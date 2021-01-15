@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+    <item
+        android:id="@+id/homeItemId"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"
+        app:showAsAction="always"/>
+    <item
+    android:id="@+id/customerItemId"
+    android:title="Home"
+    android:icon="@drawable/ic_baseline_person_24"
+    app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/productItemId"
+        android:title="Setting"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/InvoiceItemId"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_invoie_24"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/othersItemId"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        app:showAsAction="always"/>
+
+
+</menu>
