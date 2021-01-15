@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:background="@drawable/download1"
     android:padding="10dp"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <ProgressBar
         android:visibility="invisible"
