@@ -1,18 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/download1"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <TextView
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/signInProgressBarId"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="40dp"/>
+    <EditText
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
+        android:drawableRight="@drawable/ic_baseline_email_24"
+        android:layout_marginTop="10dp"
+        android:background="#DAD3D3"
+        android:hint="enter your email"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:id="@+id/signInEmailEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:imeOptions="actionDone"
+        android:id="@+id/signInPasswordEditTextId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#DAD3D3"
+        android:drawableRight="@drawable/ic_baseline_lock_24"
+        android:hint="enter your password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textSize="20sp" />
+
+    <CheckBox
+        android:id="@+id/rememberCheckBoxId"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:buttonTint="#ffffff"
+        android:text="Remember me ?"
+        android:textColor="#ffffff"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="end"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/signInButtonId"
+        android:text="Sign In"
+        android:textSize="25sp"
+        android:layout_marginTop="50dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Are you not registered? Sign Up"
+        android:textColor="#FFFEFE"
+        android:layout_marginRight="30dp"
+        android:layout_gravity="right"
+        android:layout_marginTop="30dp"
+        android:id="@+id/signUpTextViewId"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="Forgot your password?"
+        android:textColor="#FF5722"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:id="@+id/resetPasswordTextViewId"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

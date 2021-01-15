@@ -30,4 +30,15 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+
+    //google material library
+    implementation 'com.google.android.material:material:1.2.1'
+
+    //spots custom dialog
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+
 }
