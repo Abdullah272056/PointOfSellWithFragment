@@ -97,7 +97,7 @@
                 android:id="@+id/customerCountId"
                 android:gravity="center"
                 android:textAlignment="center"
-                android:text="4"
+                android:text="00"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>
         </LinearLayout>

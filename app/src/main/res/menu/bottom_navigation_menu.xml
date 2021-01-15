@@ -21,7 +21,7 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/InvoiceItemId"
+        android:id="@+id/invoiceItemId"
         android:title="Profile"
         android:icon="@drawable/ic_baseline_invoie_24"
         app:showAsAction="always"/>
