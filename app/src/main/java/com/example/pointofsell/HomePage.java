@@ -24,7 +24,7 @@ public class HomePage extends AppCompatActivity {
         token=getIntent().getStringExtra("token");
 
          bundle=new Bundle();
-        bundle.putString("token",token);
+         bundle.putString("token",token);
 
         if (savedInstanceState==null){
              fragment=new OthersFragment();
