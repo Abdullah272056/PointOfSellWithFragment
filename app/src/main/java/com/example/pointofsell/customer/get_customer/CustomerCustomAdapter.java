@@ -68,8 +68,14 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
         holder.customerDueTextView.setText(String.valueOf(customerInformationList.get(position).getDue()));
         holder.customerSerialTextView.setText(String.valueOf(position+1));
 
+        holder.deleteImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
+               // deleteCustomer(position);
+                Log.e("idid",customerInformationList.get(position).getId());
+            }
+        });
 
     }
 
@@ -94,6 +100,8 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
             customerItem=itemView.findViewById(R.id.customerItemId);
         }
     }
+
+
 
 
 }
