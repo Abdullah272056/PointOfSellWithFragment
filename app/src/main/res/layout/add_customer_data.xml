@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#009688"
+    android:padding="10dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add new Customer"
+            android:textAlignment="center"
+            android:textColor="#F6F6F6"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <ProgressBar
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:id="@+id/newCustomerProgressBarId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        android:layout_marginTop="10dp"
+        android:background="#FFFEFE"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <EditText
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        android:padding="10dp"
+        android:background="#F8F1F1"
+        android:layout_marginTop="30dp"
+        android:id="@+id/customerNameEditTextId"
+        android:hint="Enter Customer Name"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+
+        android:imeOptions="actionNext"
+        android:padding="10dp"
+        android:background="#F8F1F1"
+        android:layout_marginTop="30dp"
+        android:inputType="phone"
+        android:id="@+id/customerPhoneEditTextId"
+        android:hint="Enter phone number"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:inputType="textEmailAddress"
+        android:imeOptions="actionNext"
+        android:padding="10dp"
+        android:background="#F8F1F1"
+        android:layout_marginTop="30dp"
+        android:id="@+id/customerEmailEditTextId"
+        android:hint="Enter customer email"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:inputType="text"
+        android:imeOptions="actionDone"
+        android:padding="10dp"
+        android:background="#F8F1F1"
+        android:layout_marginTop="30dp"
+        android:id="@+id/customerAddressEditTextId"
+        android:hint="Enter customer address"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+
+        android:layout_marginTop="30dp"
+        android:weightSum="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/cancelCustomerDataButtonId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="Cancel"
+            android:textSize="25sp" />
+
+        <Button
+            android:paddingBottom="15dp"
+           android:paddingTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:id="@+id/saveCustomerDataButtonId"
+            android:text="Save"
+            android:textSize="25sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>
