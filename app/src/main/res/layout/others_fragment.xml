@@ -304,5 +304,11 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/txt"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>
