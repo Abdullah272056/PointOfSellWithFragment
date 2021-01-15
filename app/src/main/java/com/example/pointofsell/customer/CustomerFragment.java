@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.get_customer.CustomerCustomAdapter;
 import com.example.pointofsell.customer.get_customer.CustomerInformationData;
 import com.example.pointofsell.customer.get_customer.CustomerInformationDataResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
@@ -42,7 +43,7 @@ public class CustomerFragment extends Fragment {
     Button addCustomerDataButton,cancelCustomerButton;
     //CustomerData customerData;
     ProgressBar progressBar,mainProgressBar;
-    //CustomerCustomAdapter customerCustomAdapter;
+    CustomerCustomAdapter customerCustomAdapter;
     View view;
 
     @Nullable
@@ -81,9 +82,9 @@ public class CustomerFragment extends Fragment {
                     customerInformationList.addAll(response.body().getCustomerInformation());
                     if (customerInformationList.size ()>0){
                         Toast.makeText(getActivity(), String.valueOf(customerInformationList.size()), Toast.LENGTH_SHORT).show();
-//                        customerCustomAdapter = new CustomerCustomAdapter(CustomerActivity.this,token,customerInformationList);
-//                        customerRecyclerView.setLayoutManager(new LinearLayoutManager(CustomerActivity.this));
-//                        customerRecyclerView.setAdapter(customerCustomAdapter);
+                        customerCustomAdapter = new CustomerCustomAdapter(getActivity(),token,customerInformationList);
+                        customerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        customerRecyclerView.setAdapter(customerCustomAdapter);
                     }
                 }
                 else if (response.code()==404){
