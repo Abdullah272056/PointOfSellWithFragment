@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PointOfSell</string>
+
+    <array name="business_type">
+        <item>Electronics</item>
+        <item>Hardware</item>
+        <item>Software</item>
+        <item>Mobile</item>
+
+    </array>
 </resources>
