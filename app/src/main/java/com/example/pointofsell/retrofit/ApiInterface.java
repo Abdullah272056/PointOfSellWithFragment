@@ -2,6 +2,7 @@ package com.example.pointofsell.retrofit;
 
 import com.example.pointofsell.customer.create_customer.AddCustomerResponse;
 import com.example.pointofsell.customer.create_customer.CustomerData;
+import com.example.pointofsell.customer.delete_customer.CustomerDeleteResponse;
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.customer.get_customer.CustomerInformationDataResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
@@ -59,12 +60,12 @@ public interface ApiInterface {
     // get allCustomer data
     @GET("api/customer")
     Call<CustomerInformationDataResponse> getAllCustomerInformation(@Header("Authorization") String authorization1);
-//    //customer Data Edit
-//    @PUT("api/customer/{id}")
-//    Call<AddCustomerResponse> updateCustomerData(@Header("Authorization") String authorization2, @Path("id") String id, @Body CustomerData customerData);
-//    //delete customer
-//    @DELETE("api/customer/{id}")
-//    Call<CustomerDeleteResponse> deleteCustomer(@Header("Authorization") String authorization,@Path("id") String id);
+    //customer Data Edit
+    @PUT("api/customer/{id}")
+    Call<AddCustomerResponse> updateCustomerData(@Header("Authorization") String authorization2, @Path("id") String id, @Body CustomerData customerData);
+    //delete customer
+    @DELETE("api/customer/{id}")
+    Call<CustomerDeleteResponse> deleteCustomer(@Header("Authorization") String authorization, @Path("id") String id);
     // get customer Count
     @GET("api/customer/count")
     Call<CustomerCountResponse> getCustomerCount(@Header("Authorization") String authorization);

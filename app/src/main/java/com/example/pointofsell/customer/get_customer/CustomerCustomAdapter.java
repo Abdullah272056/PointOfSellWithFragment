@@ -23,10 +23,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.CustomerFragment;
+import com.example.pointofsell.customer.delete_customer.CustomerDeleteResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAdapter.MyViewHolder> {
@@ -72,7 +78,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
             @Override
             public void onClick(View v) {
 
-               // deleteCustomer(position);
+                deleteCustomer(position);
                 Log.e("idid",customerInformationList.get(position).getId());
             }
         });
@@ -102,6 +108,53 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
     }
 
 
+    private  void  deleteCustomer(final int position){
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setMessage("Do you want to Delete?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                apiInterface.deleteCustomer("Bearer "+token,customerInformationList.get(position).getId().toString())
+                        .enqueue(new Callback<CustomerDeleteResponse>() {
+                            @Override
+                            public void onResponse(Call<CustomerDeleteResponse> call, Response<CustomerDeleteResponse> response) {
+                                if (response.code()==200){
+                                    Toast.makeText(context, "Customer deleted successfully", Toast.LENGTH_SHORT).show();
+                                }else if (response.code()==500){
+                                    Toast.makeText(context, "customer id not found", Toast.LENGTH_SHORT).show();
+                                }else if (response.code()==401){
+                                    Toast.makeText(context, "You are not authorized to access this route", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
+                                }
+//                                CustomerCustomAdapter.notifyDataSetChanged();
+//                                customerInformationList.remove(position);
+//                                notifyDataSetChanged();
+
+                                //customerInformationList.notify();
+                                //new CustomerFragment().getAllCustomer();
+                            }
+
+                            @Override
+                            public void onFailure(Call<CustomerDeleteResponse> call, Throwable t) {
+                                Toast.makeText(context, "fail delete", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 
 }
