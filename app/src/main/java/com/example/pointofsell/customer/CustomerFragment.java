@@ -33,7 +33,7 @@ public class CustomerFragment extends Fragment {
     RecyclerView customerRecyclerView;
     FloatingActionButton addCustomerButton;
 
-     List<CustomerInformationData> customerInformationDataList;
+
     List<CustomerInformationData> customerInformationList;
     String token;
 
