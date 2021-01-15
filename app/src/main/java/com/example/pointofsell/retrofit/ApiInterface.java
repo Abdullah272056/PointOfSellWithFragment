@@ -111,8 +111,8 @@ public interface ApiInterface {
 //    @DELETE("api/product/{id}")
 //    Call<DeleteProductDataResponse> deleteProduct(@Header("Authorization") String authorization, @Path("id") String id);
     // Get all product info
-//    @GET("api/product/info")
-//    Call<GetAllProductInfoDataResponse> getAllProductInfo(@Header("Authorization") String authorization);
+    @GET("api/product/info")
+    Call<GetAllProductInfoDataResponse> getAllProductInfo(@Header("Authorization") String authorization);
 //    // create ProductActivity
 //    @Multipart
 //    @POST("api/product")
