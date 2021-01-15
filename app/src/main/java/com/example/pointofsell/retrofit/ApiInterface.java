@@ -1,5 +1,7 @@
 package com.example.pointofsell.retrofit;
 
+import com.example.pointofsell.customer.create_customer.AddCustomerResponse;
+import com.example.pointofsell.customer.create_customer.CustomerData;
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.customer.get_customer.CustomerInformationDataResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
@@ -51,9 +53,9 @@ public interface ApiInterface {
 //
 //
 //    ////customer/////
-//    //add customer | create customer
-//    @POST("api/customer")
-//    Call<AddCustomerResponse> addCustomerInformation(@Header("Authorization") String authorization, @Body CustomerData customerData);
+    //add customer | create customer
+    @POST("api/customer")
+    Call<AddCustomerResponse> addCustomerInformation(@Header("Authorization") String authorization, @Body CustomerData customerData);
     // get allCustomer data
     @GET("api/customer")
     Call<CustomerInformationDataResponse> getAllCustomerInformation(@Header("Authorization") String authorization1);
