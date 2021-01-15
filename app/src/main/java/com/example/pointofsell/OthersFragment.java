@@ -52,7 +52,7 @@ public class OthersFragment extends Fragment {
         totalProductTypeTextView=view.findViewById(R.id.totalProductTypeTextViewId);
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
-        
+
         getCustomerCount();
 
         return view;
@@ -75,6 +75,9 @@ public class OthersFragment extends Fragment {
             }
         });
     }
+
+
+    
 
 
 }
