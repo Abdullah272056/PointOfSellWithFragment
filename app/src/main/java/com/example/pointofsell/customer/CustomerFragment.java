@@ -1,4 +1,5 @@
 package com.example.pointofsell.customer;
 
-public class cus {
+public class CustomerFragment {
+
 }
