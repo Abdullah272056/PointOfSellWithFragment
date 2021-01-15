@@ -81,7 +81,7 @@ public class CustomerFragment extends Fragment {
                     customerInformationList=new ArrayList<>();
                     customerInformationList.addAll(response.body().getCustomerInformation());
                     if (customerInformationList.size ()>0){
-                        Toast.makeText(getActivity(), String.valueOf(customerInformationList.size()), Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), String.valueOf(customerInformationList.size()), Toast.LENGTH_SHORT).show();
                         customerCustomAdapter = new CustomerCustomAdapter(getActivity(),token,customerInformationList);
                         customerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         customerRecyclerView.setAdapter(customerCustomAdapter);
