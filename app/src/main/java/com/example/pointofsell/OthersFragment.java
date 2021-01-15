@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
+import com.example.pointofsell.retrofit.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,14 +50,30 @@ public class OthersFragment extends Fragment {
         totalProductCostTextView=view.findViewById(R.id.totalProductCostTextViewId);
         totalProductStockTextView=view.findViewById(R.id.totalProductStockTextViewId);
         totalProductTypeTextView=view.findViewById(R.id.totalProductTypeTextViewId);
+        apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
-
-
-
-
-       // getCustomerCount();
+        
+        getCustomerCount();
 
         return view;
+    }
+
+    // getting total customer count
+    private void getCustomerCount() {
+        apiInterface.getCustomerCount("Bearer "+token).enqueue(new Callback<CustomerCountResponse>() {
+            @Override
+            public void onResponse(Call<CustomerCountResponse> call, Response<CustomerCountResponse> response) {
+                Log.e("count","success");
+                CustomerCountResponse customerCountResponse=response.body();
+                customerCount=customerCountResponse.getCustomerCount().toString();
+                customerCountTextView.setText(customerCount);
+            }
+
+            @Override
+            public void onFailure(Call<CustomerCountResponse> call, Throwable t) {
+                Log.e("count","success");
+            }
+        });
     }
 
 
