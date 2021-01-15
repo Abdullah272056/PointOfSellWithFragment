@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
+import com.example.pointofsell.product.get_all_product_info.GetAllProductInfoDataResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
 
@@ -56,6 +57,7 @@ public class OthersFragment extends Fragment {
 
         getCustomerCount();
         getAllSellInfo();
+        getAllProductInfo();
 
         return view;
     }
@@ -109,6 +111,33 @@ public class OthersFragment extends Fragment {
 
 
 
+    // Get all select_customer info
+    private void getAllProductInfo(){
 
+        apiInterface.getAllProductInfo("Bearer "+token).enqueue(new Callback<GetAllProductInfoDataResponse>() {
+            @Override
+            public void onResponse(Call<GetAllProductInfoDataResponse> call, Response<GetAllProductInfoDataResponse> response) {
+                if (response.code()==200){
+                    GetAllProductInfoDataResponse getAllProductInfoDataResponse=response.body();
+                    totalProductCostTextView.setText(getAllProductInfoDataResponse.getGetAllProductInfoData().getTotalProductCost().toString());
+                    totalProductStockTextView.setText(getAllProductInfoDataResponse.getGetAllProductInfoData().getTotalProduct().toString());
+                    totalProductTypeTextView.setText(getAllProductInfoDataResponse.getGetAllProductInfoData().getTotalProductType().toString());
+
+                }
+                else if (response.code()==401){
+                    //Toast.makeText(HomePage.this, "Invalid token", Toast.LENGTH_SHORT).show();
+                }else if (response.code()==404){
+                    //Toast.makeText(HomePage.this, "No information found", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //Toast.makeText(HomePage.this, "Invalid token", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<GetAllProductInfoDataResponse> call, Throwable t) {
+                //Toast.makeText(OthersInformation.this, "failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }
