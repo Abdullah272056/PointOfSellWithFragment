@@ -3,6 +3,7 @@ package com.example.pointofsell.customer.get_customer;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -19,11 +20,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.pointofsell.OthersFragment;
 import com.example.pointofsell.R;
 import com.example.pointofsell.customer.CustomerFragment;
+import com.example.pointofsell.customer.create_customer.AddCustomerResponse;
+import com.example.pointofsell.customer.create_customer.CustomerData;
 import com.example.pointofsell.customer.delete_customer.CustomerDeleteResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
@@ -46,7 +52,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
 
     EditText customerNameEditText,customerEmailEditText,customerPhoneEditText,customerAddressEditText;
     Button addCustomerDataButton,cancelCustomerButton;
-    //CustomerData customerData;
+    CustomerData customerData;
     ProgressBar progressBar;
 
     ApiInterface apiInterface;
@@ -79,6 +85,18 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
             public void onClick(View v) {
 
                 deleteCustomer(position);
+                Log.e("idid",customerInformationList.get(position).getId());
+                Bundle  bundle=new Bundle();
+                bundle.putString("token",token);
+
+                              
+            }
+        });
+        holder.editImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                updateCustomerInformation(position);
                 Log.e("idid",customerInformationList.get(position).getId());
             }
         });
@@ -157,4 +175,132 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
         alert.show();
     }
 
+
+    private void updateCustomerInformation(final int position){
+
+        AlertDialog.Builder builder     =new AlertDialog.Builder(context);
+        LayoutInflater layoutInflater   =LayoutInflater.from(context);
+        View view                       =layoutInflater.inflate(R.layout.add_customer_data,null);
+        builder.setView(view);
+        final AlertDialog alertDialog   = builder.create();
+
+
+        customerNameEditText=view.findViewById(R.id.customerNameEditTextId);
+        customerPhoneEditText=view.findViewById(R.id.customerPhoneEditTextId);
+        customerEmailEditText=view.findViewById(R.id.customerEmailEditTextId);
+        customerAddressEditText=view.findViewById(R.id.customerAddressEditTextId);
+        progressBar=view.findViewById(R.id.newCustomerProgressBarId);
+
+        addCustomerDataButton=view.findViewById(R.id.saveCustomerDataButtonId);
+        cancelCustomerButton=view.findViewById(R.id.cancelCustomerDataButtonId);
+
+
+        customerNameEditText.setText(customerInformationList.get(position).getName());
+        customerAddressEditText.setText(customerInformationList.get(position).getAddress());
+        customerPhoneEditText.setText(customerInformationList.get(position).getPhone());
+        if (customerInformationList.get(position).getEmail()!=null || TextUtils.isEmpty(customerInformationList.get(position).getEmail())){
+            customerEmailEditText.setText(customerInformationList.get(position).getEmail());
+        }
+
+
+        addCustomerDataButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String customerName=customerNameEditText.getText().toString();
+                String customerPhone=customerPhoneEditText.getText().toString();
+                String customerEmail=customerEmailEditText.getText().toString();
+                String customerAddress=customerAddressEditText.getText().toString();
+
+                if (TextUtils.isEmpty(customerName) || customerAddress==null){
+                    customerNameEditText.setError("Enter customer name");
+                    customerNameEditText.requestFocus();
+                    return;
+                }
+                if (customerName.length()<4){
+                    customerNameEditText.setError("don't smaller than 4 character");
+                    customerNameEditText.requestFocus();
+                    return;
+                }
+                if (TextUtils.isEmpty(customerPhone)|| customerPhone==null){
+                    customerPhoneEditText.setError("Enter customer phone");
+                    customerPhoneEditText.requestFocus();
+                    return;
+                }
+                if (customerPhone.length()<8){
+                    customerPhoneEditText.setError("don't smaller than 8 character");
+                    customerPhoneEditText.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(customerAddress) ||customerAddress==null){
+                    customerAddressEditText.setError("Enter customer name");
+                    customerAddressEditText.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(customerEmail)|| customerEmail==null){
+                    customerData=new CustomerData(customerName,customerPhone,customerAddress);
+                }
+                if (!TextUtils.isEmpty(customerEmail ) && customerEmail!=null){
+                    if (!Patterns.EMAIL_ADDRESS.matcher(customerEmail).matches()){
+                        customerEmailEditText.setError("Enter a valid  email address");
+                        customerEmailEditText.requestFocus();
+                        return;
+                    }else {
+                        customerData=new CustomerData(customerName,customerPhone,customerEmail,customerAddress);
+                    }
+                }
+                progressBar.setVisibility(View.VISIBLE);
+
+                apiInterface.updateCustomerData("Bearer "+token,customerInformationList.get(position).getId().toString(),customerData)
+                        .enqueue(new Callback<AddCustomerResponse>(){
+                            @Override
+                            public void onResponse(Call<AddCustomerResponse> call, Response<AddCustomerResponse> response) {
+
+                                if (response.code()==200){
+                                    Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (response.code()==401){
+                                    Toast.makeText(context, "You are not authorized to access this route", Toast.LENGTH_LONG).show();
+                                }
+                                else if(response.code()==400){
+                                    Toast.makeText(context, "safe phone number", Toast.LENGTH_LONG).show();
+                                }
+                                else {
+                                    Toast.makeText(context, "failed try again", Toast.LENGTH_LONG).show();
+                                }
+
+                                alertDialog.dismiss();
+                               // new CustomerFragment();
+                               // ((CustomerActivity)context).getAllCustomer();
+                                progressBar.setVisibility(View.GONE);
+
+                                Bundle  bundle=new Bundle();
+                                bundle.putString("token",token);
+
+//                               Fragment fragment=new OthersFragment();
+//                                fragment.setArguments(bundle);
+//                                FragmentTransaction fragmentManager=context.getApplicationContext().getFragmentManager().beginTransaction();
+//                                fragmentManager.replace(R.id.frameViewId,fragment);
+//                                fragmentManager.commit();
+
+                            }
+                            @Override
+                            public void onFailure(Call<AddCustomerResponse> call, Throwable t) {
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(context, "fail:  "+t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+        cancelCustomerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+        alertDialog.show();
+
+    }
 }
