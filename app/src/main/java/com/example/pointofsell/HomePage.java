@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.pointofsell.customer.CustomerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePage extends AppCompatActivity {
@@ -42,7 +43,7 @@ public class HomePage extends AppCompatActivity {
 
                 }
                 if (item.getItemId()==R.id.customerItemId){
-                    fragment=new OthersFragment();
+                    fragment=new CustomerFragment();
                 }
                 if (item.getItemId()==R.id.productItemId){
                     fragment=new OthersFragment();

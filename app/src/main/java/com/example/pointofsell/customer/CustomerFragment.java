@@ -41,7 +41,7 @@ public class CustomerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view=inflater.inflate(R.layout.customer_fragment,container,false);
-    
+
         //receive token
         Bundle bundle=this.getArguments();
         token=bundle.getString("token");
