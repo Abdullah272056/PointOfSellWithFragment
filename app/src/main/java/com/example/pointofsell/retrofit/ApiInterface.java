@@ -4,6 +4,7 @@ import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.log_in.LogInData;
 import com.example.pointofsell.log_in.LogInResponse;
+import com.example.pointofsell.product.get_all_product_info.GetAllProductInfoDataResponse;
 import com.example.pointofsell.register.RegistrationData;
 import com.example.pointofsell.register.RegistrationResponse;
 
@@ -109,7 +110,7 @@ public interface ApiInterface {
 //    //delete  product
 //    @DELETE("api/product/{id}")
 //    Call<DeleteProductDataResponse> deleteProduct(@Header("Authorization") String authorization, @Path("id") String id);
-//    // Get all product info
+    // Get all product info
 //    @GET("api/product/info")
 //    Call<GetAllProductInfoDataResponse> getAllProductInfo(@Header("Authorization") String authorization);
 //    // create ProductActivity

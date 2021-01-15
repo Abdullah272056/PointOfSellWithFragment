@@ -100,11 +100,15 @@ public class OthersFragment extends Fragment {
             @Override
             public void onFailure(Call<GetAllSellInfoResponse> call, Throwable t) {
                 Log.e("ts","success");
+                Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
 
             }
         });
 
     }
+
+
+
 
 
 }
