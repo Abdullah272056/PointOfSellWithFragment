@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
+import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
 
@@ -54,6 +55,7 @@ public class OthersFragment extends Fragment {
 
 
         getCustomerCount();
+        getAllSellInfo();
 
         return view;
     }
@@ -77,7 +79,32 @@ public class OthersFragment extends Fragment {
     }
 
 
-    
+    // getting  Get all sale info
+    private void getAllSellInfo() {
+        apiInterface.getAllSellInfo("Bearer "+token).enqueue(new Callback<GetAllSellInfoResponse>() {
+            @Override
+            public void onResponse(Call<GetAllSellInfoResponse> call, Response<GetAllSellInfoResponse> response) {
+
+                if (response.isSuccessful()){
+                    if (response.body().getSuccess()==true){
+                        GetAllSellInfoResponse getAllSellInfoResponse=response.body();
+                        Log.e("totalSaleAmount",getAllSellInfoResponse.getGetAllSellInfoData().getTotalSaleAmount().toString());
+                        totalSaleAmountTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalSaleAmount().toString());
+                        totalSoldProductQuantityTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalSoldProductQuantity().toString());
+                        totalSoldInvoiceTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalSoldInvoice().toString());
+                        totalDueAmountTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalDueAmount().toString());
+                        totalProfitTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalProfit().toString());
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<GetAllSellInfoResponse> call, Throwable t) {
+                Log.e("ts","success");
+
+            }
+        });
+
+    }
 
 
 }
