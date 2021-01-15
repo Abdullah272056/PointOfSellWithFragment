@@ -1,6 +1,7 @@
 package com.example.pointofsell;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OthersFragment extends Fragment {
     TextView customerTextView,productTextView,invoiceTextView;
@@ -46,11 +52,9 @@ public class OthersFragment extends Fragment {
 
 
 
-//        TextView txt=view.findViewById(R.id.txt);
-//        txt.setText(token);
-      //  Toast.makeText(HomePage.this, "", Toast.LENGTH_SHORT).show();
 
 
+       // getCustomerCount();
 
         return view;
     }
