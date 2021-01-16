@@ -25,7 +25,9 @@ import com.example.pointofsell.R;
 import com.example.pointofsell.product.delete_product.GetProductData;
 import com.example.pointofsell.product.get_product.GetProductDataResponse;
 
+import com.example.pointofsell.product.get_product.ProductCustomAdapter;
 import com.example.pointofsell.retrofit.ApiInterface;
+import com.example.pointofsell.retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
@@ -43,7 +45,7 @@ public class ProductFragment extends Fragment {
     List<GetProductData> getProductDataList;
     String token;
     ApiInterface apiInterface;
-    //ProductCustomAdapter productCustomAdapter;
+    ProductCustomAdapter productCustomAdapter;
     RecyclerView productRecyclerView;
     ProgressBar productProgressBar;
     FloatingActionButton addProductButton;
@@ -71,6 +73,9 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.product_fragment, container, false);
+        Bundle bundle=this.getArguments();
+        token=bundle.getString("token");
+        apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
         productRecyclerView=view.findViewById(R.id.productRecyclerViewId);
         productProgressBar=view.findViewById(R.id.productProgressBarId);
@@ -91,9 +96,9 @@ public class ProductFragment extends Fragment {
                     getProductDataList.addAll(response.body().getProducts());
                     // Toast.makeText(ProductActivity.this, String.valueOf(getProductDataList.size()), Toast.LENGTH_SHORT).show();
 
-//                    productCustomAdapter = new ProductCustomAdapter(getActivity(),token,getProductDataList);
-//                    productRecyclerView.setLayoutManager(new LinearLayoutManager(ProductActivity.this));
-//                    productRecyclerView.setAdapter(productCustomAdapter);
+                    productCustomAdapter = new ProductCustomAdapter(getActivity(),token,getProductDataList);
+                    productRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    productRecyclerView.setAdapter(productCustomAdapter);
 
                     Toast.makeText(getActivity(), "All product fetched", Toast.LENGTH_SHORT).show();
                 }else if (response.code()==404){
