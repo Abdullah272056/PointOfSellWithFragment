@@ -20,6 +20,7 @@ import com.example.pointofsell.R;
 import com.example.pointofsell.product.delete_product.GetProductData;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -66,7 +67,7 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
         holder.productStockTextView.setText(String.valueOf(productDataList.get(position).getStock()));
 
         //image Load
-        //Picasso.with(context).load(Uri.parse(String.valueOf(productDataList.get(position).getImage()))).into(holder.productImageView);
+        Picasso.with(context).load(Uri.parse(String.valueOf(productDataList.get(position).getImage()))).into(holder.productImageView);
 
 
         // delete button clicked

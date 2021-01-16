@@ -41,4 +41,11 @@ dependencies {
     //spots custom dialog
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
 
+
+    // circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+
+    // picaso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
 }
