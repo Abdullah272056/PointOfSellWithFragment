@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
 import com.example.pointofsell.retrofit.ApiInterface;
+import com.example.pointofsell.retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -37,6 +38,10 @@ public class Invoice_Fragment extends Fragment {
         invoiceRecyclerView=view.findViewById(R.id.invoiceRecyclerViewId);
         invoiceProgressBar=view.findViewById(R.id.invoiceProgressBarId);
         addInvoiceButton=view.findViewById(R.id.addInvoiceButtonId);
+
+        Bundle bundle=this.getArguments();
+        token=bundle.getString("token");
+        apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
 
         return view;
