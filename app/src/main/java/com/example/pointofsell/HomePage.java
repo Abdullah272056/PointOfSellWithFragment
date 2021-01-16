@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.pointofsell.customer.CustomerFragment;
+import com.example.pointofsell.invoice.Invoice_Fragment;
 import com.example.pointofsell.product.ProductFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -49,7 +50,7 @@ public class HomePage extends AppCompatActivity {
                 if (item.getItemId()==R.id.productItemId){
                     fragment=new ProductFragment();
                 } if (item.getItemId()==R.id.invoiceItemId){
-                    fragment=new OthersFragment();
+                    fragment=new Invoice_Fragment();
 //                    Toast.makeText(MainActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 }
                 if (item.getItemId()==R.id.othersItemId){
