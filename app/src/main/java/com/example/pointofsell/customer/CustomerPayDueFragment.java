@@ -14,7 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.pay_due.DuePayDataResponse;
+import com.example.pointofsell.customer.pay_due.PayData;
 import com.example.pointofsell.retrofit.ApiInterface;
+import com.example.pointofsell.retrofit.RetrofitClient;
 
 public class CustomerPayDueFragment extends Fragment {
     ApiInterface apiInterface;
@@ -28,8 +31,8 @@ public class CustomerPayDueFragment extends Fragment {
     String customer_id,token;
 
     String duePayAmount;
-//    PayData payData;
-//    DuePayDataResponse duePayDataResponse;
+    PayData payData;
+    DuePayDataResponse duePayDataResponse;
     View view;
     @Nullable
     @Override
@@ -48,7 +51,14 @@ public class CustomerPayDueFragment extends Fragment {
         //editText finding
         duePayAmountEditText=view.findViewById(R.id.duePayAmountEditTextId);
         pauDueProgressBar=view.findViewById(R.id.pauDueProgressBarId);
+
         //data receive
+        Bundle bundle=this.getArguments();
+        customer_id=bundle.getString("customerId");
+        token= bundle.getString("token");
+
+        apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
+
 
         return view;
     }
