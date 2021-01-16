@@ -92,7 +92,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
         holder.editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateCustomerInformation(position);
+                updateCustomerInformation(position,v);
                 Log.e("idid",customerInformationList.get(position).getId());
             }
         });
@@ -136,6 +136,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                             @Override
                             public void onResponse(Call<CustomerDeleteResponse> call, Response<CustomerDeleteResponse> response) {
                                 if (response.code()==200){
+                                    Toast.makeText(context, "Customer deleted successfully", Toast.LENGTH_SHORT).show();
 
                                     Bundle  bundle=new Bundle();
                                     bundle.putString("token",token);
@@ -145,7 +146,6 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
 
-                                    Toast.makeText(context, "Customer deleted successfully", Toast.LENGTH_SHORT).show();
                                 }else if (response.code()==500){
                                     Toast.makeText(context, "customer id not found", Toast.LENGTH_SHORT).show();
                                 }else if (response.code()==401){
@@ -181,7 +181,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
     }
 
 
-    private void updateCustomerInformation(final int position){
+    private void updateCustomerInformation(final int position,final View v){
 
         AlertDialog.Builder builder     =new AlertDialog.Builder(context);
         LayoutInflater layoutInflater   =LayoutInflater.from(context);
@@ -210,7 +210,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
 
         addCustomerDataButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 String customerName=customerNameEditText.getText().toString();
                 String customerPhone=customerPhoneEditText.getText().toString();
                 String customerEmail=customerEmailEditText.getText().toString();
@@ -264,6 +264,13 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
 
                                 if (response.code()==200){
                                     Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show();
+                                    Bundle  bundle=new Bundle();
+                                    bundle.putString("token",token);
+                                    Fragment fragment=new CustomerFragment();
+                                    fragment.setArguments(bundle);
+                                    AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
                                 }
                                 else if (response.code()==401){
                                     Toast.makeText(context, "You are not authorized to access this route", Toast.LENGTH_LONG).show();
