@@ -1,5 +1,6 @@
 package com.example.pointofsell.customer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.pointofsell.OthersFragment;
 import com.example.pointofsell.R;
 
 public class CustomerAllInfoFragment extends Fragment {
@@ -17,6 +19,8 @@ public class CustomerAllInfoFragment extends Fragment {
             customerDuePayHistoryTextView,customerTotalSellTextView;
     String customer_id,token,cDue;
 
+
+Fragment fragment;
 View view;
     @Nullable
     @Override
@@ -36,9 +40,10 @@ View view;
         customerDuePayHistoryTextView=view.findViewById(R.id.customerDuePayHistoryTextViewId);
         customerTotalSellTextView=view.findViewById(R.id.customerTotalSellTextViewId);
 
+      
+
 
     return view;
-
-
     }
+
     }
