@@ -1,6 +1,7 @@
 package com.example.pointofsell.customer;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,13 @@ import androidx.fragment.app.Fragment;
 import com.example.pointofsell.R;
 import com.example.pointofsell.customer.pay_due.DuePayDataResponse;
 import com.example.pointofsell.customer.pay_due.PayData;
+import com.example.pointofsell.customer.single_customer.SingleCustomerGetResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CustomerPayDueFragment extends Fragment {
     ApiInterface apiInterface;
@@ -62,4 +68,7 @@ public class CustomerPayDueFragment extends Fragment {
 
         return view;
     }
+
+    
+
 }

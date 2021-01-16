@@ -5,6 +5,9 @@ import com.example.pointofsell.customer.create_customer.CustomerData;
 import com.example.pointofsell.customer.delete_customer.CustomerDeleteResponse;
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.customer.get_customer.CustomerInformationDataResponse;
+import com.example.pointofsell.customer.pay_due.DuePayDataResponse;
+import com.example.pointofsell.customer.pay_due.PayData;
+import com.example.pointofsell.customer.single_customer.SingleCustomerGetResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.log_in.LogInData;
 import com.example.pointofsell.log_in.LogInResponse;
@@ -70,15 +73,15 @@ public interface ApiInterface {
     @GET("api/customer/count")
     Call<CustomerCountResponse> getCustomerCount(@Header("Authorization") String authorization);
 //
-//    //Pay Due
-//    @PUT("api/customer/due/pay")
-//    Call<DuePayDataResponse> payDue(@Header("Authorization") String authorization,@Body PayData payData);
-//
+    //Pay Due
+    @PUT("api/customer/due/pay")
+    Call<DuePayDataResponse> payDue(@Header("Authorization") String authorization, @Body PayData payData);
+
 //    // http://mern-pos.herokuapp.com/api/customer/details/5fabf8a2bb2709001736251c
-//    //get single customer information
-//    @GET("api/customer/details/{id}")
-//    Call<SingleCustomerGetResponse> getSingleCustomerInformation(@Header("Authorization") String authorization,@Path("id") String id);
-//
+    //get single customer information
+    @GET("api/customer/details/{id}")
+    Call<SingleCustomerGetResponse> getSingleCustomerInformation(@Header("Authorization") String authorization, @Path("id") String id);
+
 //
 //
 //    ///// invoice/////
