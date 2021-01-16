@@ -56,7 +56,7 @@ public class Invoice_Fragment extends Fragment {
         token=bundle.getString("token");
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
-      
+
 
 
         getAllInVoice();
