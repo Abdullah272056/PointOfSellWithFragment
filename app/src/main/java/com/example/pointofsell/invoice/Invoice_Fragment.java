@@ -56,7 +56,17 @@ public class Invoice_Fragment extends Fragment {
         token=bundle.getString("token");
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
-
+        addInvoiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                Fragment fragment=new CreateInvoiceFragment();
+                fragment.setArguments(bundle);
+                AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+            }
+        });
 
 
         getAllInVoice();
