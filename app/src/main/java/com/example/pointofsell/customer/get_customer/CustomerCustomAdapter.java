@@ -105,7 +105,6 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
 
                 Bundle  bundle=new Bundle();
 
-                //Intent intent=new Intent(context, CustomerAllInfoActivity.class);
                 bundle.putString("cName",customerInformationList.get(position).getName());
                 bundle.putString("cPhone",customerInformationList.get(position).getPhone());
                 bundle.putString("cEmail",customerInformationList.get(position).getEmail());
