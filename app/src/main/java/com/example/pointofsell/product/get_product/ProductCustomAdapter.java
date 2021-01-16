@@ -3,6 +3,7 @@ package com.example.pointofsell.product.get_product;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.CustomerFragment;
+import com.example.pointofsell.product.ProductFragment;
+import com.example.pointofsell.product.delete_product.DeleteProductDataResponse;
 import com.example.pointofsell.product.delete_product.GetProductData;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
@@ -71,6 +77,13 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
 
 
         // delete button clicked
+        holder.deleteProductImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteProduct(position,v);
+
+            }
+        });
 
 
 
@@ -101,5 +114,65 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
     }
 
 
+    private  void deleteProduct(final int position, final View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setMessage("Do you want to Delete?");
+
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                apiInterface.deleteProduct("Bearer "+token,productDataList.get(position).getId())
+                        .enqueue(new Callback<DeleteProductDataResponse>() {
+                            @Override
+                            public void onResponse(Call<DeleteProductDataResponse> call, Response<DeleteProductDataResponse> response) {
+                                if (response.code()==200){
+
+                                    Bundle bundle=new Bundle();
+                                    bundle.putString("token",token);
+                                    Fragment fragment=new ProductFragment();
+                                    fragment.setArguments(bundle);
+                                    AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+                                    Toast.makeText(context, "Product deleted successfully", Toast.LENGTH_SHORT).show();
+                                
+                                }
+                                else if (response.code()==404){
+                                    Toast.makeText(context, "Not found", Toast.LENGTH_SHORT).show();
+                                }
+                                else if (response.code()==401){
+                                    Toast.makeText(context, "You are not authorized to access this route", Toast.LENGTH_SHORT).show();
+
+                                }else {
+                                    Toast.makeText(context, "try again", Toast.LENGTH_SHORT).show();
+                                }
+
+
+
+                                //((ProductActivity)context).getAllProduct();
+                            }
+
+                            @Override
+                            public void onFailure(Call<DeleteProductDataResponse> call, Throwable t) {
+                                Toast.makeText(context, "fail delete", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+
+    }
 
 }
