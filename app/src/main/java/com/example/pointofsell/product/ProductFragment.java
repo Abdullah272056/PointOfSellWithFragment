@@ -81,6 +81,12 @@ public class ProductFragment extends Fragment {
         productProgressBar=view.findViewById(R.id.productProgressBarId);
         addProductButton=view.findViewById(R.id.addProductButtonId);
        // unitTypeSpinner=view.findViewById(R.id.unitTypeSpinnerId);
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Product Upload....");
+
+        //alert dialog view show
+
         getAllProduct();
         return view;
     }

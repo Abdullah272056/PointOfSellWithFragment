@@ -8,4 +8,12 @@
         <item>Mobile</item>
 
     </array>
+
+    <array name="unit_type">
+        <item>piece</item>
+        <item>kg</item>
+        <item>litter</item>
+        <item>pack</item>
+    </array>
+
 </resources>
