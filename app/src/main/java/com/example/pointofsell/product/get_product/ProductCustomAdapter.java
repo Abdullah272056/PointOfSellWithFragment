@@ -3,6 +3,7 @@ package com.example.pointofsell.product.get_product;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -137,7 +139,7 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
                                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
                                     Toast.makeText(context, "Product deleted successfully", Toast.LENGTH_SHORT).show();
-                                
+
                                 }
                                 else if (response.code()==404){
                                     Toast.makeText(context, "Not found", Toast.LENGTH_SHORT).show();
@@ -149,9 +151,6 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
                                     Toast.makeText(context, "try again", Toast.LENGTH_SHORT).show();
                                 }
 
-
-
-                                //((ProductActivity)context).getAllProduct();
                             }
 
                             @Override
@@ -175,4 +174,6 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
 
     }
 
+
+   
 }
