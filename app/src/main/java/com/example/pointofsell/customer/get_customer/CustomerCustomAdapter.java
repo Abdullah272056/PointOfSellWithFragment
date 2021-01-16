@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -81,10 +82,9 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
             @Override
             public void onClick(View v) {
 
-                deleteCustomer(position);
+                deleteCustomer(position,v);
                 Log.e("idid",customerInformationList.get(position).getId());
-                Bundle  bundle=new Bundle();
-                bundle.putString("token",token);
+
             }
         });
 
@@ -122,7 +122,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
     }
 
 
-    private  void  deleteCustomer(final int position){
+    private  void  deleteCustomer(final int position, final View v){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(false);
@@ -136,6 +136,15 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                             @Override
                             public void onResponse(Call<CustomerDeleteResponse> call, Response<CustomerDeleteResponse> response) {
                                 if (response.code()==200){
+
+                                    Bundle  bundle=new Bundle();
+                                    bundle.putString("token",token);
+                                    Fragment fragment=new CustomerFragment();
+                                    fragment.setArguments(bundle);
+                                    AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+
                                     Toast.makeText(context, "Customer deleted successfully", Toast.LENGTH_SHORT).show();
                                 }else if (response.code()==500){
                                     Toast.makeText(context, "customer id not found", Toast.LENGTH_SHORT).show();
