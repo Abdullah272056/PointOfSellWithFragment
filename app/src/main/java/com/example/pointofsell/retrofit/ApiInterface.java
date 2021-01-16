@@ -11,6 +11,7 @@ import com.example.pointofsell.customer.single_customer.SingleCustomerGetRespons
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.log_in.LogInData;
 import com.example.pointofsell.log_in.LogInResponse;
+import com.example.pointofsell.product.create_product.ProductDataResponse;
 import com.example.pointofsell.product.delete_product.DeleteProductDataResponse;
 import com.example.pointofsell.product.get_all_product_info.GetAllProductInfoDataResponse;
 import com.example.pointofsell.product.get_product.GetProductDataResponse;
@@ -122,18 +123,18 @@ public interface ApiInterface {
     // Get all product info
     @GET("api/product/info")
     Call<GetAllProductInfoDataResponse> getAllProductInfo(@Header("Authorization") String authorization);
-//    // create ProductActivity
-//    @Multipart
-//    @POST("api/product")
-//    Call<ProductDataResponse> uploadImage(@Header("Authorization") String authorization,
-//                                          @Part MultipartBody.Part image,
-//                                          @Part("name") RequestBody name,
-//                                          @Part("price") RequestBody price,
-//                                          @Part("sellingPrice") RequestBody sellingPrice,
-//                                          @Part("unit") RequestBody unit,
-//                                          @Part("stock") RequestBody stock,
-//                                          @Part("description") RequestBody description
-//    );
+    // create ProductActivity
+    @Multipart
+    @POST("api/product")
+    Call<ProductDataResponse> uploadImage(@Header("Authorization") String authorization,
+                                          @Part MultipartBody.Part image,
+                                          @Part("name") RequestBody name,
+                                          @Part("price") RequestBody price,
+                                          @Part("sellingPrice") RequestBody sellingPrice,
+                                          @Part("unit") RequestBody unit,
+                                          @Part("stock") RequestBody stock,
+                                          @Part("description") RequestBody description
+    );
 
 
 
