@@ -40,15 +40,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAdapter.MyViewHolder> {
  // List<CustomerInformationData> customerInformationList;
 
     Context context;
     String token;
     List<CustomerInformationData> customerInformationList;
-
-
 
     EditText customerNameEditText,customerEmailEditText,customerPhoneEditText,customerAddressEditText;
     Button addCustomerDataButton,cancelCustomerButton;
@@ -88,14 +85,13 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                 Log.e("idid",customerInformationList.get(position).getId());
                 Bundle  bundle=new Bundle();
                 bundle.putString("token",token);
-
-                              
             }
         });
+
+
         holder.editImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 updateCustomerInformation(position);
                 Log.e("idid",customerInformationList.get(position).getId());
             }
