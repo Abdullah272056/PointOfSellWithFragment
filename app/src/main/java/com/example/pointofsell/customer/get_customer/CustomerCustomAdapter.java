@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.OthersFragment;
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.CustomerAllInfoFragment;
 import com.example.pointofsell.customer.CustomerFragment;
 import com.example.pointofsell.customer.create_customer.AddCustomerResponse;
 import com.example.pointofsell.customer.create_customer.CustomerData;
@@ -94,6 +95,34 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
             public void onClick(View v) {
                 updateCustomerInformation(position,v);
                 Log.e("idid",customerInformationList.get(position).getId());
+            }
+        });
+
+
+        holder.customerItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle  bundle=new Bundle();
+
+                //Intent intent=new Intent(context, CustomerAllInfoActivity.class);
+                bundle.putString("cName",customerInformationList.get(position).getName());
+                bundle.putString("cPhone",customerInformationList.get(position).getPhone());
+                bundle.putString("cEmail",customerInformationList.get(position).getEmail());
+                bundle.putString("cAddress",customerInformationList.get(position).getAddress());
+
+                bundle.putString("cDue",customerInformationList.get(position).getDue().toString());
+                bundle.putString("cCreatedAt",customerInformationList.get(position).getCreatedAt());
+                bundle.putString("cId",customerInformationList.get(position).getId());
+                bundle.putString("token",token);
+
+
+                Fragment fragment=new CustomerAllInfoFragment();
+                fragment.setArguments(bundle);
+                AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+
             }
         });
 
