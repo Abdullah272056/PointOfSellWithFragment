@@ -8,6 +8,7 @@ import com.example.pointofsell.customer.get_customer.CustomerInformationDataResp
 import com.example.pointofsell.customer.pay_due.DuePayDataResponse;
 import com.example.pointofsell.customer.pay_due.PayData;
 import com.example.pointofsell.customer.single_customer.SingleCustomerGetResponse;
+import com.example.pointofsell.invoice.delete_invoice.DeleteInVoiceGetInVoiceDataResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.invoice.get_invoice.InVoiceResponse;
 import com.example.pointofsell.log_in.LogInData;
@@ -106,9 +107,9 @@ public interface ApiInterface {
 //    @POST("/api/invoice")
 //    Call<OwnerDataWithResponse> getInvoiceResponse(@Header("Authorization") String authorization, @Body SetInVoiceResponse setInVoiceResponse);
 //
-//    // delete invoice
-//    @DELETE("api/invoice/{id}")
-//    Call<DeleteInVoiceGetInVoiceDataResponse> deleteInVoice(@Header("Authorization") String authorization, @Path("id") String id);
+    // delete invoice
+    @DELETE("api/invoice/{id}")
+    Call<DeleteInVoiceGetInVoiceDataResponse> deleteInVoice(@Header("Authorization") String authorization, @Path("id") String id);
 //
 //
 //
