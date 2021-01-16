@@ -40,7 +40,7 @@ View view;
         customerDuePayHistoryTextView=view.findViewById(R.id.customerDuePayHistoryTextViewId);
         customerTotalSellTextView=view.findViewById(R.id.customerTotalSellTextViewId);
 
-      
+     
 
 
     return view;
