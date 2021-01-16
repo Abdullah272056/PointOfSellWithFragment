@@ -67,7 +67,14 @@ public class CustomerPayDueFragment extends Fragment {
 
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
         customerInformation();
+        payDueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                payDue();
+            }
+        });
 
+        
         return view;
     }
 
