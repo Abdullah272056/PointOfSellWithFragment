@@ -72,7 +72,7 @@ public interface ApiInterface {
     // get customer Count
     @GET("api/customer/count")
     Call<CustomerCountResponse> getCustomerCount(@Header("Authorization") String authorization);
-//
+
     //Pay Due
     @PUT("api/customer/due/pay")
     Call<DuePayDataResponse> payDue(@Header("Authorization") String authorization, @Body PayData payData);
@@ -82,8 +82,8 @@ public interface ApiInterface {
     @GET("api/customer/details/{id}")
     Call<SingleCustomerGetResponse> getSingleCustomerInformation(@Header("Authorization") String authorization, @Path("id") String id);
 
-//
-//
+
+
 //    ///// invoice/////
     //GetAllSellInfoResponse
     @GET("api/invoice/sale-info")
