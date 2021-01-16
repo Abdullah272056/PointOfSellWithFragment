@@ -29,6 +29,13 @@ View view;
         token= bundle.getString("token");
         cDue= bundle.getString("cDue");
 
+        //textView Finding
+        customerNameTextView=view.findViewById(R.id.customerNameTextViewId);
+        customerDataTextView=view.findViewById(R.id.customerDataTextViewId);
+        customerPayDueTextView=view.findViewById(R.id.customerPayDueTextViewId);
+        customerDuePayHistoryTextView=view.findViewById(R.id.customerDuePayHistoryTextViewId);
+        customerTotalSellTextView=view.findViewById(R.id.customerTotalSellTextViewId);
+
 
     return view;
 
