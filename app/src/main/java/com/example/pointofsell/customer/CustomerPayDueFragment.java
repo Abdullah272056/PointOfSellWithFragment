@@ -64,11 +64,36 @@ public class CustomerPayDueFragment extends Fragment {
         token= bundle.getString("token");
 
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
-
+        customerInformation();
 
         return view;
     }
 
-    
+    public void customerInformation(){
+        apiInterface.getSingleCustomerInformation("Bearer "+token,customer_id)
+                .enqueue(new Callback<SingleCustomerGetResponse>() {
+                    @Override
+                    public void onResponse(Call<SingleCustomerGetResponse> call, Response<SingleCustomerGetResponse> response) {
+                        if (response.code()==200){
+                            dueTextView.setText(String.valueOf(response.body().getSingleCustomerInformation().getDue()));
+                            allTimeSellTextView.setText(String.valueOf(response.body().getSingleCustomerInformation().getAllTimeSellAmount()));
+
+                            cNameTextView.setText("Name :  "+String.valueOf(response.body().getSingleCustomerInformation().getName()));
+                            cPhoneTextView.setText("Phone :  "+String.valueOf(response.body().getSingleCustomerInformation().getPhone()));
+                            cEmailTextView.setText("Email :  "+String.valueOf(response.body().getSingleCustomerInformation().getEmail()));
+                            cAddressTextView.setText("Address :  "+String.valueOf(response.body().getSingleCustomerInformation().getAddress()));
+                        }else {
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<SingleCustomerGetResponse> call, Throwable t) {
+                        Log.e("awer",t.getMessage().toString());
+                        //pauDueHistoryProgressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
+    }
 
 }
