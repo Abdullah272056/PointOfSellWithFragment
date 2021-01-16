@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.CustomerFragment;
+import com.example.pointofsell.invoice.Invoice_Fragment;
 import com.example.pointofsell.invoice.delete_invoice.DeleteInVoiceGetInVoiceDataResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
@@ -72,7 +77,7 @@ public class InvoiceCustomAdapter extends RecyclerView.Adapter<InvoiceCustomAdap
 
         holder.deleteInvoiceImageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(false);
                 builder.setMessage("Do you want to Delete?");
@@ -85,6 +90,14 @@ public class InvoiceCustomAdapter extends RecyclerView.Adapter<InvoiceCustomAdap
 
 
                                 if (response.code()==200){
+
+                                    Bundle bundle=new Bundle();
+                                    bundle.putString("token",token);
+                                    Fragment fragment=new Invoice_Fragment();
+                                    fragment.setArguments(bundle);
+                                    AppCompatActivity activity=(AppCompatActivity)v.getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
                                     Toast.makeText(context, "delete successful", Toast.LENGTH_SHORT).show();
                                 }else if (response.code()==500){
                                     Toast.makeText(context, "internal server error", Toast.LENGTH_SHORT).show();
@@ -94,9 +107,6 @@ public class InvoiceCustomAdapter extends RecyclerView.Adapter<InvoiceCustomAdap
                                 }else {
                                     Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show();
                                 }
-
-
-                               
 
                             }
 
