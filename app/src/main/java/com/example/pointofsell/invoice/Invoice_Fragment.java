@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pointofsell.R;
 import com.example.pointofsell.invoice.get_invoice.InVoiceResponse;
 import com.example.pointofsell.invoice.get_invoice.Invoice;
+import com.example.pointofsell.invoice.get_invoice.InvoiceCustomAdapter;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +33,7 @@ public class Invoice_Fragment extends Fragment {
     ApiInterface apiInterface;
     String token;
     List<Invoice> invoiceList;
-//    InvoiceCustomAdapter invoiceCustomAdapter;
+    InvoiceCustomAdapter invoiceCustomAdapter;
     RecyclerView invoiceRecyclerView;
     ProgressBar invoiceProgressBar;
     FloatingActionButton addInvoiceButton;
@@ -70,10 +71,10 @@ public class Invoice_Fragment extends Fragment {
                     invoiceList.addAll(response.body().getInvoices());
                     if (invoiceList.size ()>0){
                         Toast.makeText(getActivity(), String.valueOf(invoiceList.size()), Toast.LENGTH_SHORT).show();
-//                        Log.e("se",String.valueOf(invoiceList.get(0).getCustomer().getName()));
-//                        invoiceCustomAdapter = new InvoiceCustomAdapter(getActivity(),token,invoiceList);
-//                        invoiceRecyclerView.setLayoutManager(new LinearLayoutManager(InVoiceActivity.this));
-//                        invoiceRecyclerView.setAdapter(invoiceCustomAdapter);
+                        Log.e("se",String.valueOf(invoiceList.get(0).getCustomer().getName()));
+                        invoiceCustomAdapter = new InvoiceCustomAdapter(getActivity(),token,invoiceList);
+                        invoiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        invoiceRecyclerView.setAdapter(invoiceCustomAdapter);
                     }
                 }else if (response.code()==404){
                     Toast.makeText(getActivity(), "No invoice found", Toast.LENGTH_SHORT).show();
