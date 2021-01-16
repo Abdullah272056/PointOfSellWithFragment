@@ -82,7 +82,7 @@ public class Invoice_Fragment extends Fragment {
 
                 }
 
-                
+
                 invoiceProgressBar.setVisibility(View.GONE);
 
             }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_margin="5dp"
+    android:weightSum="6"
+    android:gravity="center"
+    android:background="@drawable/background"
+    android:id="@+id/inVoiceItemId"
+    >
+    <TextView
+        android:id="@+id/invoiceItemSerialTextViewId"
+        android:gravity="center"
+        android:text="00"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_weight=".9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_margin="2.5dp"
+        android:background="@drawable/back"
+        android:layout_weight="5.1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="2.8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
+                android:paddingLeft="7dp"
+                android:id="@+id/invoiceItemCustomerNameTextViewId"
+                android:textColor="#090909"
+                android:text="Abdullah"
+              android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/invoiceItemDateTextViewId"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp"
+                android:paddingLeft="7dp"
+                android:text="November 13 2020"
+               android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/invoiceItemTotalAmountTextViewId"
+            android:padding="5dp"
+            android:text="00"
+            android:textColor="#38711A"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_weight="1.5"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/deleteInvoiceImageViewId"
+            android:padding="5dp"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:textColor="#38711A"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_weight=".8"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
