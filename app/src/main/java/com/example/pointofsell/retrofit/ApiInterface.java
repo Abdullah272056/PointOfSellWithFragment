@@ -9,6 +9,7 @@ import com.example.pointofsell.customer.pay_due.DuePayDataResponse;
 import com.example.pointofsell.customer.pay_due.PayData;
 import com.example.pointofsell.customer.single_customer.SingleCustomerGetResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
+import com.example.pointofsell.invoice.get_invoice.InVoiceResponse;
 import com.example.pointofsell.log_in.LogInData;
 import com.example.pointofsell.log_in.LogInResponse;
 import com.example.pointofsell.product.create_product.ProductDataResponse;
@@ -92,8 +93,8 @@ public interface ApiInterface {
     @GET("api/invoice/sale-info")
     Call<GetAllSellInfoResponse> getAllSellInfo(@Header("Authorization") String authorization);
     //get all invoice
-//    @GET("api/invoice")
-//    Call<InVoiceResponse> getInvoice(@Header("Authorization") String authorization);
+    @GET("api/invoice")
+    Call<InVoiceResponse> getInvoice(@Header("Authorization") String authorization);
 //    //get single invoice information
 //    @GET("api/invoice/{id}")
 //    Call<SingleInvoiceGetResponse> getSingleInvoiceInformation(@Header("Authorization") String authorization, @Path("id") String id);
