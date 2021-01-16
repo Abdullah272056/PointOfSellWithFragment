@@ -74,7 +74,7 @@ public class CustomerPayDueFragment extends Fragment {
             }
         });
 
-        
+
         return view;
     }
 
