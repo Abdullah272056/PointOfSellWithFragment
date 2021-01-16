@@ -1,6 +1,7 @@
 package com.example.pointofsell.customer;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -95,5 +97,45 @@ public class CustomerPayDueFragment extends Fragment {
                     }
                 });
     }
+    public void payDue(){
+        duePayAmount = duePayAmountEditText.getText().toString();
+        if (TextUtils.isEmpty(duePayAmount)){
+            duePayAmountEditText.setError("Enter  pay amount");
+            duePayAmountEditText.requestFocus();
+            return;
+        }if(Integer.parseInt(duePayAmount)>Integer.parseInt(dueTextView.getText().toString())){
+            duePayAmountEditText.setError("You send more amount than due");
+            duePayAmountEditText.requestFocus();
+            return;
+        }
+        payDueButton.setVisibility(View.INVISIBLE);
+        pauDueProgressBar.setVisibility(View.VISIBLE);
+        payData=new PayData(customer_id,Integer.parseInt(duePayAmount));
 
+        apiInterface.payDue("Bearer "+token,payData)
+                .enqueue(new Callback<DuePayDataResponse>() {
+                    @Override
+                    public void onResponse(Call<DuePayDataResponse> call, Response<DuePayDataResponse> response) {
+
+                        if (response.code()==404){
+                            Toast.makeText(getActivity(), "You send more amount than due", Toast.LENGTH_SHORT).show();
+                        }else if (response.code()==200){
+                            customerInformation();
+                            Toast.makeText(getActivity(), "Due has been updated", Toast.LENGTH_SHORT).show();
+                        }else if (response.code()==401){
+                            Toast.makeText(getActivity(), "You are not authorized to access this route", Toast.LENGTH_LONG).show();
+                        }else {
+                            Toast.makeText(getActivity(), "failed", Toast.LENGTH_LONG).show();
+                        }
+                        pauDueProgressBar.setVisibility(View.INVISIBLE);
+                        payDueButton.setVisibility(View.VISIBLE);
+                    }
+                    @Override
+                    public void onFailure(Call<DuePayDataResponse> call, Throwable t) {
+                        pauDueProgressBar.setVisibility(View.INVISIBLE);
+                        payDueButton.setVisibility(View.VISIBLE);
+                    }
+                });
+
+    }
 }
