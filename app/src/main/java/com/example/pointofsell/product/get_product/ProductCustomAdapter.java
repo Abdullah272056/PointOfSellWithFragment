@@ -86,7 +86,13 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
 
             }
         });
-
+        // edit button clicked
+        holder.editProductImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Not available", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         holder.productRecyclerViewItem.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
