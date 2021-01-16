@@ -40,10 +40,27 @@ View view;
         customerDuePayHistoryTextView=view.findViewById(R.id.customerDuePayHistoryTextViewId);
         customerTotalSellTextView=view.findViewById(R.id.customerTotalSellTextViewId);
 
-     
+        customerPayDueTextView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                bundle.putString("customerId",customer_id);
+                bundle.putString("cDue",cDue);
+                fragment=new CustomerPayDueFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
 
-    return view;
+
+
+            }
+        });
+
+
+
+        return view;
     }
 
     }
