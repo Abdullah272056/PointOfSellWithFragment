@@ -88,6 +88,15 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
         });
 
 
+        holder.productRecyclerViewItem.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                ProductInformation(position);
+            }
+        });
+
+
 
     }
 
@@ -175,5 +184,56 @@ public class ProductCustomAdapter extends RecyclerView.Adapter<ProductCustomAdap
     }
 
 
-   
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void ProductInformation(int position){
+        AlertDialog.Builder builder     =new AlertDialog.Builder(context);
+        LayoutInflater layoutInflater   =LayoutInflater.from(context);
+        View view                       =layoutInflater.inflate(R.layout.product_details,null);
+        builder.setView(view);
+        final AlertDialog alertDialog   = builder.create();
+
+        productNameTextView=view.findViewById(R.id.productNameTextViewId);
+        productRegularPriceTextView=view.findViewById(R.id.productRegularPriceTextViewId);
+        productSellingPriceTextView=view.findViewById(R.id.productSellingPriceTextViewId);
+        productStockTextView=view.findViewById(R.id.productStockTextViewId);
+        productUnitTextView=view.findViewById(R.id.productUnitTextViewId);
+        productDescriptionTextView=view.findViewById(R.id.productDescriptionTextViewId);
+        productAddDateTextView=view.findViewById(R.id.productAddDateTextViewId);
+        productUpdateDateTextView=view.findViewById(R.id.productUpdateDateTextViewId);
+        productIDetailsImageView=view.findViewById(R.id.productImageViewId);
+
+        okButton=view.findViewById(R.id.okButtonId);
+
+
+        productNameTextView.setText(String.valueOf(productDataList.get(position).getName()));
+        productRegularPriceTextView.setText(String.valueOf(productDataList.get(position).getPrice()));
+        productSellingPriceTextView.setText(String.valueOf(productDataList.get(position).getSellingPrice()));
+        productStockTextView.setText(String.valueOf(productDataList.get(position).getStock()));
+        productDescriptionTextView.setText(String.valueOf(productDataList.get(position).getDescription()));
+
+        //  String string=String.valueOf(productDataList.get(position).getCreatedAt());
+        SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy \nhh:mm a", Locale.forLanguageTag(String.valueOf(productDataList.get(position).getCreatedAt())));
+        String getCreatedAt = df.format(new Date());
+        productAddDateTextView.setText(String.valueOf(getCreatedAt));
+
+        SimpleDateFormat df1 = new SimpleDateFormat("dd MMM yyyy \nhh:mm a", Locale.forLanguageTag(String.valueOf(productDataList.get(position).getUpdatedAt())));
+        String getUpdatedAt = df.format(new Date());
+        productUpdateDateTextView.setText(String.valueOf(getUpdatedAt));
+
+        productUnitTextView.setText(String.valueOf(productDataList.get(position).getUnit()));
+
+
+        okButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+
+        Picasso.with(context).load(Uri.parse(String.valueOf(productDataList.get(position).getImage()))).into(productIDetailsImageView);
+
+        alertDialog.show();
+    }
+
 }
