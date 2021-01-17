@@ -81,6 +81,7 @@ public class SellDetailsFragment extends Fragment {
                 .enqueue(new Callback<SingleCustomerGetResponse>() {
                     @Override
                     public void onResponse(Call<SingleCustomerGetResponse> call, Response<SingleCustomerGetResponse> response) {
+                        if (getActivity()!=null){
                         SingleCustomerGetResponse singleCustomerGetResponse=response.body();
                         sellDetailsProgressBar.setVisibility(View.INVISIBLE);
                         if (singleCustomerGetResponse.getSuccess()==true){
@@ -90,6 +91,7 @@ public class SellDetailsFragment extends Fragment {
                             singleCustomerTotalSellList.addAll(response.body().getSingleCustomerInformation().getTotalSell());
                             singleCustomerProductList.addAll(singleCustomerTotalSellList.get(position).getProducts());
                             if (singleCustomerProductList.size()>0){
+                                if (getActivity()!=null){
                                 singleCustomerSellsDetailsCustomAdapter = new SingleCustomerSellsDetailsCustomAdapter(getActivity(),token,singleCustomerProductList,position);
                                 sellDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                 sellDetailsRecyclerView.setAdapter(singleCustomerSellsDetailsCustomAdapter);
@@ -108,16 +110,17 @@ public class SellDetailsFragment extends Fragment {
                                 }
                                 productTotalPriceTextView.setText(String.valueOf(sub));
 
-                            }
+                            }}
 
                         }
-                    }
+                    }}
 
                     @Override
                     public void onFailure(Call<SingleCustomerGetResponse> call, Throwable t) {
+                        if (getActivity()!=null){
                         sellDetailsProgressBar.setVisibility(View.INVISIBLE);
 
-                    }
+                    }}
                 });
     }
 
