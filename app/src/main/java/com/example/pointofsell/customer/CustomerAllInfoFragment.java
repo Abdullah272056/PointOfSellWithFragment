@@ -24,7 +24,7 @@ public class CustomerAllInfoFragment extends Fragment  {
 
     TextView customerNameTextView,customerDataTextView,customerPayDueTextView,
             customerDuePayHistoryTextView,customerTotalSellTextView;
-    String customer_id,token,cDue;
+    String customer_id,token;
 
 
 Fragment fragment;
@@ -36,9 +36,9 @@ View view;
 
         //data receive
         Bundle bundle=this.getArguments();
-        customer_id=bundle.getString("cId");
+        customer_id=bundle.getString("customerId");
         token= bundle.getString("token");
-        cDue= bundle.getString("cDue");
+
 
         //textView Finding
         titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
@@ -69,7 +69,6 @@ View view;
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
-                bundle.putString("cDue",cDue);
                 fragment=new CustomerPayDueFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();

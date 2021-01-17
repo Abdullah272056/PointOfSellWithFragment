@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CustomerPayDueFragment extends Fragment {
+    TextView titleBarTextView;
+    ImageView backImageView;
+
     ApiInterface apiInterface;
     ProgressBar pauDueProgressBar;
 
@@ -47,6 +51,18 @@ public class CustomerPayDueFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.customer_pay_due_fragment, container, false);
 
+        //data receive
+        Bundle bundle=this.getArguments();
+        customer_id=bundle.getString("customerId");
+        token= bundle.getString("token");
+
+       //title bar view finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("Customer Pay Due");
+
+
+
         // textView finding
         cNameTextView=view.findViewById(R.id.customerNameTextViewId);
         cPhoneTextView=view.findViewById(R.id.customerPhoneTextViewId);
@@ -60,13 +76,22 @@ public class CustomerPayDueFragment extends Fragment {
         duePayAmountEditText=view.findViewById(R.id.duePayAmountEditTextId);
         pauDueProgressBar=view.findViewById(R.id.pauDueProgressBarId);
 
-        //data receive
-        Bundle bundle=this.getArguments();
-        customer_id=bundle.getString("customerId");
-        token= bundle.getString("token");
+
 
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
         customerInformation();
+
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                bundle.putString("customerId",customer_id);
+                Fragment fragment=new CustomerAllInfoFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+            }
+        });
         payDueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

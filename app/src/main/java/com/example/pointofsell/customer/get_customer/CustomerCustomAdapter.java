@@ -112,7 +112,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
 
                 bundle.putString("cDue",customerInformationList.get(position).getDue().toString());
                 bundle.putString("cCreatedAt",customerInformationList.get(position).getCreatedAt());
-                bundle.putString("cId",customerInformationList.get(position).getId());
+                bundle.putString("customerId",customerInformationList.get(position).getId());
                 bundle.putString("token",token);
 
 
