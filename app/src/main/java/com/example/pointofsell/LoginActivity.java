@@ -139,12 +139,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
                         }
 
-
+                        if(!LoginActivity.this.isFinishing()){
                         Intent intent=new Intent(LoginActivity.this, HomePage.class);
                         intent.putExtra("token",response.body().getToken());
                         startActivity(intent);
                         finish();
-
+                        }
 
                     }
                     Log.e("res",response.body().getToken().toString());
