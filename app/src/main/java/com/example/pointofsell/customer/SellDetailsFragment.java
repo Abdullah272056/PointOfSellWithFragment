@@ -63,6 +63,8 @@ public class SellDetailsFragment extends Fragment {
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
 
+
+        
         return view;
     }}
 
