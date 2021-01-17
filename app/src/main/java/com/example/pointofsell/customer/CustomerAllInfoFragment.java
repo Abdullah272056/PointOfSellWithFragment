@@ -64,13 +64,6 @@ View view;
 
         return view;
     }
-    OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-        @Override
-        public void handleOnBackPressed() {
-            Toast.makeText(getContext(), "asdfgh", Toast.LENGTH_SHORT).show();
-        }
-    };
 
-    //requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
     }

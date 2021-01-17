@@ -123,25 +123,29 @@ public class CustomerPayDueFragment extends Fragment {
                 .enqueue(new Callback<DuePayDataResponse>() {
                     @Override
                     public void onResponse(Call<DuePayDataResponse> call, Response<DuePayDataResponse> response) {
+                        if(getActivity() != null) {
+                            if (response.code() == 404) {
 
-                        if (response.code()==404){
-                            Toast.makeText(getActivity(), "You send more amount than due", Toast.LENGTH_SHORT).show();
-                        }else if (response.code()==200){
-                            customerInformation();
-                            Toast.makeText(getActivity(), "Due has been updated", Toast.LENGTH_SHORT).show();
-                        }else if (response.code()==401){
-                            Toast.makeText(getActivity(), "You are not authorized to access this route", Toast.LENGTH_LONG).show();
-                        }else {
-                            Toast.makeText(getActivity(), "failed", Toast.LENGTH_LONG).show();
-                        }
-                        pauDueProgressBar.setVisibility(View.INVISIBLE);
-                        payDueButton.setVisibility(View.VISIBLE);
-                    }
+                                Toast.makeText(getActivity(), "You send more amount than due", Toast.LENGTH_SHORT).show();
+                            } else if (response.code() == 200) {
+                                if(getActivity() != null) {
+                                    customerInformation();
+                                    Toast.makeText(getActivity(), "Due has been updated", Toast.LENGTH_SHORT).show();
+                                }
+                            } else if (response.code() == 401) {
+                                Toast.makeText(getActivity(), "You are not authorized to access this route", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(getActivity(), "failed", Toast.LENGTH_LONG).show();
+                            }
+                            pauDueProgressBar.setVisibility(View.INVISIBLE);
+                            payDueButton.setVisibility(View.VISIBLE);
+                        } }
                     @Override
                     public void onFailure(Call<DuePayDataResponse> call, Throwable t) {
+                        if(getActivity() != null) {
                         pauDueProgressBar.setVisibility(View.INVISIBLE);
                         payDueButton.setVisibility(View.VISIBLE);
-                    }
+                    }}
                 });
 
     }
