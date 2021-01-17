@@ -79,7 +79,6 @@ public class SingleCustomerTotalSellFragment extends Fragment {
                                     singleCustomerTotalSellRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                     singleCustomerTotalSellRecyclerView.setAdapter(singleCustomerTotalSellCustomAdapter);
                                 } }
-
                             Log.e("oooo",String.valueOf(singleCustomerTotalSellList.size()));
                         }
                     }}
