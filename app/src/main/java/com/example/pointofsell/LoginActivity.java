@@ -138,10 +138,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             sharePref.rememberData(LoginActivity.this,signInEmail,signInPassword);
                             Toast.makeText(LoginActivity.this, "success", Toast.LENGTH_SHORT).show();
                         }
+
+
                         Intent intent=new Intent(LoginActivity.this, HomePage.class);
                         intent.putExtra("token",response.body().getToken());
                         startActivity(intent);
                         finish();
+
 
                     }
                     Log.e("res",response.body().getToken().toString());
@@ -166,10 +169,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<LogInResponse> call, Throwable t) {
+                if(getApplication() != null){
                 Toast.makeText(LoginActivity.this, "login fail ! Try again", Toast.LENGTH_SHORT).show();
                 Log.e("lee",t.getMessage());
                 logInProgressBar.setVisibility(View.GONE);
 
+            }
             }
         });
 

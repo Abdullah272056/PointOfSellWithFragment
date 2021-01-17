@@ -123,13 +123,11 @@ public class ProductFragment extends Fragment {
                 if (response.code()==200){
                     getProductDataList=new ArrayList<>();
                     getProductDataList.addAll(response.body().getProducts());
-                    // Toast.makeText(ProductActivity.this, String.valueOf(getProductDataList.size()), Toast.LENGTH_SHORT).show();
-
                     productCustomAdapter = new ProductCustomAdapter(getActivity(),token,getProductDataList);
                     productRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                     productRecyclerView.setAdapter(productCustomAdapter);
 
-                    Toast.makeText(getActivity(), "All product fetched", Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(getActivity(), "All product fetched", Toast.LENGTH_SHORT).show();
                 }else if (response.code()==404){
                     Toast.makeText(getActivity(), "Product not found", Toast.LENGTH_SHORT).show();
                 }

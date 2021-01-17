@@ -85,8 +85,8 @@ public class Invoice_Fragment extends Fragment {
                     invoiceList=new ArrayList<>();
                     invoiceList.addAll(response.body().getInvoices());
                     if (invoiceList.size ()>0){
-                        Toast.makeText(getActivity(), String.valueOf(invoiceList.size()), Toast.LENGTH_SHORT).show();
-                        Log.e("se",String.valueOf(invoiceList.get(0).getCustomer().getName()));
+                        //Toast.makeText(getActivity(), String.valueOf(invoiceList.size()), Toast.LENGTH_SHORT).show();
+                       // Log.e("se",String.valueOf(invoiceList.get(0).getCustomer().getName()));
                         invoiceCustomAdapter = new InvoiceCustomAdapter(getActivity(),token,invoiceList);
                         invoiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         invoiceRecyclerView.setAdapter(invoiceCustomAdapter);

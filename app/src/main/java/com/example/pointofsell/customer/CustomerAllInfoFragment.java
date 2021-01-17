@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -62,5 +64,13 @@ View view;
 
         return view;
     }
+    OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+        @Override
+        public void handleOnBackPressed() {
+            Toast.makeText(getContext(), "asdfgh", Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    //requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
     }

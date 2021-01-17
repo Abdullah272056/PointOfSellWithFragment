@@ -85,32 +85,38 @@ public class CustomerFragment extends Fragment {
         apiInterface.getAllCustomerInformation("Bearer "+token).enqueue(new Callback<CustomerInformationDataResponse>() {
             @Override
             public void onResponse(Call<CustomerInformationDataResponse> call, Response<CustomerInformationDataResponse> response) {
-                CustomerInformationDataResponse customerInformationDataResponse=response.body();
-                if (response.code()==500){
+
+                if(getActivity() != null){
+                CustomerInformationDataResponse customerInformationDataResponse = response.body();
+                if (response.code() == 500) {
                     Toast.makeText(getActivity(), "Cannot read property 'id' of null", Toast.LENGTH_SHORT).show();
-                }
-                else if (response.code()==200){
-                    customerInformationList=new ArrayList<>();
+                } else if (response.code() == 200) {
+                    customerInformationList = new ArrayList<>();
                     customerInformationList.addAll(response.body().getCustomerInformation());
-                    if (customerInformationList.size ()>0){
-                        customerCustomAdapter = new CustomerCustomAdapter(getActivity(),token,customerInformationList);
+                    if (customerInformationList.size() > 0) {
+                        if (getActivity() != null){
+                            Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+                        customerCustomAdapter = new CustomerCustomAdapter(getActivity(), token, customerInformationList);
                         customerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                         customerRecyclerView.setAdapter(customerCustomAdapter);
                     }
-                }
-                else if (response.code()==404){
+
+                    }
+                } else if (response.code() == 404) {
                     Toast.makeText(getActivity(), "No customer found", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
 
                 }
 
                 mainProgressBar.setVisibility(View.GONE);
-
+            }
             }
             @Override
             public void onFailure(Call<CustomerInformationDataResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "fail:  "+t.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                mainProgressBar.setVisibility(View.GONE);
+                if(getActivity() != null) {
+                    Toast.makeText(getActivity(), "fail:  " + t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                    mainProgressBar.setVisibility(View.GONE);
+                }
             }
         });
 

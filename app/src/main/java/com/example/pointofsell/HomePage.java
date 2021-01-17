@@ -35,10 +35,11 @@ public class HomePage extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
         }
+
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
 
                 if (item.getItemId()==R.id.homeItemId){
                     fragment=new OthersFragment();
