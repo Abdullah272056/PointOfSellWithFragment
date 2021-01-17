@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SellDetailsFragment extends Fragment {
+    TextView titleBarTextView;
+    ImageView backImageView;
     View view;
 
     int position;
@@ -56,6 +59,11 @@ public class SellDetailsFragment extends Fragment {
         position=bundle.getInt("position",10);
         customer_id= bundle.getString("customerId");
         token=bundle.getString("token");
+
+        //title bar view finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("Sell Details");
 
         //textView finding
         productTotalPriceTextView=view.findViewById(R.id.productTotalPriceTextViewId);
