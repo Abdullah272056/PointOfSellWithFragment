@@ -79,7 +79,18 @@ public class SellDetailsFragment extends Fragment {
 
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                bundle.putString("customerId",customer_id);
+                Fragment fragment=new SingleCustomerTotalSellFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
+            }
+        });
         singleCustomerTotalSell();
 
         return view;
