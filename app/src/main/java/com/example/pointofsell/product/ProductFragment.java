@@ -130,7 +130,6 @@ public class ProductFragment extends Fragment {
                                 productRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                 productRecyclerView.setAdapter(productCustomAdapter);
                             }
-
                         }
                     } else if (response.code() == 404) {
                         Toast.makeText(getActivity(), "Product not found", Toast.LENGTH_SHORT).show();

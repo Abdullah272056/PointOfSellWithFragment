@@ -80,34 +80,37 @@ public class Invoice_Fragment extends Fragment {
         apiInterface.getInvoice("Bearer "+token).enqueue(new Callback<InVoiceResponse>() {
             @Override
             public void onResponse(Call<InVoiceResponse> call, Response<InVoiceResponse> response) {
+                if(getActivity() != null) {
+                    if (response.code() == 200) {
+                        invoiceList = new ArrayList<>();
+                        invoiceList.addAll(response.body().getInvoices());
+                        if (invoiceList.size() > 0) {
+                            if(getActivity() != null) {
+                                Toast.makeText(getActivity(), String.valueOf(invoiceList.size()), Toast.LENGTH_SHORT).show();
+                                // Log.e("se",String.valueOf(invoiceList.get(0).getCustomer().getName()));
+                                invoiceCustomAdapter = new InvoiceCustomAdapter(getActivity(), token, invoiceList);
+                                invoiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                invoiceRecyclerView.setAdapter(invoiceCustomAdapter);
+                            }
+                        }
+                    } else if (response.code() == 404) {
+                        Toast.makeText(getActivity(), "No invoice found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
 
-                if (response.code()==200){
-                    invoiceList=new ArrayList<>();
-                    invoiceList.addAll(response.body().getInvoices());
-                    if (invoiceList.size ()>0){
-                        //Toast.makeText(getActivity(), String.valueOf(invoiceList.size()), Toast.LENGTH_SHORT).show();
-                       // Log.e("se",String.valueOf(invoiceList.get(0).getCustomer().getName()));
-                        invoiceCustomAdapter = new InvoiceCustomAdapter(getActivity(),token,invoiceList);
-                        invoiceRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        invoiceRecyclerView.setAdapter(invoiceCustomAdapter);
                     }
-                }else if (response.code()==404){
-                    Toast.makeText(getActivity(), "No invoice found", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
 
+
+                    invoiceProgressBar.setVisibility(View.GONE);
                 }
-
-
-                invoiceProgressBar.setVisibility(View.GONE);
-
             }
 
             @Override
             public void onFailure(Call<InVoiceResponse> call, Throwable t) {
+                if(getActivity() != null) {
                 Toast.makeText(getActivity(), "fail", Toast.LENGTH_SHORT).show();
                 invoiceProgressBar.setVisibility(View.GONE);
-            }
+            }}
         });
 
     }
