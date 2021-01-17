@@ -67,7 +67,13 @@ public class SingleCustomerTotalSellFragment extends Fragment {
         backImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                bundle.putString("customerId",customer_id);
+                Fragment fragment=new CustomerAllInfoFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
             }
         });
 

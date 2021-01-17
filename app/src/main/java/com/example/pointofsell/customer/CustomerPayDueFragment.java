@@ -90,6 +90,7 @@ public class CustomerPayDueFragment extends Fragment {
                 Fragment fragment=new CustomerAllInfoFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
             }
         });
         payDueButton.setOnClickListener(new View.OnClickListener() {
