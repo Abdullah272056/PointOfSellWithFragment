@@ -21,6 +21,7 @@ public class SingleCustomerTotalSellFragment extends Fragment {
 
 
 
+
     return view;
     }
 }
