@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SingleCustomerTotalSellFragment extends Fragment {
+    TextView titleBarTextView;
+    ImageView backImageView;
+
     View view;
     String customer_id,token;
 
@@ -47,6 +52,10 @@ public class SingleCustomerTotalSellFragment extends Fragment {
         customer_id=bundle.getString("customerId");
         token= bundle.getString("token");
 
+        //title bar view finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("Total Sell history");
 
         //recycler view finding
         singleCustomerTotalSellRecyclerView=view.findViewById(R.id.singleCustomerTotalSellRecyclerViewId);
@@ -55,7 +64,12 @@ public class SingleCustomerTotalSellFragment extends Fragment {
 
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
         singleCustomerTotalSell();
-
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
 
     return view;
     }
