@@ -45,7 +45,6 @@ View view;
         customerPayDueTextView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
@@ -53,10 +52,18 @@ View view;
                 fragment=new CustomerPayDueFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
-
-
-
-
+            }
+        });
+        customerTotalSellTextView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                bundle.putString("customerId",customer_id);
+                bundle.putString("cDue",cDue);
+                fragment=new SingleCustomerTotalSellFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
             }
         });
 
