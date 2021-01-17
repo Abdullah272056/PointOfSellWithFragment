@@ -18,7 +18,7 @@
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu"
         android:layout_alignParentBottom="true"
-        android:background="?android:windowBackground"
+        android:background="#673AB7"
         android:id="@+id/bottomBarId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
