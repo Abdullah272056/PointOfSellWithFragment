@@ -13,11 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"/>
     <TextView
+        android:id="@+id/titleBarTextViewId"
         android:layout_marginStart="30dp"
         android:gravity="center_vertical"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
-        android:text="Home page"
+        android:text="Title bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />

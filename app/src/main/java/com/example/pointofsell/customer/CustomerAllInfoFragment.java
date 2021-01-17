@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,9 @@ import com.example.pointofsell.OthersFragment;
 import com.example.pointofsell.R;
 
 public class CustomerAllInfoFragment extends Fragment  {
+    TextView titleBarTextView;
+    ImageView backImageView;
+
     TextView customerNameTextView,customerDataTextView,customerPayDueTextView,
             customerDuePayHistoryTextView,customerTotalSellTextView;
     String customer_id,token,cDue;
@@ -37,11 +41,27 @@ View view;
         cDue= bundle.getString("cDue");
 
         //textView Finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("CustomerAll Info");
+
         customerNameTextView=view.findViewById(R.id.customerNameTextViewId);
         customerDataTextView=view.findViewById(R.id.customerDataTextViewId);
         customerPayDueTextView=view.findViewById(R.id.customerPayDueTextViewId);
         customerDuePayHistoryTextView=view.findViewById(R.id.customerDuePayHistoryTextViewId);
         customerTotalSellTextView=view.findViewById(R.id.customerTotalSellTextViewId);
+
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                fragment=new CustomerFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+            }
+        });
 
         customerPayDueTextView.setOnClickListener(new View.OnClickListener(){
             @Override
