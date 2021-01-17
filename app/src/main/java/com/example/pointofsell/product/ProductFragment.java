@@ -119,29 +119,34 @@ public class ProductFragment extends Fragment {
         apiInterface.getAllProduct("Bearer "+token).enqueue(new Callback<GetProductDataResponse>() {
             @Override
             public void onResponse(Call<GetProductDataResponse> call, Response<GetProductDataResponse> response) {
+                if(getActivity() != null) {
+                    if (response.code() == 200) {
+                        if(getActivity() != null) {
+                              Toast.makeText(getActivity(), "All product fetched", Toast.LENGTH_SHORT).show();
+                            getProductDataList = new ArrayList<>();
+                            getProductDataList.addAll(response.body().getProducts());
+                            if (getProductDataList.size()>0){
+                                productCustomAdapter = new ProductCustomAdapter(getActivity(), token, getProductDataList);
+                                productRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                productRecyclerView.setAdapter(productCustomAdapter);
+                            }
 
-                if (response.code()==200){
-                    getProductDataList=new ArrayList<>();
-                    getProductDataList.addAll(response.body().getProducts());
-                    productCustomAdapter = new ProductCustomAdapter(getActivity(),token,getProductDataList);
-                    productRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    productRecyclerView.setAdapter(productCustomAdapter);
-
-                  //  Toast.makeText(getActivity(), "All product fetched", Toast.LENGTH_SHORT).show();
-                }else if (response.code()==404){
-                    Toast.makeText(getActivity(), "Product not found", Toast.LENGTH_SHORT).show();
-                }
-                else if (response.code()==401){
-                    Toast.makeText(getActivity(), "Invalid token", Toast.LENGTH_SHORT).show();
-                }else {
-                }
+                        }
+                    } else if (response.code() == 404) {
+                        Toast.makeText(getActivity(), "Product not found", Toast.LENGTH_SHORT).show();
+                    } else if (response.code() == 401) {
+                        Toast.makeText(getActivity(), "Invalid token", Toast.LENGTH_SHORT).show();
+                    } else {
+                    }
 
                 productProgressBar.setVisibility(View.GONE);
+                }
             }
             @Override
             public void onFailure(Call<GetProductDataResponse> call, Throwable t) {
-                productProgressBar.setVisibility(View.GONE);
-            }
+                if(getActivity() != null) {
+                    productProgressBar.setVisibility(View.GONE);
+                }  }
         });
     }
 
