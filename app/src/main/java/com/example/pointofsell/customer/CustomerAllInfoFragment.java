@@ -60,7 +60,6 @@ View view;
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
-                bundle.putString("cDue",cDue);
                 fragment=new SingleCustomerTotalSellFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
