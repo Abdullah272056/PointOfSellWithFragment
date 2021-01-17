@@ -17,7 +17,7 @@ public class SellDetailsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.customer_fragment,container,false);
+        view=inflater.inflate(R.layout.sell_details_fragment,container,false);
 
      return view;
     }}

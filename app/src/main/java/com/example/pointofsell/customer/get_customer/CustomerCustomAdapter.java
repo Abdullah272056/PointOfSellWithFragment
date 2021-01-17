@@ -181,12 +181,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                                 }else {
                                     Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
                                 }
-//                                CustomerCustomAdapter.notifyDataSetChanged();
-//                                customerInformationList.remove(position);
-//                                notifyDataSetChanged();
-
-                                //customerInformationList.notify();
-                                //new CustomerFragment().getAllCustomer();
+//
                             }
 
                             @Override
