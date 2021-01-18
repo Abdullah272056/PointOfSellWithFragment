@@ -9,16 +9,9 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:background="#C0F3EE"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:textAlignment="center"
-            android:text="Due pay all history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
+        <include layout="@layout/my_toolbar"
+            android:id="@+id/toolbarId"
+            />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_marginTop="10dp"
             android:id="@+id/duePayHistoryRecyclerViewId"
