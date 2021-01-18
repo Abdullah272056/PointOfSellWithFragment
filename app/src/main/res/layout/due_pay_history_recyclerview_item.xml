@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_margin="5dp"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:background="#A3A2A2"
+        android:orientation="horizontal"
+        android:weightSum="6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/duePayHistoryDateTextViewId"
+            android:textColor="#000000"
+            android:padding="5dp"
+            android:text="12/12/2020"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/duePayHistoryPayAmountTextViewId"
+            android:textColor="#29D103"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:text="1000"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
