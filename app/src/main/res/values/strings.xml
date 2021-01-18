@@ -16,4 +16,7 @@
         <item>pack</item>
     </array>
 
+    <string name="open">Open</string>
+    <string name="closed">Closed</string>
+
 </resources>

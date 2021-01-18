@@ -1,39 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout android:id="@+id/drawerLayoutId"
-    android:fitsSystemWindows="true"
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawerLayoutId"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include layout="@layout/my_toolbar1"
-            android:id="@+id/toolbarId"
-            />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
             <ScrollView
                 android:layout_above="@+id/bottomBarId"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
                 <LinearLayout
-
                     android:id="@+id/mainLayoutId"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <include layout="@layout/my_toolbar1"
+                        android:id="@+id/toolbarId"
+                        />
 
                     <LinearLayout
                         android:layout_margin="5dp"
                         android:weightSum="2"
                         android:orientation="vertical"
-                        android:gravity="center"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <LinearLayout
@@ -366,17 +361,6 @@
                 </LinearLayout>
             </ScrollView>
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom_navigation_menu"
-                android:layout_alignParentBottom="true"
-                android:background="#BADEFA"
-                android:id="@+id/bottomBarId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
-
     </LinearLayout>
 
 
@@ -388,7 +372,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/my_menu" />
 

@@ -1,8 +1,11 @@
 package com.example.pointofsell;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -70,11 +74,75 @@ public class OthersFragment extends Fragment {
         totalProductTypeTextView=view.findViewById(R.id.totalProductTypeTextViewId);
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
-
+        navigationDrawer();
         getCustomerCount();
         getAllSellInfo();
         getAllProductInfo();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId ()){
+//                    case R.id.reportItemIdId:
+//                        intent=new Intent(HomePage.this,UpComingFeature.class);
+//                        startActivity(intent);
+//                        break;
+//                    case R.id.eCommerceItemIdId:
+//                        intent=new Intent(HomePage.this,UpComingFeature.class);
+//                        startActivity(intent);
+//                        break;
+//                    case R.id.currentMonthItemIdId:
+//                        intent=new Intent(HomePage.this,UpComingFeature.class);
+//                        startActivity(intent);
+//                        break;
+//                    case R.id.lastQuarterItemIdId:
+//                        intent=new Intent(HomePage.this,UpComingFeature.class);
+//                        startActivity(intent);
+//                        break;
+//                    case R.id.yearEndSaleItemId:
+//                        intent=new Intent(HomePage.this,UpComingFeature.class);
+//                        startActivity(intent);
+//                        break;
+//                    case R.id.calculatorItemIdId:
+//                        intent=new Intent(HomePage.this,UpComingFeature.class);
+//                        startActivity(intent);
+//                        drawerLayout.closeDrawer(Gravity.LEFT);
+//                        break;
+//                    case R.id.invoiceItemId:
+//                        intent=new Intent(HomePage.this, InVoiceActivity.class);
+//                        intent.putExtra("token",token);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                    case R.id.productItemIdId:
+//                        intent=new Intent(HomePage.this, ProductActivity.class);
+//                        intent.putExtra("token",token);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                    case R.id.logOutId:
+//                        sharePref.rememberData(HomePage.this,"","");
+//                        intent=new Intent(HomePage.this, LoginActivity.class);
+//                        intent.putExtra("token",token);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                    case R.id.customerItemId:
+//                        intent=new Intent(HomePage.this,CustomerActivity.class);
+//                        intent.putExtra("token",token);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
+//                    case R.id.dashBoardAllDataItemIdId:
+//                        intent=new Intent(HomePage.this, AboutMeActivity.class);
+//                        intent.putExtra("token",token);
+//                        startActivity(intent);
+//                        finish();
+//                        break;
 
+                }
+                return false;
+            }
+        });
         return view;
     }
 
@@ -154,6 +222,28 @@ public class OthersFragment extends Fragment {
                 //Toast.makeText(OthersInformation.this, "failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+
+    // create for drawerLayout
+    private void navigationDrawer() {
+
+        ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(
+                getActivity(),drawerLayout,toolbar,R.string.open,R.string.closed){
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                Toast.makeText (getActivity(), "Open", Toast.LENGTH_SHORT).show ();
+            }
+            @Override
+            public void onDrawerClosed(View drawerView){
+                super.onDrawerClosed(drawerView);
+                Toast.makeText (getActivity(), "Closed", Toast.LENGTH_SHORT).show ();
+            }
+        };
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
     }
 
 }
