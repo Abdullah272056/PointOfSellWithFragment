@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.pointofsell.customer.SingleCustomerTotalSellFragment;
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.product.get_all_product_info.GetAllProductInfoDataResponse;
@@ -49,6 +50,7 @@ public class OthersFragment extends Fragment {
     String token;
     String customerCount;
     View view;
+    Fragment fragment;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,35 +80,33 @@ public class OthersFragment extends Fragment {
         getCustomerCount();
         getAllSellInfo();
         getAllProductInfo();
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                fragment=new UpComingFeatureFragment();
                 switch(item.getItemId ()){
-//                    case R.id.reportItemIdId:
-//                        intent=new Intent(HomePage.this,UpComingFeature.class);
-//                        startActivity(intent);
-//                        break;
-//                    case R.id.eCommerceItemIdId:
-//                        intent=new Intent(HomePage.this,UpComingFeature.class);
-//                        startActivity(intent);
-//                        break;
-//                    case R.id.currentMonthItemIdId:
-//                        intent=new Intent(HomePage.this,UpComingFeature.class);
-//                        startActivity(intent);
-//                        break;
-//                    case R.id.lastQuarterItemIdId:
-//                        intent=new Intent(HomePage.this,UpComingFeature.class);
-//                        startActivity(intent);
-//                        break;
-//                    case R.id.yearEndSaleItemId:
-//                        intent=new Intent(HomePage.this,UpComingFeature.class);
-//                        startActivity(intent);
-//                        break;
-//                    case R.id.calculatorItemIdId:
-//                        intent=new Intent(HomePage.this,UpComingFeature.class);
-//                        startActivity(intent);
-//                        drawerLayout.closeDrawer(Gravity.LEFT);
-//                        break;
+
+                    case R.id.reportItemIdId:
+                        getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+                        break;
+                    case R.id.eCommerceItemIdId:
+                        getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+                        break;
+                    case R.id.currentMonthItemIdId:
+                        getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+                        break;
+                    case R.id.lastQuarterItemIdId:
+                        getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+                        break;
+                    case R.id.yearEndSaleItemId:
+                        getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+                        break;
+                    case R.id.calculatorItemIdId:
+                        getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+                        break;
 //                    case R.id.invoiceItemId:
 //                        intent=new Intent(HomePage.this, InVoiceActivity.class);
 //                        intent.putExtra("token",token);

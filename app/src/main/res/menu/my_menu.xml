@@ -4,16 +4,7 @@
     android:title="About me"
     android:icon="@drawable/ic_baseline_person_24"/>
 
-    <item android:id="@+id/productItemIdId"
-        android:title="Product"
-        android:icon="@drawable/ic_baseline_shopping_cart_24"/>
-    <item android:id="@+id/customerItemId"
-        android:title="Customer"
-        android:icon="@drawable/ic_baseline_person_24"/>
 
-            <item android:id="@+id/invoiceItemId"
-                android:title="Invoice"
-                android:icon="@drawable/ic_baseline_invoie_24"/>
             <item android:id="@+id/reportItemIdId"
                 android:icon="@drawable/ic_baseline_reports_24"
                 android:title="Reports"/>
