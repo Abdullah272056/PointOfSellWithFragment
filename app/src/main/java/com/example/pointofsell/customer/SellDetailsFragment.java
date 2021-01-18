@@ -118,7 +118,6 @@ public class SellDetailsFragment extends Fragment {
                                         singleCustomerSellsDetailsCustomAdapter = new SingleCustomerSellsDetailsCustomAdapter(getActivity(),token,singleCustomerProductList,position);
                                         sellDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         sellDetailsRecyclerView.setAdapter(singleCustomerSellsDetailsCustomAdapter);
-//
 
                                         totalAmountAfterDiscountTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getTotalAmountAfterDiscount()));
                                         payAmountTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getPayAmount()));

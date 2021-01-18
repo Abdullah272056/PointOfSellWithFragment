@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/dashBoardAllDataItemIdId"
+    android:title="About me"
+    android:icon="@drawable/ic_baseline_person_24"/>
+
+    <item android:id="@+id/productItemIdId"
+        android:title="Product"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"/>
+    <item android:id="@+id/customerItemId"
+        android:title="Customer"
+        android:icon="@drawable/ic_baseline_person_24"/>
+
+            <item android:id="@+id/invoiceItemId"
+                android:title="Invoice"
+                android:icon="@drawable/ic_baseline_invoie_24"/>
+            <item android:id="@+id/reportItemIdId"
+                android:icon="@drawable/ic_baseline_reports_24"
+                android:title="Reports"/>
+
+            <item android:id="@+id/eCommerceItemIdId"
+                android:icon="@drawable/ic_baseline_e_commerce_24"
+                android:title="E-Commerce"/>
+    <item android:title="Saved Report"
+        android:id="@+id/otherId"
+        >
+        <menu>
+            <item android:id="@+id/currentMonthItemIdId"
+                android:icon="@drawable/ic_baseline_calender_24"
+                android:title="Current Month"/>
+
+            <item android:id="@+id/lastQuarterItemIdId"
+                android:icon="@drawable/ic_baseline_calender_24"
+                android:title="Last Quarter"/>
+
+            <item android:id="@+id/yearEndSaleItemId"
+                android:icon="@drawable/ic_baseline_calender_24"
+                android:title="Year-end Sale"/>
+
+            <item android:id="@+id/calculatorItemIdId"
+                android:icon="@drawable/ic_baseline_calender_24"
+                android:title="Calculator"/>
+
+        </menu>
+
+
+    </item>
+
+    <item android:title="Log Out"
+        android:id="@+id/logOutId"
+        />
+</menu>
