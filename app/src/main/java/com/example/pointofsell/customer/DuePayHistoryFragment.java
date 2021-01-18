@@ -93,13 +93,13 @@ public class DuePayHistoryFragment extends Fragment {
                     @Override
                     public void onResponse(Call<SingleCustomerGetResponse> call, Response<SingleCustomerGetResponse> response) {
                               if (getActivity()!=null){
-                                  SingleCustomerGetResponse singleCustomerGetResponse=response.body();
                                   if (response.code()==404){
                                    Toast.makeText(getActivity(), "No customer found", Toast.LENGTH_SHORT).show();
                                }else if (response.code()==500){
                                    Toast.makeText(getActivity(), "internal server error", Toast.LENGTH_SHORT).show();
                                }else if (response.code()==200){
-                                   pauDueHistoryProgressBar.setVisibility(View.INVISIBLE);
+                                      SingleCustomerGetResponse singleCustomerGetResponse=response.body();
+                                      pauDueHistoryProgressBar.setVisibility(View.INVISIBLE);
                                    singleCustomerDuePayHistoryList=new ArrayList<>();
                                    singleCustomerDuePayHistoryList.addAll(response.body().getSingleCustomerInformation().getDuePayHistory());
                                    // reverse list inserting

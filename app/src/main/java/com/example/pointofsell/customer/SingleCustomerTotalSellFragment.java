@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.single_customer.SingleCustomerDuePayCustomAdapter;
 import com.example.pointofsell.customer.single_customer.SingleCustomerGetResponse;
 import com.example.pointofsell.customer.single_customer.SingleCustomerTotalSell;
 import com.example.pointofsell.customer.single_customer.SingleCustomerTotalSellCustomAdapter;
@@ -24,6 +25,7 @@ import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -85,23 +87,34 @@ public class SingleCustomerTotalSellFragment extends Fragment {
                 .enqueue(new Callback<SingleCustomerGetResponse>() {
                     @Override
                     public void onResponse(Call<SingleCustomerGetResponse> call, Response<SingleCustomerGetResponse> response) {
-                       if (getActivity()!=null){
-                        SingleCustomerGetResponse singleCustomerGetResponse=response.body();
-                        singleCustomerTotalSellProgressBar.setVisibility(View.INVISIBLE);
-                        if (singleCustomerGetResponse.getSuccess()==true){
-                            singleCustomerTotalSellList=new ArrayList<>();
-                            singleCustomerTotalSellList.addAll(response.body().getSingleCustomerInformation().getTotalSell());
-                            // reverse list inserting
-                            //Collections.reverse(singleCustomerTotalSellList);
-                            if (singleCustomerTotalSellList.size()>0){
-                                if (getActivity()!=null) {
-                                    singleCustomerTotalSellCustomAdapter = new SingleCustomerTotalSellCustomAdapter(getActivity(), token, singleCustomerTotalSellList);
-                                    singleCustomerTotalSellRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                    singleCustomerTotalSellRecyclerView.setAdapter(singleCustomerTotalSellCustomAdapter);
-                                } }
-                            Log.e("oooo",String.valueOf(singleCustomerTotalSellList.size()));
+                        if (getActivity()!=null){
+                            if (response.code()==404){
+                                Toast.makeText(getActivity(), "No customer found", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==500){
+                                Toast.makeText(getActivity(), "internal server error", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==200){
+                                singleCustomerTotalSellList=new ArrayList<>();
+                                singleCustomerTotalSellList.addAll(response.body().getSingleCustomerInformation().getTotalSell());
+                                // reverse list inserting
+                                //Collections.reverse(singleCustomerTotalSellList);
+                                if (singleCustomerTotalSellList.size()>0){
+                                    if (getActivity()!=null) {
+                                        if (getActivity()!=null){
+                                        singleCustomerTotalSellCustomAdapter = new SingleCustomerTotalSellCustomAdapter(getActivity(), token, singleCustomerTotalSellList);
+                                        singleCustomerTotalSellRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                        singleCustomerTotalSellRecyclerView.setAdapter(singleCustomerTotalSellCustomAdapter);
+                                    } }}
+                            }
+                            else {
+
+                            }
+                            singleCustomerTotalSellProgressBar.setVisibility(View.INVISIBLE);
                         }
-                    }}
+
+                    }
+
+
+
 
                     @Override
                     public void onFailure(Call<SingleCustomerGetResponse> call, Throwable t) {
