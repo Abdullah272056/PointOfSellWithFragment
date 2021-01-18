@@ -6,7 +6,7 @@
     android:layout_height="50dp"
     android:background="#0821AC"
     >
-    
+
     <TextView
         android:gravity="center_vertical"
         android:textColor="#FFFFFF"

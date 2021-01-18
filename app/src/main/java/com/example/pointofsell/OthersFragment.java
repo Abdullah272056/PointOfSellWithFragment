@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
@@ -18,12 +21,19 @@ import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.product.get_all_product_info.GetAllProductInfoDataResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
+import com.google.android.material.navigation.NavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OthersFragment extends Fragment {
+
+    Toolbar toolbar;
+    LinearLayout linearLayout;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+
     TextView customerTextView,productTextView,invoiceTextView;
     TextView totalSaleAmountTextView,totalSoldProductQuantityTextView,totalSoldInvoiceTextView,
             totalDueAmountTextView,totalProfitTextView;
@@ -41,6 +51,12 @@ public class OthersFragment extends Fragment {
          view=inflater.inflate(R.layout.others_fragment,container,false);
             Bundle bundle=this.getArguments();
             token=bundle.getString("token");
+
+
+        linearLayout=view.findViewById(R.id.mainLayoutId);
+        toolbar=view.findViewById (R.id.toolbarId);
+        drawerLayout=view.findViewById (R.id.drawerLayoutId);
+        navigationView=view.findViewById (R.id.myNavigationViewId);
 
         //finding textView
         customerCountTextView=view.findViewById(R.id.customerCountId);
