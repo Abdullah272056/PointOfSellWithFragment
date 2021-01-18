@@ -65,8 +65,6 @@ public class SingleCustomerTotalSellCustomAdapter extends RecyclerView.Adapter<S
         holder.singleCustomerItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Bundle bundle=new Bundle();
                 bundle.putInt("position",position);
                 bundle.putString("token",token);

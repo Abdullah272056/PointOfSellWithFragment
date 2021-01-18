@@ -110,11 +110,8 @@ public interface ApiInterface {
     // delete invoice
     @DELETE("api/invoice/{id}")
     Call<DeleteInVoiceGetInVoiceDataResponse> deleteInVoice(@Header("Authorization") String authorization, @Path("id") String id);
-//
-//
-//
-//
-//
+
+
 //    //product
     // get al product
     @GET("api/product")

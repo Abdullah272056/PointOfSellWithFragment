@@ -102,7 +102,6 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
         holder.customerItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bundle  bundle=new Bundle();
 
                 bundle.putString("cName",customerInformationList.get(position).getName());
@@ -114,7 +113,6 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                 bundle.putString("cCreatedAt",customerInformationList.get(position).getCreatedAt());
                 bundle.putString("customerId",customerInformationList.get(position).getId());
                 bundle.putString("token",token);
-
 
                 Fragment fragment=new CustomerAllInfoFragment();
                 fragment.setArguments(bundle);
@@ -163,16 +161,13 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                         .enqueue(new Callback<CustomerDeleteResponse>() {
                             @Override
                             public void onResponse(Call<CustomerDeleteResponse> call, Response<CustomerDeleteResponse> response) {
+                                if (context!=null){
+
                                 if (response.code()==200){
-                                    Toast.makeText(context, "Customer deleted successfully", Toast.LENGTH_SHORT).show();
+                                    if (context!=null) {
+                                        Toast.makeText(context, "Customer deleted successfully", Toast.LENGTH_SHORT).show();
 
-                                    Bundle  bundle=new Bundle();
-                                    bundle.putString("token",token);
-                                    Fragment fragment=new CustomerFragment();
-                                    fragment.setArguments(bundle);
-                                    AppCompatActivity activity=(AppCompatActivity)v.getContext();
-                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
-
+                                    }
 
                                 }else if (response.code()==500){
                                     Toast.makeText(context, "customer id not found", Toast.LENGTH_SHORT).show();
@@ -181,14 +176,22 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                                 }else {
                                     Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
                                 }
-//
-                            }
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("token", token);
+                                    Fragment fragment = new CustomerFragment();
+                                    fragment.setArguments(bundle);
+                                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId, fragment).commit();
+
+                                }}
 
                             @Override
                             public void onFailure(Call<CustomerDeleteResponse> call, Throwable t) {
+                                if (context!=null){
                                 Toast.makeText(context, "fail delete", Toast.LENGTH_SHORT).show();
 
-                            }
+                            }}
                         });
 
             }
@@ -284,8 +287,10 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                         .enqueue(new Callback<AddCustomerResponse>(){
                             @Override
                             public void onResponse(Call<AddCustomerResponse> call, Response<AddCustomerResponse> response) {
+                                if (context!=null){
 
                                 if (response.code()==200){
+                                    if (context!=null){
                                     Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show();
                                     Bundle  bundle=new Bundle();
                                     bundle.putString("token",token);
@@ -294,7 +299,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                                     AppCompatActivity activity=(AppCompatActivity)v.getContext();
                                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
-                                }
+                                } }
                                 else if (response.code()==401){
                                     Toast.makeText(context, "You are not authorized to access this route", Toast.LENGTH_LONG).show();
                                 }
@@ -310,21 +315,14 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                                // ((CustomerActivity)context).getAllCustomer();
                                 progressBar.setVisibility(View.GONE);
 
-                                Bundle  bundle=new Bundle();
-                                bundle.putString("token",token);
-
-//                               Fragment fragment=new OthersFragment();
-//                                fragment.setArguments(bundle);
-//                                FragmentTransaction fragmentManager=context.getApplicationContext().getFragmentManager().beginTransaction();
-//                                fragmentManager.replace(R.id.frameViewId,fragment);
-//                                fragmentManager.commit();
-
-                            }
+                            } }
                             @Override
                             public void onFailure(Call<AddCustomerResponse> call, Throwable t) {
+                                if (context!=null){
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(context, "fail:  "+t.getMessage().toString(), Toast.LENGTH_SHORT).show();
                             }
+                             }
                         });
             }
         });

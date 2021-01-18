@@ -200,7 +200,7 @@ public class CustomerFragment extends Fragment  {
                         new Callback<AddCustomerResponse>() {
                             @Override
                             public void onResponse(Call<AddCustomerResponse> call, Response<AddCustomerResponse> response) {
-
+                                if (getActivity()!=null){
                                 if (response.code()==201){
                                     Toast.makeText(getActivity(), "add successful", Toast.LENGTH_SHORT).show();
                                     alertDialog.dismiss();
@@ -211,13 +211,14 @@ public class CustomerFragment extends Fragment  {
                                 }
                                 progressBar.setVisibility(View.GONE);
                                 getAllCustomer();
-
+                                }
                             }
                             @Override
                             public void onFailure(Call<AddCustomerResponse> call, Throwable t) {
-                                Toast.makeText(getActivity(), "fail:  "+t.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
-
+                                if (getActivity()!=null) {
+                                    Toast.makeText(getActivity(), "fail:  " + t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                                    progressBar.setVisibility(View.GONE);
+                                }
                             }
                         }
                 );
