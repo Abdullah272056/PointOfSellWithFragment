@@ -111,12 +111,9 @@ public class OthersFragment extends Fragment {
                     case R.id.logOutId:
                         sharePref.rememberData(getActivity(),"","");
                         Intent intent=new Intent(getActivity(), LoginActivity.class);
-                        intent.putExtra("token",token);
+//
                         startActivity(intent);
-                       Fragment fragment=new OthersFragment();
-                       getFragmentManager().beginTransaction().remove(fragment).commit();
-
-
+                        getActivity().finish();
                         break;
 //
 //                    case R.id.dashBoardAllDataItemIdId:
