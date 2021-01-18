@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.example.pointofsell.customer.single_customer.SingleCustomerGetRespons
 import com.example.pointofsell.customer.single_customer.SingleCustomerProduct;
 import com.example.pointofsell.customer.single_customer.SingleCustomerSellsDetailsCustomAdapter;
 import com.example.pointofsell.customer.single_customer.SingleCustomerTotalSell;
+import com.example.pointofsell.customer.single_customer.SingleCustomerTotalSellCustomAdapter;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
 
@@ -101,38 +103,49 @@ public class SellDetailsFragment extends Fragment {
                     @Override
                     public void onResponse(Call<SingleCustomerGetResponse> call, Response<SingleCustomerGetResponse> response) {
                         if (getActivity()!=null){
-                        SingleCustomerGetResponse singleCustomerGetResponse=response.body();
-                        sellDetailsProgressBar.setVisibility(View.INVISIBLE);
-                        if (singleCustomerGetResponse.getSuccess()==true){
-                            singleCustomerTotalSellList=new ArrayList<>();
-                            singleCustomerProductList=new ArrayList<>();
+                            if (response.code()==404){
+                                Toast.makeText(getActivity(), "No customer found", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==500){
+                                Toast.makeText(getActivity(), "internal server error", Toast.LENGTH_SHORT).show();
+                            }else if (response.code()==200){
+                                singleCustomerTotalSellList=new ArrayList<>();
+                                singleCustomerProductList=new ArrayList<>();
 
-                            singleCustomerTotalSellList.addAll(response.body().getSingleCustomerInformation().getTotalSell());
-                            singleCustomerProductList.addAll(singleCustomerTotalSellList.get(position).getProducts());
-                            if (singleCustomerProductList.size()>0){
-                                if (getActivity()!=null){
-                                singleCustomerSellsDetailsCustomAdapter = new SingleCustomerSellsDetailsCustomAdapter(getActivity(),token,singleCustomerProductList,position);
-                                sellDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                sellDetailsRecyclerView.setAdapter(singleCustomerSellsDetailsCustomAdapter);
+                                singleCustomerTotalSellList.addAll(response.body().getSingleCustomerInformation().getTotalSell());
+                                singleCustomerProductList.addAll(singleCustomerTotalSellList.get(position).getProducts());
+                                if (singleCustomerProductList.size()>0){
+                                    if (getActivity()!=null){
+                                        singleCustomerSellsDetailsCustomAdapter = new SingleCustomerSellsDetailsCustomAdapter(getActivity(),token,singleCustomerProductList,position);
+                                        sellDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                        sellDetailsRecyclerView.setAdapter(singleCustomerSellsDetailsCustomAdapter);
 //
 
-                                totalAmountAfterDiscountTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getTotalAmountAfterDiscount()));
-                                payAmountTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getPayAmount()));
-                                dueTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getDue()));
-                                discountTextView.setText("after "+String.valueOf(singleCustomerTotalSellList.get(position).getDiscount())+"% discount : ");
+                                        totalAmountAfterDiscountTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getTotalAmountAfterDiscount()));
+                                        payAmountTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getPayAmount()));
+                                        dueTextView.setText(String.valueOf(singleCustomerTotalSellList.get(position).getDue()));
+                                        discountTextView.setText("after "+String.valueOf(singleCustomerTotalSellList.get(position).getDiscount())+"% discount : ");
 
-                                int size=singleCustomerProductList.size();
-                                for ( int i=size-1; i>=0;i--){
-                                    Log.e(String.valueOf(i),String.valueOf(singleCustomerProductList.get(i).getSellingPrice()));
-                                    sub=sub+(singleCustomerProductList.get(i).getSellingPrice()*singleCustomerProductList.get(i).getQuantity());
-                                    Log.e("svs",String.valueOf(sub));
-                                }
-                                productTotalPriceTextView.setText(String.valueOf(sub));
+                                        int size=singleCustomerProductList.size();
+                                        for ( int i=size-1; i>=0;i--){
+                                            Log.e(String.valueOf(i),String.valueOf(singleCustomerProductList.get(i).getSellingPrice()));
+                                            sub=sub+(singleCustomerProductList.get(i).getSellingPrice()*singleCustomerProductList.get(i).getQuantity());
+                                            Log.e("svs",String.valueOf(sub));
+                                        }
+                                        productTotalPriceTextView.setText(String.valueOf(sub));
 
-                            }}
+                                    }}
 
+                            }
+                            else {
+
+                            }
+                            sellDetailsProgressBar.setVisibility(View.INVISIBLE);
                         }
-                    }}
+
+
+
+
+                    }
 
                     @Override
                     public void onFailure(Call<SingleCustomerGetResponse> call, Throwable t) {

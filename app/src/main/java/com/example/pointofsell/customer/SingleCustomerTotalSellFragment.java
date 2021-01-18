@@ -98,12 +98,12 @@ public class SingleCustomerTotalSellFragment extends Fragment {
                                 // reverse list inserting
                                 //Collections.reverse(singleCustomerTotalSellList);
                                 if (singleCustomerTotalSellList.size()>0){
-                                    if (getActivity()!=null) {
+
                                         if (getActivity()!=null){
                                         singleCustomerTotalSellCustomAdapter = new SingleCustomerTotalSellCustomAdapter(getActivity(), token, singleCustomerTotalSellList);
                                         singleCustomerTotalSellRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         singleCustomerTotalSellRecyclerView.setAdapter(singleCustomerTotalSellCustomAdapter);
-                                    } }}
+                                     }}
                             }
                             else {
 
