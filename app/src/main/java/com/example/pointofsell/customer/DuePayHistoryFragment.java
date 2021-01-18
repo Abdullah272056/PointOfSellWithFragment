@@ -67,6 +67,7 @@ public class DuePayHistoryFragment extends Fragment {
         //ProgressBar finding
         pauDueHistoryProgressBar=view.findViewById(R.id.pauDueHistoryProgressBarId);
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
+       //call method
         singleCustomerDuePayHistory();
 
         backImageView.setOnClickListener(new View.OnClickListener() {
@@ -91,27 +92,32 @@ public class DuePayHistoryFragment extends Fragment {
                 .enqueue(new Callback<SingleCustomerGetResponse>() {
                     @Override
                     public void onResponse(Call<SingleCustomerGetResponse> call, Response<SingleCustomerGetResponse> response) {
+                              if (getActivity()!=null){
+                                  SingleCustomerGetResponse singleCustomerGetResponse=response.body();
+                                  if (response.code()==404){
+                                   Toast.makeText(getActivity(), "No customer found", Toast.LENGTH_SHORT).show();
+                               }else if (response.code()==500){
+                                   Toast.makeText(getActivity(), "internal server error", Toast.LENGTH_SHORT).show();
+                               }else if (response.code()==200){
+                                   pauDueHistoryProgressBar.setVisibility(View.INVISIBLE);
+                                   singleCustomerDuePayHistoryList=new ArrayList<>();
+                                   singleCustomerDuePayHistoryList.addAll(response.body().getSingleCustomerInformation().getDuePayHistory());
+                                   // reverse list inserting
+                                   Collections.reverse(singleCustomerDuePayHistoryList);
+                                   if (singleCustomerDuePayHistoryList.size()>0){
+                                       if (getActivity()!=null){
+                                           Toast.makeText(getActivity(), singleCustomerGetResponse.getMsg().toString(), Toast.LENGTH_SHORT).show();
+                                           singleCustomerDuePayCustomAdapter = new SingleCustomerDuePayCustomAdapter(getActivity(),token,singleCustomerDuePayHistoryList);
+                                           duePayHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                           duePayHistoryRecyclerView.setAdapter(singleCustomerDuePayCustomAdapter);
+                                       }}
+                               }
+                               else {
 
-                        SingleCustomerGetResponse singleCustomerGetResponse=response.body();
-                        if (getActivity()!=null){
-                        if (singleCustomerGetResponse.getSuccess()==true){
-                            pauDueHistoryProgressBar.setVisibility(View.INVISIBLE);
-                            singleCustomerDuePayHistoryList=new ArrayList<>();
-                            singleCustomerDuePayHistoryList.addAll(response.body().getSingleCustomerInformation().getDuePayHistory());
-                            // reverse list inserting
-                            Collections.reverse(singleCustomerDuePayHistoryList);
-                            if (singleCustomerDuePayHistoryList.size()>0){
-                                if (getActivity()!=null){
-                                    Toast.makeText(getActivity(), singleCustomerGetResponse.getMsg().toString(), Toast.LENGTH_SHORT).show();
-                                singleCustomerDuePayCustomAdapter = new SingleCustomerDuePayCustomAdapter(getActivity(),token,singleCustomerDuePayHistoryList);
-                                duePayHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                duePayHistoryRecyclerView.setAdapter(singleCustomerDuePayCustomAdapter);
-                            }}
+                               }
+                                  pauDueHistoryProgressBar.setVisibility(View.INVISIBLE);
+                              }
 
-                            Log.e("asas",String.valueOf(singleCustomerDuePayHistoryList.size()));
-                        }
-
-                    }
                     }
                     @Override
                     public void onFailure(Call<SingleCustomerGetResponse> call, Throwable t) {
