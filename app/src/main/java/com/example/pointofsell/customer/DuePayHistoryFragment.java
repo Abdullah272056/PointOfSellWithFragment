@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DuePayHistoryFragment extends Fragment {
+    TextView titleBarTextView;
+    ImageView backImageView;
+
+
     String customer_id,token;
     SingleCustomerDuePayCustomAdapter singleCustomerDuePayCustomAdapter;
     List<SingleCustomerDuePayHistory> singleCustomerDuePayHistoryList;
@@ -51,12 +57,31 @@ public class DuePayHistoryFragment extends Fragment {
         customer_id= bundle.getString("customerId");
         token=bundle.getString("token");
 
+        //title bar view finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("Customer Pay Due History");
+
         //recycler view finding
         duePayHistoryRecyclerView=view.findViewById(R.id.duePayHistoryRecyclerViewId);
         //ProgressBar finding
         pauDueHistoryProgressBar=view.findViewById(R.id.pauDueHistoryProgressBarId);
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
         singleCustomerDuePayHistory();
+
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                bundle.putString("customerId",customer_id);
+                Fragment fragment=new CustomerAllInfoFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+            }
+        });
+
 
         return view;
     }
