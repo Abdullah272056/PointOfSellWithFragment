@@ -51,6 +51,7 @@ public class OthersFragment extends Fragment {
     String customerCount;
     View view;
     Fragment fragment;
+    SharePref sharePref;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class OthersFragment extends Fragment {
         totalProductStockTextView=view.findViewById(R.id.totalProductStockTextViewId);
         totalProductTypeTextView=view.findViewById(R.id.totalProductTypeTextViewId);
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
-
+        sharePref=new SharePref();
         navigationDrawer();
         getCustomerCount();
         getAllSellInfo();
@@ -89,7 +90,6 @@ public class OthersFragment extends Fragment {
 
                     case R.id.reportItemIdId:
                         getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
-
                         break;
                     case R.id.eCommerceItemIdId:
                         getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
@@ -107,31 +107,18 @@ public class OthersFragment extends Fragment {
                     case R.id.calculatorItemIdId:
                         getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
                         break;
-//                    case R.id.invoiceItemId:
-//                        intent=new Intent(HomePage.this, InVoiceActivity.class);
-//                        intent.putExtra("token",token);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
-//                    case R.id.productItemIdId:
-//                        intent=new Intent(HomePage.this, ProductActivity.class);
-//                        intent.putExtra("token",token);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
-//                    case R.id.logOutId:
-//                        sharePref.rememberData(HomePage.this,"","");
-//                        intent=new Intent(HomePage.this, LoginActivity.class);
-//                        intent.putExtra("token",token);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
-//                    case R.id.customerItemId:
-//                        intent=new Intent(HomePage.this,CustomerActivity.class);
-//                        intent.putExtra("token",token);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
+//
+                    case R.id.logOutId:
+                        sharePref.rememberData(getActivity(),"","");
+                        Intent intent=new Intent(getActivity(), LoginActivity.class);
+                        intent.putExtra("token",token);
+                        startActivity(intent);
+                       Fragment fragment=new OthersFragment();
+                       getFragmentManager().beginTransaction().remove(fragment).commit();
+
+
+                        break;
+//
 //                    case R.id.dashBoardAllDataItemIdId:
 //                        intent=new Intent(HomePage.this, AboutMeActivity.class);
 //                        intent.putExtra("token",token);
