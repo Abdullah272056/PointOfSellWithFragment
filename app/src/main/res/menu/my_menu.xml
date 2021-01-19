@@ -38,6 +38,7 @@
     </item>
 
     <item android:title="Log Out"
+
         android:id="@+id/logOutId"
         />
 </menu>

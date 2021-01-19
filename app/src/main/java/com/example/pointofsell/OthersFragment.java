@@ -107,11 +107,10 @@ public class OthersFragment extends Fragment {
                     case R.id.calculatorItemIdId:
                         getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
                         break;
-//
+
                     case R.id.logOutId:
                         sharePref.rememberData(getActivity(),"","");
                         Intent intent=new Intent(getActivity(), LoginActivity.class);
-//
                         startActivity(intent);
                         getActivity().finish();
                         break;
