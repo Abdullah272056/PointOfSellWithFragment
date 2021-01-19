@@ -24,7 +24,7 @@
         android:paddingLeft="15dp"
         android:textColor="#0C0C0C"
         android:textSize="20sp"
-        android:text="Attendance App"
+        android:text="Point of sell"
         android:id="@+id/navigationSubHeaderId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
