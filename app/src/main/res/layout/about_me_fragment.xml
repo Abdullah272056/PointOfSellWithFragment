@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_weight="1.9"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/back2"
+            android:padding="7dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginTop="10dp"
+                android:src="@drawable/company_logo"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+            <TextView
+                android:id="@+id/companyNameTextViewId"
+                android:layout_marginTop="10dp"
+                android:textColor="#000000"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textAlignment="center"
+                android:text="Cplg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/companyEmailTextViewId"
+                android:layout_marginTop="10dp"
+                android:textColor="#817C7C"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:text="email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/companyPhoneTextViewId"
+                android:layout_marginTop="10dp"
+                android:textColor="#817C7C"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:text="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/companyAddressTextViewId"
+                android:layout_marginTop="10dp"
+                android:textColor="#817C7C"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:text="address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/memberSinceTextViewId"
+                android:layout_marginTop="10dp"
+                android:textColor="#817C7C"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textAlignment="center"
+                android:text="Member Since"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/uploadPictureButtonId"
+                android:padding="10dp"
+                android:textColor="#03C50B"
+                android:background="@drawable/back2"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="Upload Picture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <LinearLayout
+            android:background="@drawable/back2"
+            android:layout_marginRight="7dp"
+            android:layout_marginLeft="7dp"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/changePasswordButtonId"
+                android:layout_margin="5dp"
+                android:background="@drawable/back2"
+                android:textColor="#F45151"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="Change Password"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/deleteAccountButtonId"
+                android:layout_margin="5dp"
+                android:background="@drawable/back2"
+                android:textColor="#F45151"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="Delete Account"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:textAlignment="center"
+        android:text="Copyright © 2020 Developed by Abdullah ."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
