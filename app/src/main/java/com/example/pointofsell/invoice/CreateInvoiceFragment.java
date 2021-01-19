@@ -289,7 +289,7 @@ public class CreateInvoiceFragment extends Fragment implements
                     Toast.makeText(getActivity(), "create success", Toast.LENGTH_SHORT).show();
                 }
                 else if (response.code()==500){
-                    
+
                     Toast.makeText(getActivity(), "internal server error", Toast.LENGTH_SHORT).show();
                 }
                 else{
