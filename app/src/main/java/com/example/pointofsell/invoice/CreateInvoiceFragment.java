@@ -1,5 +1,6 @@
 package com.example.pointofsell.invoice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -29,6 +30,7 @@ import com.example.pointofsell.invoice.create_invoice.ProductCustomAdapter2;
 import com.example.pointofsell.invoice.create_invoice.ProductCustomAdapter3;
 import com.example.pointofsell.invoice.create_invoice.SetInVoiceResponse;
 import com.example.pointofsell.invoice.create_invoice.SetProductData;
+import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
 import com.example.pointofsell.product.delete_product.GetProductData;
 import com.example.pointofsell.product.get_product.GetProductDataResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
@@ -175,6 +177,18 @@ public class CreateInvoiceFragment extends Fragment implements
                 changeStatus=0;
             }
         });
+        // create invoice button click
+        inVoiceButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (changeStatus==1){
+                    Toast.makeText(getActivity(), "Ready", Toast.LENGTH_SHORT).show();
+                    setInVoice();
+                }else {
+                    Toast.makeText(getActivity(), "click calculate button", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +223,87 @@ public class CreateInvoiceFragment extends Fragment implements
 
         return view;
     }
+
+    public void  setInVoice(){
+        customerId= customerIdTextView.getText().toString().trim();
+        if (TextUtils.isEmpty(customerId)){
+            nameTextView.setError("Enter your email");
+            nameTextView.requestFocus();
+            return;
+        }if (newList.size()<=0){
+            Toast.makeText(getActivity(), "please select add product", Toast.LENGTH_SHORT).show();
+            return;
+        }
+//        name= nameTextView.getText().toString().trim();
+//        phone= phoneTextView.getText().toString().trim();
+
+
+        int  totalProductAmount= Integer.parseInt(grandTotalTextView.getText().toString());
+        int  discount= Integer.parseInt(discountTextView.getText().toString());
+        int payAmount=0;
+
+        if (!TextUtils.isEmpty(payAmountEditText.getText().toString())){
+            payAmount= Integer.parseInt(payAmountEditText.getText().toString());
+        }
+
+        setProductDataList=new ArrayList<>();
+
+        int sz=newList.size();
+        for (int i=0;sz-1>=i;i++){
+            setProductDataList.add(new SetProductData(newList.get(i).getId(),newList.get(i).getQuantity()));
+        }
+
+
+
+
+        // int discount=Integer.parseInt(discountTextView.getText().toString());
+
+
+        int TotalAmount=0;
+        int sze=newList.size();
+        int discountAmount=0;
+        if (sze>0){
+
+            for (int i=0;sze-1>=i;i++){
+                TotalAmount=TotalAmount+(newList.get(i).getSellingPrice()*newList.get(i).getQuantity());
+            }
+        }
+        if (discount>0){
+            float dis=(TotalAmount*discount)/100;
+            discountAmount= (int) dis;
+        }
+
+
+        setInVoiceResponse=new SetInVoiceResponse(customerId,payAmount,
+                (TotalAmount-discountAmount),discount, setProductDataList);
+        apiInterface.getInvoiceResponse("Bearer "+token,setInVoiceResponse).enqueue(new Callback<OwnerDataWithResponse>() {
+            @Override
+            public void onResponse(Call<OwnerDataWithResponse> call, Response<OwnerDataWithResponse> response) {
+                if (response.code()==201){
+//                    Intent intent=new Intent(CreateInVoice_Activity.this, InVoiceActivity.class);
+//                    intent.putExtra("token",token);
+//                    startActivity(intent);
+//                    finish();
+                    Toast.makeText(getActivity(), "create success", Toast.LENGTH_SHORT).show();
+                }
+                else if (response.code()==500){
+                    Toast.makeText(getActivity(), "internal server error", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getActivity(), "create failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<OwnerDataWithResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), String.valueOf(t.getMessage()), Toast.LENGTH_SHORT).show();
+                Log.e("getInvoice", String.valueOf(t.getMessage()));
+            }
+        });
+
+    }
+
+
+
     // get All customer
     public  void getAllCustomerInformation(){
         apiInterface.getAllCustomerInformation("Bearer "+token).enqueue(new Callback<CustomerInformationDataResponse>() {
