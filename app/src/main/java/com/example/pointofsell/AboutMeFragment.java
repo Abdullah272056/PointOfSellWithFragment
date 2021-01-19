@@ -1,7 +1,9 @@
 package com.example.pointofsell;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.pointofsell.delete_user.DeleteUserGetDataResponse;
+import com.example.pointofsell.delete_user.DeleteUserSetDataResponse;
 import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
@@ -109,5 +114,5 @@ public class AboutMeFragment extends Fragment {
         });
     }
 
-
+    
 }
