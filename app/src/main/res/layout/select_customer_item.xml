@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    android:paddingLeft="10dp"
+    android:layout_margin="5dp"
+    android:background="#A3A5A6"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/customerNameTextViewId"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:padding="3dp"
+        android:text="Customer Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/customerPhoneTextViewId"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:padding="3dp"
+        android:text="phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

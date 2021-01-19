@@ -48,10 +48,6 @@ public interface ApiInterface {
     @POST("api/auth/login/")
     Call<LogInResponse>logInData(@Body LogInData logInData);
 
-//    ///////////////////
-
-
-
     //Get Me
     @GET("api/auth/me")
     Call<OwnerDataWithResponse> getUserAllInformation(@Header("Authorization") String authorization);
@@ -63,9 +59,8 @@ public interface ApiInterface {
     @POST("api/auth/delete")
     Call<DeleteUserGetDataResponse> deleteUser(@Header("Authorization") String authorization, @Body DeleteUserSetDataResponse deleteUserSetDataResponse);
 
-//
-//
-//
+
+
 //    ////customer/////
     //add customer | create customer
     @POST("api/customer")
@@ -87,14 +82,13 @@ public interface ApiInterface {
     @PUT("api/customer/due/pay")
     Call<DuePayDataResponse> payDue(@Header("Authorization") String authorization, @Body PayData payData);
 
-//    // http://mern-pos.herokuapp.com/api/customer/details/5fabf8a2bb2709001736251c
+ // http://mern-pos.herokuapp.com/api/customer/details/5fabf8a2bb2709001736251c
     //get single customer information
     @GET("api/customer/details/{id}")
     Call<SingleCustomerGetResponse> getSingleCustomerInformation(@Header("Authorization") String authorization, @Path("id") String id);
 
 
-//
-//    ///// invoice/////
+  ///// invoice/////
     //GetAllSellInfoResponse
     @GET("api/invoice/sale-info")
     Call<GetAllSellInfoResponse> getAllSellInfo(@Header("Authorization") String authorization);
