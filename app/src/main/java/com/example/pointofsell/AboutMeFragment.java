@@ -1,5 +1,6 @@
 package com.example.pointofsell;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,13 +9,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
 import com.example.pointofsell.retrofit.RetrofitClient;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AboutMeFragment extends Fragment {
     String token;
@@ -48,7 +60,7 @@ public class AboutMeFragment extends Fragment {
 
 
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
-       // getUserAllInfo();
+        getUserAllInfo();
         // textView finding
         companyNameTextView=view.findViewById(R.id.companyNameTextViewId);
         companyEmailTextView=view.findViewById(R.id.companyEmailTextViewId);
@@ -64,4 +76,38 @@ public class AboutMeFragment extends Fragment {
 
         return view;
 }
+
+    public void getUserAllInfo (){
+        apiInterface.getUserAllInformation("Bearer "+token).enqueue(new Callback<OwnerDataWithResponse>() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onResponse(Call<OwnerDataWithResponse> call, Response<OwnerDataWithResponse> response) {
+
+                if (response.code()==200){
+                    companyNameTextView.setText(String.valueOf(response.body().getData().getCompanyName()));
+                    companyEmailTextView.setText(String.valueOf(response.body().getData().getEmail()));
+                    companyPhoneTextView.setText(String.valueOf(response.body().getData().getPhone()));
+                    companyAddressTextView.setText(String.valueOf(response.body().getData().getAddress()));
+
+                    SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy  hh:mm a", Locale.forLanguageTag(String.valueOf(response.body().getData().getCreatedAt())));
+                    String getCreatedAt = df.format(new Date());
+
+                    memberSinceTextView.setText(String.valueOf(getCreatedAt));
+                    //  Toast.makeText(AboutMeActivity.this, "success", Toast.LENGTH_SHORT).show();
+                }else if (response.code()==500){
+                    Toast.makeText(getActivity(), "invalid user", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<OwnerDataWithResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "failed! try again", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
 }

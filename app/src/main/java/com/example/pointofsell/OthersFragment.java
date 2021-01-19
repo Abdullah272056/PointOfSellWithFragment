@@ -121,7 +121,7 @@ public class OthersFragment extends Fragment {
 
                         Bundle bundle = new Bundle();
                         bundle.putString("token", token);
-                        Fragment fragment = new CustomerFragment();
+                        Fragment fragment = new AboutMeFragment();
                         fragment.setArguments(bundle);
 
                         getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
