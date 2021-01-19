@@ -177,7 +177,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
                                     Toast.makeText(context, "failed", Toast.LENGTH_SHORT).show();
                                 }
 
-                                    Bundle bundle = new Bundle();
+                                                                       Bundle bundle = new Bundle();
                                     bundle.putString("token", token);
                                     Fragment fragment = new CustomerFragment();
                                     fragment.setArguments(bundle);

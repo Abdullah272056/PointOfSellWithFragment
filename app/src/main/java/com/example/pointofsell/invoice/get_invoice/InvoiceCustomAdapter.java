@@ -22,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
 import com.example.pointofsell.customer.CustomerFragment;
+import com.example.pointofsell.customer.CustomerPayDueFragment;
+import com.example.pointofsell.invoice.InvoiceDetailsFragment;
 import com.example.pointofsell.invoice.Invoice_Fragment;
 import com.example.pointofsell.invoice.delete_invoice.DeleteInVoiceGetInVoiceDataResponse;
 import com.example.pointofsell.retrofit.ApiInterface;
@@ -73,6 +75,28 @@ public class InvoiceCustomAdapter extends RecyclerView.Adapter<InvoiceCustomAdap
         holder.invoiceItemDateTextView.setText(String.valueOf(time));
         holder.invoiceItemPayAmountTextView.setText(String.valueOf(invoiceList.get(position).getTotalAmountAfterDiscount()));
         holder.invoiceItemSerialTextView.setText(String.valueOf(position+1));
+
+        holder.inVoiceItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                bundle.putString("invoice_id",String.valueOf(invoiceList.get(position).getId()));
+                Fragment fragment=new InvoiceDetailsFragment();
+                fragment.setArguments(bundle);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId, fragment).commit();
+
+
+//                Intent intent =new Intent(context, InVoiceDetails.class);
+//                intent.putExtra("token",token);
+//                intent.putExtra("invoice_id",String.valueOf(invoiceList.get(position).getId()));
+//                context.startActivity(intent);
+
+
+            }
+        });
 
 
         holder.deleteInvoiceImageView.setOnClickListener(new View.OnClickListener() {
