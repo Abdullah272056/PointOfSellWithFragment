@@ -88,13 +88,6 @@ public class InvoiceCustomAdapter extends RecyclerView.Adapter<InvoiceCustomAdap
                 AppCompatActivity activity = (AppCompatActivity) v.getContext();
                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId, fragment).commit();
 
-
-//                Intent intent =new Intent(context, InVoiceDetails.class);
-//                intent.putExtra("token",token);
-//                intent.putExtra("invoice_id",String.valueOf(invoiceList.get(position).getId()));
-//                context.startActivity(intent);
-
-
             }
         });
 
