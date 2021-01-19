@@ -54,6 +54,50 @@ public class InvoiceDetailsFragment extends Fragment {
     }
 
 
-    
+    public void singleInvoiceDetails(){
+        apiInterface.getSingleInvoiceInformation("Bearer "+token,invoice_id).enqueue(new Callback<SingleInvoiceGetResponse>() {
+            @Override
+            public void onResponse(Call<SingleInvoiceGetResponse> call, Response<SingleInvoiceGetResponse> response) {
+                SingleInvoiceGetResponse singleInvoiceGetResponse=response.body();
+                invoiceDetailsProgressBar.setVisibility(View.INVISIBLE);
+                if (singleInvoiceGetResponse.getSuccess()==true){
+                    singleInvoiceProductDataList=new ArrayList<>();
+                    singleInvoiceData=response.body().getSingleInvoiceData();
+                    singleInvoiceProductDataList.addAll(response.body().getSingleInvoiceData().getSingleInvoiceProductDataList());
+                    if (singleInvoiceProductDataList.size()>0){
+                        singleInvoiceCustomAdapter=new SingleInvoiceCustomAdapter(getActivity(),token,singleInvoiceProductDataList);
+                        inVoiceDetailsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        inVoiceDetailsRecyclerView.setAdapter(singleInvoiceCustomAdapter);
+//
+
+                        totalAmountAfterDiscountTextView.setText(String.valueOf( singleInvoiceData.getTotalAmountAfterDiscount()));
+                        payAmountTextView.setText(String.valueOf(singleInvoiceData.getPayAmount()));
+                        dueTextView.setText(String.valueOf(singleInvoiceData.getDue()));
+                        discountTextView.setText("after "+String.valueOf(singleInvoiceData.getDiscount())+"% discount : ");
+
+
+                        int size=singleInvoiceProductDataList.size();
+                        for ( int i=size-1; i>=0;i--){
+                            Log.e(String.valueOf(i),String.valueOf(singleInvoiceProductDataList.get(i).getSellingPrice()));
+                            sub=sub+(singleInvoiceProductDataList.get(i).getSellingPrice()*singleInvoiceProductDataList.get(i).getQuantity());
+                            Log.e("svs",String.valueOf(sub));
+                        }
+                        productTotalPriceTextView.setText(String.valueOf(sub));
+
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SingleInvoiceGetResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), String.valueOf(t.getMessage()), Toast.LENGTH_LONG).show();
+                invoiceDetailsProgressBar.setVisibility(View.INVISIBLE);
+                Log.e("tsd",String.valueOf(t.getMessage()));
+            }
+        });
+
+    }
 
     }
