@@ -2,6 +2,7 @@ package com.example.pointofsell.invoice;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -175,7 +176,36 @@ public class CreateInvoiceFragment extends Fragment implements
             }
         });
 
+        calculateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int  payDue=0,due;
+                int discountAmount=0;
+                int subTotal=0;
+                int sz=newList.size();
+                if (sz>0){
 
+                    for (int i=0;sz-1>=i;i++){
+                        subTotal=subTotal+(newList.get(i).getSellingPrice()*newList.get(i).getQuantity());
+                    }
+                }
+                int discount=Integer.parseInt(discountTextView.getText().toString());
+
+                if (discount>0){
+                    float dis=(subTotal*discount)/100;
+                    discountAmount= (int) dis;
+                }
+
+                if (!TextUtils.isEmpty(payAmountEditText.getText().toString())){
+                    payDue=Integer.parseInt(payAmountEditText.getText().toString());
+                }
+                subTotalTextView.setText(String.valueOf(subTotal));
+                grandTotalTextView.setText(String.valueOf(subTotal-discountAmount));
+                due=(subTotal-discountAmount)-payDue;
+                dueTextView.setText(String.valueOf(due));
+                changeStatus=1;
+            }
+        });
 
         return view;
     }
