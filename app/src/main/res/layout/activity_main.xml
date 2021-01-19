@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,12 +10,13 @@
     android:padding="10dp"
     tools:context=".LoginActivity">
 
-    <ProgressBar
-        android:visibility="invisible"
-        android:id="@+id/signInProgressBarId"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
     <EditText
         android:inputType="textEmailAddress"
         android:imeOptions="actionNext"
@@ -88,3 +89,15 @@
 
 
 </LinearLayout>
+    <ProgressBar
+        android:layout_marginBottom="120dp"
+        android:id="@+id/signInProgressBarId"
+        android:layout_width="59dp"
+        android:layout_height="67dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
