@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,8 @@ import retrofit2.Response;
 public class CreateInvoiceFragment extends Fragment implements
         CustomerCustomAdapter.OnContactClickListener1, ProductCustomAdapter2.OnContactClickListener3, ProductCustomAdapter3.OnContactClickListener{
 
+    TextView titleBarTextView;
+    ImageView backImageView;
 
     int changeStatus=0;
 
@@ -93,6 +96,12 @@ public class CreateInvoiceFragment extends Fragment implements
         onContactClickListener=this;
         onContactClickListener1=this;
        onContactClickListener3=this;
+
+        //title bar view Finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("Create invoice");
+
 
 
         inVoiceButton=view.findViewById(R.id.inVoiceButtonId);
