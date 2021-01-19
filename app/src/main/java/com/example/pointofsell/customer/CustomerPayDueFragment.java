@@ -40,7 +40,7 @@ public class CustomerPayDueFragment extends Fragment {
 
     EditText duePayAmountEditText;
     Button payDueButton;
-    String customer_id,token;
+    String customer_id,token,customerName;
 
     String duePayAmount;
     PayData payData;
@@ -55,11 +55,12 @@ public class CustomerPayDueFragment extends Fragment {
         Bundle bundle=this.getArguments();
         customer_id=bundle.getString("customerId");
         token= bundle.getString("token");
+        customerName= bundle.getString("customerName");
 
        //title bar view finding
         titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
         backImageView=view.findViewById(R.id.backImageViewId);
-        titleBarTextView.setText("Customer Pay Due");
+        titleBarTextView.setText(customerName+" Pay Due");
 
 
 
@@ -87,6 +88,7 @@ public class CustomerPayDueFragment extends Fragment {
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
+                bundle.putString("customerName",customerName);
                 Fragment fragment=new CustomerAllInfoFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();

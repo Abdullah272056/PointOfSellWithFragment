@@ -38,7 +38,7 @@ public class SellDetailsFragment extends Fragment {
     View view;
 
     int position;
-    String customer_id,token;
+    String customer_id,token,customerName;
 
 
     SingleCustomerSellsDetailsCustomAdapter singleCustomerSellsDetailsCustomAdapter;
@@ -61,11 +61,12 @@ public class SellDetailsFragment extends Fragment {
         position=bundle.getInt("position",10);
         customer_id= bundle.getString("customerId");
         token=bundle.getString("token");
+        customerName=bundle.getString("customerName");
 
         //title bar view finding
         titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
         backImageView=view.findViewById(R.id.backImageViewId);
-        titleBarTextView.setText("Sell Details");
+        titleBarTextView.setText(customerName+"'s sell details");
 
         //textView finding
         productTotalPriceTextView=view.findViewById(R.id.productTotalPriceTextViewId);
@@ -87,6 +88,7 @@ public class SellDetailsFragment extends Fragment {
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
+                bundle.putString("customerName",customerName);
                 Fragment fragment=new SingleCustomerTotalSellFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();

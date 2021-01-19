@@ -57,6 +57,7 @@ import retrofit2.Response;
 import static android.app.Activity.RESULT_OK;
 
 public class ProductFragment extends Fragment {
+    TextView titleBarTextView;
     String productName,productRegularPrice,productSellingPrice,productStock,productDescription,unitType;
 
     Spinner unitTypeSpinner;
@@ -99,6 +100,8 @@ public class ProductFragment extends Fragment {
         productProgressBar=view.findViewById(R.id.productProgressBarId);
         addProductButton=view.findViewById(R.id.addProductButtonId);
         unitTypeSpinner=view.findViewById(R.id.unitTypeSpinnerId);
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        titleBarTextView.setText("Product list");
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Product Upload....");

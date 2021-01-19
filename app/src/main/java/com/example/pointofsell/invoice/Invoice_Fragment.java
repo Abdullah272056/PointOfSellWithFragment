@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,7 @@ public class Invoice_Fragment extends Fragment {
     RecyclerView invoiceRecyclerView;
     ProgressBar invoiceProgressBar;
     FloatingActionButton addInvoiceButton;
+    TextView titleBarTextView;
 
 
 
@@ -48,12 +50,18 @@ public class Invoice_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.invoice_fragment, container, false);
 
-        invoiceRecyclerView=view.findViewById(R.id.invoiceRecyclerViewId);
-        invoiceProgressBar=view.findViewById(R.id.invoiceProgressBarId);
-        addInvoiceButton=view.findViewById(R.id.addInvoiceButtonId);
+
 
         Bundle bundle=this.getArguments();
         token=bundle.getString("token");
+
+        invoiceRecyclerView=view.findViewById(R.id.invoiceRecyclerViewId);
+        invoiceProgressBar=view.findViewById(R.id.invoiceProgressBarId);
+        addInvoiceButton=view.findViewById(R.id.addInvoiceButtonId);
+        titleBarTextView =view.findViewById(R.id.titleBarTextViewId);
+
+        titleBarTextView.setText("Invoice list");
+
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
         addInvoiceButton.setOnClickListener(new View.OnClickListener() {

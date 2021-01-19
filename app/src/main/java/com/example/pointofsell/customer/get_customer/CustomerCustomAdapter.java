@@ -104,7 +104,7 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
             public void onClick(View v) {
                 Bundle  bundle=new Bundle();
 
-                bundle.putString("cName",customerInformationList.get(position).getName());
+                bundle.putString("customerName",customerInformationList.get(position).getName());
                 bundle.putString("cPhone",customerInformationList.get(position).getPhone());
                 bundle.putString("cEmail",customerInformationList.get(position).getEmail());
                 bundle.putString("cAddress",customerInformationList.get(position).getAddress());

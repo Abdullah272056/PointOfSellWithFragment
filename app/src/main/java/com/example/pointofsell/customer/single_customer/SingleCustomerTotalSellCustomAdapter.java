@@ -30,12 +30,14 @@ import java.util.Locale;
 public class SingleCustomerTotalSellCustomAdapter extends RecyclerView.Adapter<SingleCustomerTotalSellCustomAdapter.MyViewHolder> {
     Context context;
     String token;
+    String customerName;
     List<SingleCustomerTotalSell> singleCustomerTotalSellList;
     ApiInterface apiInterface;
 
-    public SingleCustomerTotalSellCustomAdapter(Context context, String token, List<SingleCustomerTotalSell> singleCustomerTotalSellList) {
+    public SingleCustomerTotalSellCustomAdapter(Context context, String token,String customerName, List<SingleCustomerTotalSell> singleCustomerTotalSellList) {
         this.context = context;
         this.token = token;
+        this.customerName = customerName;
         this.singleCustomerTotalSellList = singleCustomerTotalSellList;
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
@@ -67,6 +69,7 @@ public class SingleCustomerTotalSellCustomAdapter extends RecyclerView.Adapter<S
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
                 bundle.putInt("position",position);
+                bundle.putString("customerName",customerName);
                 bundle.putString("token",token);
                 bundle.putString("customerId",String.valueOf(singleCustomerTotalSellList.get(position).getCustomer()));
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,9 +38,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CustomerFragment extends Fragment  {
+    TextView titleBarTextView;
+
     RecyclerView customerRecyclerView;
     FloatingActionButton addCustomerButton;
-    ImageView backImageView;
+
 
 
     List<CustomerInformationData> customerInformationList;
@@ -62,19 +65,15 @@ public class CustomerFragment extends Fragment  {
         Bundle bundle=this.getArguments();
         token=bundle.getString("token");
 
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
         mainProgressBar=view.findViewById(R.id.customerProgressBarId);
         mainProgressBar.setVisibility(View.VISIBLE);
         customerRecyclerView=view.findViewById(R.id.customerRecyclerViewId);
         addCustomerButton=view.findViewById(R.id.addCustomerButtonId);
-        backImageView=view.findViewById(R.id.backImageViewId);
 
+        titleBarTextView.setText("Customer list");
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
-        backImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "click", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         addCustomerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

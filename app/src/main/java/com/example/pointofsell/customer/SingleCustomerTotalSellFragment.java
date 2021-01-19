@@ -37,7 +37,7 @@ public class SingleCustomerTotalSellFragment extends Fragment {
     ImageView backImageView;
 
     View view;
-    String customer_id,token;
+    String customer_id,token,customerName;
 
     SingleCustomerTotalSellCustomAdapter singleCustomerTotalSellCustomAdapter;
     List<SingleCustomerTotalSell> singleCustomerTotalSellList;
@@ -53,11 +53,12 @@ public class SingleCustomerTotalSellFragment extends Fragment {
         Bundle bundle=this.getArguments();
         customer_id=bundle.getString("customerId");
         token= bundle.getString("token");
+        customerName= bundle.getString("customerName");
 
         //title bar view finding
         titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
         backImageView=view.findViewById(R.id.backImageViewId);
-        titleBarTextView.setText("Total Sell history");
+        titleBarTextView.setText(customerName+"'s sell history");
 
         //recycler view finding
         singleCustomerTotalSellRecyclerView=view.findViewById(R.id.singleCustomerTotalSellRecyclerViewId);
@@ -72,6 +73,7 @@ public class SingleCustomerTotalSellFragment extends Fragment {
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
+                bundle.putString("customerName",customerName);
                 Fragment fragment=new CustomerAllInfoFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
@@ -100,7 +102,7 @@ public class SingleCustomerTotalSellFragment extends Fragment {
                                 if (singleCustomerTotalSellList.size()>0){
 
                                         if (getActivity()!=null){
-                                        singleCustomerTotalSellCustomAdapter = new SingleCustomerTotalSellCustomAdapter(getActivity(), token, singleCustomerTotalSellList);
+                                        singleCustomerTotalSellCustomAdapter = new SingleCustomerTotalSellCustomAdapter(getActivity(), token,customerName, singleCustomerTotalSellList);
                                         singleCustomerTotalSellRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                                         singleCustomerTotalSellRecyclerView.setAdapter(singleCustomerTotalSellCustomAdapter);
                                      }}

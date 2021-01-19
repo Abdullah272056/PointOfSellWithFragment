@@ -24,7 +24,7 @@ public class CustomerAllInfoFragment extends Fragment  {
 
     TextView customerNameTextView,customerDataTextView,customerPayDueTextView,
             customerDuePayHistoryTextView,customerTotalSellTextView;
-    String customer_id,token;
+    String customer_id,token,customerName;
 
 
 Fragment fragment;
@@ -38,12 +38,13 @@ View view;
         Bundle bundle=this.getArguments();
         customer_id=bundle.getString("customerId");
         token= bundle.getString("token");
+        customerName= bundle.getString("customerName");
 
 
         //title bar view Finding
         titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
         backImageView=view.findViewById(R.id.backImageViewId);
-        titleBarTextView.setText("CustomerAll Info");
+        titleBarTextView.setText(customerName+"'s all info");
 
         customerNameTextView=view.findViewById(R.id.customerNameTextViewId);
         customerDataTextView=view.findViewById(R.id.customerDataTextViewId);
@@ -56,6 +57,7 @@ View view;
             public void onClick(View v) {
                Bundle bundle=new Bundle();
                 bundle.putString("token",token);
+                bundle.putString("customerName",customerName);
                 fragment=new CustomerFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
@@ -69,6 +71,7 @@ View view;
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
+                bundle.putString("customerName",customerName);
                 fragment=new CustomerPayDueFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
@@ -80,6 +83,7 @@ View view;
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
+                bundle.putString("customerName",customerName);
                 fragment=new SingleCustomerTotalSellFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
@@ -94,6 +98,7 @@ View view;
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
                 bundle.putString("customerId",customer_id);
+                bundle.putString("customerName",customerName);
                 fragment=new DuePayHistoryFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
