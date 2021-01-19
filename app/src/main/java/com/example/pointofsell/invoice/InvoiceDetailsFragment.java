@@ -62,11 +62,21 @@ public class InvoiceDetailsFragment extends Fragment {
         invoice_id=bundle.getString("invoice_id");
 
 
-    //title bar view Finding
+        //title bar view Finding
         titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
         backImageView=view.findViewById(R.id.backImageViewId);
-        titleBarTextView.setText("Invoice Details");
+        titleBarTextView.setText("Invoice Details ");
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                Fragment fragment=new Invoice_Fragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
+            }
+        });
 
 
         //textView finding
