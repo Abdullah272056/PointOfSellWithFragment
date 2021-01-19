@@ -21,6 +21,7 @@ import com.example.pointofsell.R;
 import com.example.pointofsell.customer.get_customer.CustomerInformationData;
 import com.example.pointofsell.customer.get_customer.CustomerInformationDataResponse;
 import com.example.pointofsell.invoice.create_invoice.CustomerCustomAdapter;
+import com.example.pointofsell.invoice.create_invoice.ProductCustomAdapter2;
 import com.example.pointofsell.invoice.create_invoice.SetInVoiceResponse;
 import com.example.pointofsell.invoice.create_invoice.SetProductData;
 import com.example.pointofsell.product.delete_product.GetProductData;
@@ -35,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CreateInvoiceFragment extends Fragment implements
-        CustomerCustomAdapter.OnContactClickListener1{
+        CustomerCustomAdapter.OnContactClickListener1, ProductCustomAdapter2.OnContactClickListener3{
 
 
     int changeStatus=0;
@@ -61,12 +62,12 @@ public class CreateInvoiceFragment extends Fragment implements
     Button inVoiceButton,product,selectCustomerButton;
     RecyclerView productRecyclerView;
     ListView listView;
-//    ProductCustomAdapter3.OnContactClickListener onContactClickListener;
-//    ProductCustomAdapter2.OnContactClickListener3 onContactClickListener3;
+   // ProductCustomAdapter3.OnContactClickListener onContactClickListener;
+    ProductCustomAdapter2.OnContactClickListener3 onContactClickListener3;
     CustomerCustomAdapter.OnContactClickListener1 onContactClickListener1;
 
 //    ProductCustomAdapter3 productCustomAdapter;
-//    ProductCustomAdapter2 productCustomAdapter2;
+    ProductCustomAdapter2 productCustomAdapter2;
     CustomerCustomAdapter customerCustomAdapter;
     AlertDialog alertDialog;
 
@@ -82,7 +83,7 @@ public class CreateInvoiceFragment extends Fragment implements
 
        // onContactClickListener=this;
         onContactClickListener1=this;
-       // onContactClickListener3=this;
+       onContactClickListener3=this;
 
 
         inVoiceButton=view.findViewById(R.id.inVoiceButtonId);
@@ -187,5 +188,11 @@ public class CreateInvoiceFragment extends Fragment implements
         alertDialog.dismiss();
 
     }
+
+    @Override
+    public void onContactClick3(int position) {
+        
+    }
+
 
 }
