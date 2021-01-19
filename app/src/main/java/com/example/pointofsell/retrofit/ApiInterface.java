@@ -8,6 +8,8 @@ import com.example.pointofsell.customer.get_customer.CustomerInformationDataResp
 import com.example.pointofsell.customer.pay_due.DuePayDataResponse;
 import com.example.pointofsell.customer.pay_due.PayData;
 import com.example.pointofsell.customer.single_customer.SingleCustomerGetResponse;
+import com.example.pointofsell.delete_user.DeleteUserGetDataResponse;
+import com.example.pointofsell.delete_user.DeleteUserSetDataResponse;
 import com.example.pointofsell.invoice.delete_invoice.DeleteInVoiceGetInVoiceDataResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.invoice.get_invoice.InVoiceResponse;
@@ -55,10 +57,10 @@ public interface ApiInterface {
 //    //http://mern-pos.herokuapp.com/api/auth/change-password
 //    @PUT("api/auth/change-password")
 //    Call<ChangePasswordGetResponse> changePassword(@Header("Authorization") String authorization, @Body ChangePasswordSetResponse changePasswordSetResponse);
-//    //delete user
-//    @POST("api/auth/delete")
-//    Call<DeleteUserGetDataResponse> deleteUser(@Header("Authorization") String authorization, @Body DeleteUserSetDataResponse deleteUserSetDataResponse);
-//
+    //delete user
+    @POST("api/auth/delete")
+    Call<DeleteUserGetDataResponse> deleteUser(@Header("Authorization") String authorization, @Body DeleteUserSetDataResponse deleteUserSetDataResponse);
+
 //
 //
 //
