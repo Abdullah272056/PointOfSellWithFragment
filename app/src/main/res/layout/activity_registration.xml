@@ -157,17 +157,18 @@
 
         </LinearLayout>
     </ScrollView>
-
     <ProgressBar
         android:layout_marginBottom="120dp"
         android:id="@+id/registrationProgressBarId"
         android:layout_width="59dp"
         android:layout_height="67dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    
 
 </androidx.constraintlayout.widget.ConstraintLayout>
