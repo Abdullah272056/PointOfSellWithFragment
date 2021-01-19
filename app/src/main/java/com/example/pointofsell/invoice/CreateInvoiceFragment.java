@@ -102,6 +102,17 @@ public class CreateInvoiceFragment extends Fragment implements
         backImageView=view.findViewById(R.id.backImageViewId);
         titleBarTextView.setText("Create invoice");
 
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+                Fragment fragment=new Invoice_Fragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+            }
+        });
 
 
         inVoiceButton=view.findViewById(R.id.inVoiceButtonId);

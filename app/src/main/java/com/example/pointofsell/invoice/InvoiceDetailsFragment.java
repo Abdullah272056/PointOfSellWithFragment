@@ -58,7 +58,6 @@ public class InvoiceDetailsFragment extends Fragment {
         //receive token
         Bundle bundle=this.getArguments();
         token=bundle.getString("token");
-
         invoice_id=bundle.getString("invoice_id");
 
 
