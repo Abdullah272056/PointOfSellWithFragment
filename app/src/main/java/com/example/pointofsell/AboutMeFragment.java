@@ -91,6 +91,13 @@ public class AboutMeFragment extends Fragment {
             }
         });
 
+        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePasswordInputBoxShow();
+            }
+        });
+
 
         return view;
 }
@@ -254,5 +261,27 @@ public class AboutMeFragment extends Fragment {
                 });
     }
 
-    
+    public void  changePasswordInputBoxShow(){
+        AlertDialog.Builder builder     =new AlertDialog.Builder(getActivity());
+        LayoutInflater layoutInflater   =LayoutInflater.from(getActivity());
+        View view                       =layoutInflater.inflate(R.layout.change_password_page,null);
+        builder.setView(view);
+        final AlertDialog alertDialog   = builder.create();
+
+        oldPasswordEditText=view.findViewById(R.id.oldPasswordEditTextId);
+        newPasswordEditText=view.findViewById(R.id.newPasswordEditTextId);
+        confirmPasswordEditText=view.findViewById(R.id.confirmPasswordEditTextId);
+        saveChangePasswordButton=view.findViewById(R.id.saveChangePasswordButtonId);
+        changePasswordProgressBar=view.findViewById(R.id.changePasswordProgressBarId);
+
+        saveChangePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePassword();
+
+            }
+        });
+
+        alertDialog.show();
+    }
 }
