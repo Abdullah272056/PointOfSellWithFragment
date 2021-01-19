@@ -1,149 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ScrollView
+    <LinearLayout
+        tools:ignore="MissingConstraints"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="MissingConstraints">
-        <LinearLayout
-            android:background="#F0F1F0"
-            android:orientation="vertical"
+        android:layout_height="match_parent">
+        <include layout="@layout/my_toolbar"
+            android:id="@+id/toolbarId"
+            />
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/inVoiceDetailsRecyclerViewId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-            <View
-                android:layout_marginBottom="20dp"
-                android:background="#111"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"/>
+            android:layout_height="match_parent"
+           >
             <LinearLayout
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:paddingBottom="30dp"
+                android:background="#F0F1F0"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:background="@drawable/back"
-                    android:orientation="horizontal"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/inVoiceDetailsRecyclerViewId"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:text="Sub total :"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:layout_width="210dp"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/productTotalPriceTextViewId"
-                        android:background="@drawable/back2"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="1dp"
-                        android:paddingRight="30dp"
-                        android:paddingBottom="1dp"
-                        android:text="00"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_marginBottom="20dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"/>
                 <LinearLayout
-                    android:background="@drawable/back"
-                    android:orientation="horizontal"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingBottom="30dp"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-
-                        android:id="@+id/discountTextViewId"
-                        android:layout_width="210dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:text="After 4% discount : "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                    <TextView
-                        android:id="@+id/totalAmountAfterDiscountTextViewId"
-                        android:background="@drawable/back2"
+                    <LinearLayout
+                        android:background="@drawable/back"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="1dp"
-                        android:paddingRight="30dp"
-                        android:paddingBottom="1dp"
-                        android:text="00"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-                </LinearLayout>
-                <LinearLayout
-                    android:background="@drawable/back"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="210dp"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:text="Paid :"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                    <TextView
-                        android:id="@+id/payAmountTextViewId"
-                        android:background="@drawable/back2"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Sub total :"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:id="@+id/productTotalPriceTextViewId"
+                            android:background="@drawable/back2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingTop="1dp"
+                            android:paddingRight="30dp"
+                            android:paddingBottom="1dp"
+                            android:text="00"
+                            android:textAlignment="viewEnd"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:background="@drawable/back"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="1dp"
-                        android:paddingRight="30dp"
-                        android:paddingBottom="1dp"
-                        android:text="00"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-                </LinearLayout>
-                <LinearLayout
-                    android:background="@drawable/back"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
+                        android:layout_height="wrap_content">
 
-                        android:paddingLeft="5dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:text="Due :"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        android:layout_width="210dp"
-                        android:layout_height="wrap_content"/>
-                    <TextView
-                        android:id="@+id/dueTextViewId"
-                        android:background="@drawable/back2"
+                        <TextView
+
+                            android:id="@+id/discountTextViewId"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="After 4% discount : "
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                        <TextView
+                            android:id="@+id/totalAmountAfterDiscountTextViewId"
+                            android:background="@drawable/back2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingTop="1dp"
+                            android:paddingRight="30dp"
+                            android:paddingBottom="1dp"
+                            android:text="00"
+                            android:textAlignment="viewEnd"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:background="@drawable/back"
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="1dp"
-                        android:paddingRight="30dp"
-                        android:paddingBottom="1dp"
-                        android:text="00"
-                        android:textAlignment="viewEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Paid :"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                        <TextView
+                            android:id="@+id/payAmountTextViewId"
+                            android:background="@drawable/back2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingTop="1dp"
+                            android:paddingRight="30dp"
+                            android:paddingBottom="1dp"
+                            android:text="00"
+                            android:textAlignment="viewEnd"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:background="@drawable/back"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+
+                            android:paddingLeft="5dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:text="Due :"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:layout_width="210dp"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:id="@+id/dueTextViewId"
+                            android:background="@drawable/back2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingTop="1dp"
+                            android:paddingRight="30dp"
+                            android:paddingBottom="1dp"
+                            android:text="00"
+                            android:textAlignment="viewEnd"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
-        </LinearLayout>
-    </ScrollView>
 
     <ProgressBar
         android:layout_marginBottom="120dp"
