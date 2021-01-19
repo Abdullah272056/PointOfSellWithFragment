@@ -100,7 +100,8 @@ public class CreateInvoiceFragment extends Fragment implements
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
 
 //        //receive user token
-//        token= getIntent().getStringExtra("token");
+        Bundle bundle=this.getArguments();
+        token=bundle.getString("token");
 
 
 
