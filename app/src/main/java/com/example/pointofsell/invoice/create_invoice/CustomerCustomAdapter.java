@@ -26,8 +26,6 @@ public class CustomerCustomAdapter extends RecyclerView.Adapter<CustomerCustomAd
         this.token = token;
         this.customerInformationDataList = customerInformationDataList;
         this.onContactClickListener = onContactClickListener;
-
-
     }
     @NonNull
     @Override
