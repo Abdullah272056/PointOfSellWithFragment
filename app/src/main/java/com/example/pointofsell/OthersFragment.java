@@ -16,10 +16,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.pointofsell.customer.CustomerFragment;
 import com.example.pointofsell.customer.SingleCustomerTotalSellFragment;
 import com.example.pointofsell.customer.get_customer.CustomerCountResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
@@ -116,7 +118,12 @@ public class OthersFragment extends Fragment {
                         break;
 //
                     case R.id.dashBoardAllDataItemIdId:
-                        Fragment fragment=new AboutMeFragment();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putString("token", token);
+                        Fragment fragment = new CustomerFragment();
+                        fragment.setArguments(bundle);
+
                         getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
                         break;
 
