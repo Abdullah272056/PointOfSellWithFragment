@@ -115,12 +115,10 @@ public class OthersFragment extends Fragment {
                         getActivity().finish();
                         break;
 //
-//                    case R.id.dashBoardAllDataItemIdId:
-//                        intent=new Intent(HomePage.this, AboutMeActivity.class);
-//                        intent.putExtra("token",token);
-//                        startActivity(intent);
-//                        finish();
-//                        break;
+                    case R.id.dashBoardAllDataItemIdId:
+                        Fragment fragment=new AboutMeFragment();
+                        getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+                        break;
 
                 }
                 return false;
