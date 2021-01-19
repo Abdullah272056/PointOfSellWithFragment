@@ -40,7 +40,7 @@ View view;
         token= bundle.getString("token");
 
 
-        //textView Finding
+        //title bar view Finding
         titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
         backImageView=view.findViewById(R.id.backImageViewId);
         titleBarTextView.setText("CustomerAll Info");

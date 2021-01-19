@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.change_password.ChangePasswordGetResponse;
 import com.example.pointofsell.change_password.ChangePasswordSetResponse;
+import com.example.pointofsell.customer.CustomerFragment;
 import com.example.pointofsell.delete_user.DeleteUserGetDataResponse;
 import com.example.pointofsell.delete_user.DeleteUserSetDataResponse;
 import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
@@ -36,6 +38,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class AboutMeFragment extends Fragment {
+    TextView titleBarTextView;
+    ImageView backImageView;
+
     String token;
     ApiInterface apiInterface;
     TextView companyNameTextView,companyEmailTextView,companyPhoneTextView,
@@ -65,6 +70,21 @@ public class AboutMeFragment extends Fragment {
 
 
 
+        //title bar view Finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("About me");
+        backImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putString("token",token);
+               Fragment fragment=new OthersFragment();
+                fragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
+
+            }
+        });
 
         apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
         getUserAllInfo();
