@@ -127,8 +127,9 @@ public class AboutMeFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onResponse(Call<OwnerDataWithResponse> call, Response<OwnerDataWithResponse> response) {
-
+                if(getActivity() != null) {
                 if (response.code()==200){
+                    if(getActivity() != null) {
                     companyNameTextView.setText(String.valueOf(response.body().getData().getCompanyName()));
                     companyEmailTextView.setText(String.valueOf(response.body().getData().getEmail()));
                     companyPhoneTextView.setText(String.valueOf(response.body().getData().getPhone()));
@@ -139,17 +140,19 @@ public class AboutMeFragment extends Fragment {
 
                     memberSinceTextView.setText(String.valueOf(getCreatedAt));
                     //  Toast.makeText(AboutMeActivity.this, "success", Toast.LENGTH_SHORT).show();
-                }else if (response.code()==500){
+                }}else if (response.code()==500){
                     Toast.makeText(getActivity(), "invalid user", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
                 }
             }
+            }
 
             @Override
             public void onFailure(Call<OwnerDataWithResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "failed! try again", Toast.LENGTH_SHORT).show();
-
+                if(getActivity() != null) {
+                    Toast.makeText(getActivity(), "failed! try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -176,30 +179,32 @@ public class AboutMeFragment extends Fragment {
                         .enqueue(new Callback<DeleteUserGetDataResponse>() {
                             @Override
                             public void onResponse(Call<DeleteUserGetDataResponse> call, Response<DeleteUserGetDataResponse> response) {
-                                if (response.code()==200){
-                                    Toast.makeText(getActivity(), "Delete success", Toast.LENGTH_SHORT).show();
-                                    alertDialog.dismiss();
-                                    Intent intent=new Intent(getActivity(),RegistrationActivity.class);
-                                    startActivity(intent);
-                                    getActivity().finish();
-                                }else if (response.code()==400){
-                                    passwordEditText.setError("incorrect password");
-                                    passwordEditText.requestFocus();
-                                    // Toast.makeText(AboutMeActivity.this, "incorrect password", Toast.LENGTH_SHORT).show();
+                                if (getActivity() != null) {
+                                    if (response.code() == 200) {
+                                        if(getActivity() != null) {
+                                        Toast.makeText(getActivity(), "Delete success", Toast.LENGTH_SHORT).show();
+                                        alertDialog.dismiss();
+                                        Intent intent = new Intent(getActivity(), RegistrationActivity.class);
+                                        startActivity(intent);
+                                        getActivity().finish();
+                                    } }else if (response.code() == 400) {
+                                        passwordEditText.setError("incorrect password");
+                                        passwordEditText.requestFocus();
+                                        // Toast.makeText(AboutMeActivity.this, "incorrect password", Toast.LENGTH_SHORT).show();
 
-                                }else if (response.code()==500){
-                                    Toast.makeText(getActivity(), "Cannot read property 'email' of null", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "Try again", Toast.LENGTH_SHORT).show();
+                                    } else if (response.code() == 500) {
+                                        Toast.makeText(getActivity(), "Cannot read property 'email' of null", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getActivity(), "Try again", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
-
                             @Override
                             public void onFailure(Call<DeleteUserGetDataResponse> call, Throwable t) {
+                                if(getActivity() != null) {
                                 Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
 
-                            }
+                            }}
                         });
 
             }
@@ -250,14 +255,15 @@ public class AboutMeFragment extends Fragment {
                 enqueue(new Callback<ChangePasswordGetResponse>() {
                     @Override
                     public void onResponse(Call<ChangePasswordGetResponse> call, Response<ChangePasswordGetResponse> response) {
-
+                        if(getActivity() != null) {
                         if(response.code()==200){
-                            Toast.makeText(getActivity(), "Password changed successfully", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getActivity(), "Password changed successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent =new Intent(getActivity(), LoginActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
-
+                            if(getActivity() != null) {
+                                Toast.makeText(getActivity(), "Password changed successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Password changed successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                                startActivity(intent);
+                                getActivity().finish();
+                            }
                         }else if (response.code()==400){
                             Toast.makeText(getActivity(), "Old password does not match", Toast.LENGTH_SHORT).show();
                             oldPasswordEditText.setError("old password can not match");
@@ -271,13 +277,14 @@ public class AboutMeFragment extends Fragment {
 
                         changePasswordProgressBar.setVisibility(View.INVISIBLE);
 
-                    }
+                    }}
 
                     @Override
                     public void onFailure(Call<ChangePasswordGetResponse> call, Throwable t) {
+                        if(getActivity() != null) {
                         Toast.makeText(getActivity(), "failed ! try again ", Toast.LENGTH_SHORT).show();
                         changePasswordProgressBar.setVisibility(View.INVISIBLE);
-                    }
+                    }}
                 });
     }
 
