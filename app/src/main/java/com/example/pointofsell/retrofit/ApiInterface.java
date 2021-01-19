@@ -16,6 +16,7 @@ import com.example.pointofsell.invoice.create_invoice.SetInVoiceResponse;
 import com.example.pointofsell.invoice.delete_invoice.DeleteInVoiceGetInVoiceDataResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.invoice.get_invoice.InVoiceResponse;
+import com.example.pointofsell.invoice.single_invoice.SingleInvoiceGetResponse;
 import com.example.pointofsell.log_in.LogInData;
 import com.example.pointofsell.log_in.LogInResponse;
 import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
@@ -83,7 +84,7 @@ public interface ApiInterface {
     @PUT("api/customer/due/pay")
     Call<DuePayDataResponse> payDue(@Header("Authorization") String authorization, @Body PayData payData);
 
- // http://mern-pos.herokuapp.com/api/customer/details/5fabf8a2bb2709001736251c
+    // http://mern-pos.herokuapp.com/api/customer/details/5fabf8a2bb2709001736251c
     //get single customer information
     @GET("api/customer/details/{id}")
     Call<SingleCustomerGetResponse> getSingleCustomerInformation(@Header("Authorization") String authorization, @Path("id") String id);
@@ -96,9 +97,9 @@ public interface ApiInterface {
     //get all invoice
     @GET("api/invoice")
     Call<InVoiceResponse> getInvoice(@Header("Authorization") String authorization);
-//    //get single invoice information
-//    @GET("api/invoice/{id}")
-//    Call<SingleInvoiceGetResponse> getSingleInvoiceInformation(@Header("Authorization") String authorization, @Path("id") String id);
+    //get single invoice information
+    @GET("api/invoice/{id}")
+    Call<SingleInvoiceGetResponse> getSingleInvoiceInformation(@Header("Authorization") String authorization, @Path("id") String id);
 //    // Get sale info by date
 //    // http://mern-pos.herokuapp.com/api/invoice/sale/day?day=0
 //    @GET("/api/invoice/sale/day")
