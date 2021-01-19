@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pointofsell.OthersFragment;
 import com.example.pointofsell.R;
 import com.example.pointofsell.invoice.single_invoice.SingleInvoiceCustomAdapter;
 import com.example.pointofsell.invoice.single_invoice.SingleInvoiceData;
@@ -31,6 +33,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InvoiceDetailsFragment extends Fragment {
+    TextView titleBarTextView;
+    ImageView backImageView;
+
+
     View view;
     ApiInterface apiInterface;
     String token,invoice_id;
@@ -54,6 +60,12 @@ public class InvoiceDetailsFragment extends Fragment {
         token=bundle.getString("token");
 
         invoice_id=bundle.getString("invoice_id");
+
+
+    //title bar view Finding
+        titleBarTextView=view.findViewById(R.id.titleBarTextViewId);
+        backImageView=view.findViewById(R.id.backImageViewId);
+        titleBarTextView.setText("Invoice Details");
 
 
 
