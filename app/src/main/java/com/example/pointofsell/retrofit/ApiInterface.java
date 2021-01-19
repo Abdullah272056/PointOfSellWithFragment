@@ -1,5 +1,7 @@
 package com.example.pointofsell.retrofit;
 
+import com.example.pointofsell.change_password.ChangePasswordGetResponse;
+import com.example.pointofsell.change_password.ChangePasswordSetResponse;
 import com.example.pointofsell.customer.create_customer.AddCustomerResponse;
 import com.example.pointofsell.customer.create_customer.CustomerData;
 import com.example.pointofsell.customer.delete_customer.CustomerDeleteResponse;
@@ -53,10 +55,10 @@ public interface ApiInterface {
     //Get Me
     @GET("api/auth/me")
     Call<OwnerDataWithResponse> getUserAllInformation(@Header("Authorization") String authorization);
-//    // change password
-//    //http://mern-pos.herokuapp.com/api/auth/change-password
-//    @PUT("api/auth/change-password")
-//    Call<ChangePasswordGetResponse> changePassword(@Header("Authorization") String authorization, @Body ChangePasswordSetResponse changePasswordSetResponse);
+    // change password
+    //http://mern-pos.herokuapp.com/api/auth/change-password
+    @PUT("api/auth/change-password")
+    Call<ChangePasswordGetResponse> changePassword(@Header("Authorization") String authorization, @Body ChangePasswordSetResponse changePasswordSetResponse);
     //delete user
     @POST("api/auth/delete")
     Call<DeleteUserGetDataResponse> deleteUser(@Header("Authorization") String authorization, @Body DeleteUserSetDataResponse deleteUserSetDataResponse);
