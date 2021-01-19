@@ -1,6 +1,8 @@
 package com.example.pointofsell.invoice;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,7 +125,29 @@ public class CreateInvoiceFragment extends Fragment implements
             }
         });
 
+        //selected product button click
+        product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeStatus=0;
+                getAllProduct();
+            }
+        });
 
+        // text change listener add
+        payAmountEditText.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start,
+                                          int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                changeStatus=0;
+            }
+        });
 
 
 
@@ -256,12 +280,11 @@ public class CreateInvoiceFragment extends Fragment implements
     //product
     @Override
     public void onContactClick(int position) {
-        //getAllProduct();
-        // Toast.makeText(this, String.valueOf(filterProductDataList.get(position).getName()), Toast.LENGTH_SHORT).show();
-        //newList.add(getProductDataList.get(position));
 
         int sSize= newList.size();
         if (sSize>0){
+
+            // double not selected
             for (int i=0;sSize-1>=i;i++){
                 String id=newList.get(i).getId();
                 if (id.equals(filterProductDataList.get(position).getId())){
