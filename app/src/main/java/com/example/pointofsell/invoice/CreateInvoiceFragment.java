@@ -8,15 +8,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
 import com.example.pointofsell.customer.get_customer.CustomerInformationData;
+import com.example.pointofsell.customer.get_customer.CustomerInformationDataResponse;
 import com.example.pointofsell.invoice.create_invoice.CustomerCustomAdapter;
 import com.example.pointofsell.invoice.create_invoice.SetInVoiceResponse;
 import com.example.pointofsell.invoice.create_invoice.SetProductData;
@@ -26,6 +29,10 @@ import com.example.pointofsell.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateInvoiceFragment extends Fragment implements
         CustomerCustomAdapter.OnContactClickListener1{
@@ -105,7 +112,12 @@ public class CreateInvoiceFragment extends Fragment implements
 
 
 
-
+        selectCustomerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getAllCustomerInformation();
+            }
+        });
 
 
 
@@ -113,6 +125,54 @@ public class CreateInvoiceFragment extends Fragment implements
 
         return view;
     }
+    // get All customer
+    public  void getAllCustomerInformation(){
+        apiInterface.getAllCustomerInformation("Bearer "+token).enqueue(new Callback<CustomerInformationDataResponse>() {
+            @Override
+            public void onResponse(Call<CustomerInformationDataResponse> call, Response<CustomerInformationDataResponse> response) {
+
+
+                if (response.code()==500){
+                    Toast.makeText(getActivity(), "Cannot read property 'id' of null", Toast.LENGTH_SHORT).show();
+                }
+                else if (response.code()==200){
+                    customerInformationDataList=new ArrayList<>();
+                    customerInformationDataList.addAll(response.body().getCustomerInformation());
+                    if (customerInformationDataList.size ()>0){
+                        addCustomerInformation(customerInformationDataList);
+                        Toast.makeText(getActivity(), String.valueOf(customerInformationDataList.size()), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else if (response.code()==404){
+                    Toast.makeText(getActivity(), "No customer found", Toast.LENGTH_SHORT).show();
+                }else {
+
+                }
+
+            }
+            @Override
+            public void onFailure(Call<CustomerInformationDataResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "fail Customer", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void addCustomerInformation(List<CustomerInformationData> customerInformationDataList1){
+        AlertDialog.Builder builder     =new AlertDialog.Builder(getActivity());
+        LayoutInflater layoutInflater   =LayoutInflater.from(getActivity());
+        View view                       =layoutInflater.inflate(R.layout.select_customer,null);
+        builder.setView(view);
+        alertDialog   = builder.create();
+        productRecyclerView=view.findViewById(R.id.productRecyclerViewId);
+
+        customerCustomAdapter = new CustomerCustomAdapter(getActivity(),token,customerInformationDataList1,onContactClickListener1);
+        productRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        productRecyclerView.setAdapter(customerCustomAdapter);
+        alertDialog.show();
+    }
+
+
+
 
     @Override
     public void onContactClick1(int position) {
