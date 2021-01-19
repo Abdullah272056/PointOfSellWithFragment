@@ -21,6 +21,7 @@ import com.example.pointofsell.invoice.single_invoice.SingleInvoiceData;
 import com.example.pointofsell.invoice.single_invoice.SingleInvoiceGetResponse;
 import com.example.pointofsell.invoice.single_invoice.SingleInvoiceProductData;
 import com.example.pointofsell.retrofit.ApiInterface;
+import com.example.pointofsell.retrofit.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,29 @@ public class InvoiceDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.invoice_details_fragment, container, false);
 
+        //receive token
+        Bundle bundle=this.getArguments();
+        token=bundle.getString("token");
 
+        invoice_id=bundle.getString("invoice_id");
+
+
+
+        //textView finding
+        productTotalPriceTextView=view.findViewById(R.id.productTotalPriceTextViewId);
+        totalAmountAfterDiscountTextView=view.findViewById(R.id.totalAmountAfterDiscountTextViewId);
+        payAmountTextView=view.findViewById(R.id.payAmountTextViewId);
+        dueTextView=view.findViewById(R.id.dueTextViewId);
+        discountTextView=view.findViewById(R.id.discountTextViewId);
+        //recyclerview finding
+        inVoiceDetailsRecyclerView=view.findViewById(R.id.inVoiceDetailsRecyclerViewId);
+        //progressbar finding
+        invoiceDetailsProgressBar=view.findViewById(R.id.invoiceDetailsProgressBarId);
+
+        apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
+
+        // call method
+        singleInvoiceDetails();
 
         return view;
     }
