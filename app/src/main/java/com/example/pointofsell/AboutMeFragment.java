@@ -76,7 +76,12 @@ public class AboutMeFragment extends Fragment {
         uploadPictureButton=view.findViewById(R.id.uploadPictureButtonId);
         changePasswordButton=view.findViewById(R.id.changePasswordButtonId);
         deleteAccountButton=view.findViewById(R.id.deleteAccountButtonId);
-
+        uploadPictureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Sorry! It is not available now !", Toast.LENGTH_SHORT).show();
+            }
+        });
         deleteAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
