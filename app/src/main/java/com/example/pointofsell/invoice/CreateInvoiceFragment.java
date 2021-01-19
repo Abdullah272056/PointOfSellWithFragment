@@ -255,9 +255,6 @@ public class CreateInvoiceFragment extends Fragment implements
             Toast.makeText(getActivity(), "please select add product", Toast.LENGTH_SHORT).show();
             return;
         }
-//        name= nameTextView.getText().toString().trim();
-//        phone= phoneTextView.getText().toString().trim();
-
 
         int  totalProductAmount= Integer.parseInt(grandTotalTextView.getText().toString());
         int  discount= Integer.parseInt(discountTextView.getText().toString());
@@ -273,11 +270,6 @@ public class CreateInvoiceFragment extends Fragment implements
         for (int i=0;sz-1>=i;i++){
             setProductDataList.add(new SetProductData(newList.get(i).getId(),newList.get(i).getQuantity()));
         }
-
-
-
-
-        // int discount=Integer.parseInt(discountTextView.getText().toString());
 
 
         int TotalAmount=0;
