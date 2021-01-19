@@ -162,6 +162,19 @@ public class CreateInvoiceFragment extends Fragment implements
             }
         });
 
+        // percent increment button
+        addCountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int discount=Integer.parseInt(discountTextView.getText().toString());
+                if (discount<100){
+                    discount++;
+                }
+                discountTextView.setText(String.valueOf(discount));
+                changeStatus=0;
+            }
+        });
+
 
 
         return view;
