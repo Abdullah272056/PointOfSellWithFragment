@@ -174,8 +174,18 @@ public class CreateInvoiceFragment extends Fragment implements
 
 
 
+    //customer
     @Override
     public void onContactClick1(int position) {
+        nameTextView.setError(null);
+        nameTextView.requestFocus();
+        nameTextView.setText(String.valueOf(customerInformationDataList.get(position).getName()));
+        phoneTextView.setText(String.valueOf(customerInformationDataList.get(position).getPhone()));
+        addressTextView.setText(String.valueOf(customerInformationDataList.get(position).getAddress()));
+        oldDueTextView.setText(String.valueOf(customerInformationDataList.get(position).getDue()));
+        customerIdTextView.setText(String.valueOf(customerInformationDataList.get(position).getId()));
+        alertDialog.dismiss();
 
     }
+
 }
