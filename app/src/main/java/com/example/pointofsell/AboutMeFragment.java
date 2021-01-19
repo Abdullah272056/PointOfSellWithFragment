@@ -77,6 +77,12 @@ public class AboutMeFragment extends Fragment {
         changePasswordButton=view.findViewById(R.id.changePasswordButtonId);
         deleteAccountButton=view.findViewById(R.id.deleteAccountButtonId);
 
+        deleteAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteUser();
+            }
+        });
 
 
         return view;
@@ -114,5 +120,65 @@ public class AboutMeFragment extends Fragment {
         });
     }
 
-    
+    public  void  deleteUser(){
+        AlertDialog.Builder builder     =new AlertDialog.Builder(getActivity());
+        LayoutInflater layoutInflater   =LayoutInflater.from(getActivity());
+        View view                       =layoutInflater.inflate(R.layout.delete_user_dialog_box,null);
+        builder.setView(view);
+        final AlertDialog alertDialog   = builder.create();
+        deleteCancelButton=view.findViewById(R.id.deleteCancelButtonId);
+        deleteConfirmButton=view.findViewById(R.id.deleteConfirmButtonId);
+        passwordEditText=view.findViewById(R.id.passwordEditTextId);
+        deleteConfirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String password=passwordEditText.getText().toString();
+                if (TextUtils.isEmpty(password)){
+                    passwordEditText.setError("Enter your password");
+                    passwordEditText.requestFocus();
+                    return;
+                }
+                apiInterface.deleteUser("Bearer "+token,new DeleteUserSetDataResponse(password))
+                        .enqueue(new Callback<DeleteUserGetDataResponse>() {
+                            @Override
+                            public void onResponse(Call<DeleteUserGetDataResponse> call, Response<DeleteUserGetDataResponse> response) {
+                                if (response.code()==200){
+                                    Toast.makeText(getActivity(), "Delete success", Toast.LENGTH_SHORT).show();
+                                    alertDialog.dismiss();
+                                    Intent intent=new Intent(getActivity(),RegistrationActivity.class);
+                                    startActivity(intent);
+                                    getActivity().finish();
+                                }else if (response.code()==400){
+                                    passwordEditText.setError("incorrect password");
+                                    passwordEditText.requestFocus();
+                                    // Toast.makeText(AboutMeActivity.this, "incorrect password", Toast.LENGTH_SHORT).show();
+
+                                }else if (response.code()==500){
+                                    Toast.makeText(getActivity(), "Cannot read property 'email' of null", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "Try again", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<DeleteUserGetDataResponse> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+            }
+        });
+        deleteCancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
+
+
+    }
 }
