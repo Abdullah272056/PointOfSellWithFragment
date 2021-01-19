@@ -17,19 +17,19 @@
         >
         <menu>
             <item android:id="@+id/currentMonthItemIdId"
-                android:icon="@drawable/ic_baseline_calender_24"
+                android:icon="@drawable/ic_calendar"
                 android:title="Current Month"/>
 
             <item android:id="@+id/lastQuarterItemIdId"
-                android:icon="@drawable/ic_baseline_calender_24"
+                android:icon="@drawable/ic_calendar"
                 android:title="Last Quarter"/>
 
             <item android:id="@+id/yearEndSaleItemId"
-                android:icon="@drawable/ic_baseline_calender_24"
+                android:icon="@drawable/ic_calendar"
                 android:title="Year-end Sale"/>
 
             <item android:id="@+id/calculatorItemIdId"
-                android:icon="@drawable/ic_baseline_calender_24"
+                android:icon="@drawable/ic_calculator"
                 android:title="Calculator"/>
 
         </menu>
@@ -38,7 +38,7 @@
     </item>
 
     <item android:title="Log Out"
-
+        android:icon="@drawable/ic_logout"
         android:id="@+id/logOutId"
         />
 </menu>
