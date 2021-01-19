@@ -109,6 +109,7 @@ public class CustomerPayDueFragment extends Fragment {
                 .enqueue(new Callback<SingleCustomerGetResponse>() {
                     @Override
                     public void onResponse(Call<SingleCustomerGetResponse> call, Response<SingleCustomerGetResponse> response) {
+                        if(getActivity() != null) {
                         if (response.code()==200){
                             dueTextView.setText(String.valueOf(response.body().getSingleCustomerInformation().getDue()));
                             allTimeSellTextView.setText(String.valueOf(response.body().getSingleCustomerInformation().getAllTimeSellAmount()));
@@ -121,13 +122,14 @@ public class CustomerPayDueFragment extends Fragment {
 
                         }
 
-                    }
+                    }}
 
                     @Override
                     public void onFailure(Call<SingleCustomerGetResponse> call, Throwable t) {
+                        if(getActivity() != null) {
                         Log.e("awer",t.getMessage().toString());
                         //pauDueHistoryProgressBar.setVisibility(View.INVISIBLE);
-                    }
+                    }}
                 });
     }
     public void payDue(){

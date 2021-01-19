@@ -139,16 +139,20 @@ public class OthersFragment extends Fragment {
         apiInterface.getCustomerCount("Bearer "+token).enqueue(new Callback<CustomerCountResponse>() {
             @Override
             public void onResponse(Call<CustomerCountResponse> call, Response<CustomerCountResponse> response) {
-                Log.e("count","success");
+                if(getActivity() != null) {
+                    if (response.code()==200){
                 CustomerCountResponse customerCountResponse=response.body();
                 customerCount=customerCountResponse.getCustomerCount().toString();
                 customerCountTextView.setText(customerCount);
             }
+          }
+        }
 
             @Override
             public void onFailure(Call<CustomerCountResponse> call, Throwable t) {
-                Log.e("count","success");
-            }
+                if(getActivity() != null) {
+
+            }}
         });
     }
 
@@ -159,10 +163,9 @@ public class OthersFragment extends Fragment {
             @Override
             public void onResponse(Call<GetAllSellInfoResponse> call, Response<GetAllSellInfoResponse> response) {
 
-                if (response.isSuccessful()){
-                    if (response.body().getSuccess()==true){
-                        GetAllSellInfoResponse getAllSellInfoResponse=response.body();
-                        Log.e("totalSaleAmount",getAllSellInfoResponse.getGetAllSellInfoData().getTotalSaleAmount().toString());
+                if (response.code()==200){
+                    if(getActivity() != null) {
+                        GetAllSellInfoResponse getAllSellInfoResponse = response.body();
                         totalSaleAmountTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalSaleAmount().toString());
                         totalSoldProductQuantityTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalSoldProductQuantity().toString());
                         totalSoldInvoiceTextView.setText(getAllSellInfoResponse.getGetAllSellInfoData().getTotalSoldInvoice().toString());
@@ -173,9 +176,9 @@ public class OthersFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<GetAllSellInfoResponse> call, Throwable t) {
-                Log.e("ts","success");
-                Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
-
+                if(getActivity() != null) {
+                    //Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -189,6 +192,7 @@ public class OthersFragment extends Fragment {
         apiInterface.getAllProductInfo("Bearer "+token).enqueue(new Callback<GetAllProductInfoDataResponse>() {
             @Override
             public void onResponse(Call<GetAllProductInfoDataResponse> call, Response<GetAllProductInfoDataResponse> response) {
+                if(getActivity() != null) {
                 if (response.code()==200){
                     GetAllProductInfoDataResponse getAllProductInfoDataResponse=response.body();
                     totalProductCostTextView.setText(getAllProductInfoDataResponse.getGetAllProductInfoData().getTotalProductCost().toString());
@@ -204,11 +208,12 @@ public class OthersFragment extends Fragment {
                 else {
                     //Toast.makeText(HomePage.this, "Invalid token", Toast.LENGTH_SHORT).show();
                 }
-            }
+            }}
             @Override
             public void onFailure(Call<GetAllProductInfoDataResponse> call, Throwable t) {
+                if(getActivity() != null) {
                 //Toast.makeText(OthersInformation.this, "failed", Toast.LENGTH_SHORT).show();
-            }
+            }}
         });
     }
 
