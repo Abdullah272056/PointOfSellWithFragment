@@ -19,6 +19,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.pointofsell.change_password.ChangePasswordGetResponse;
+import com.example.pointofsell.change_password.ChangePasswordSetResponse;
 import com.example.pointofsell.delete_user.DeleteUserGetDataResponse;
 import com.example.pointofsell.delete_user.DeleteUserSetDataResponse;
 import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
@@ -45,7 +47,7 @@ public class AboutMeFragment extends Fragment {
     TextView oldPasswordEditText,newPasswordEditText,confirmPasswordEditText;
     Button saveChangePasswordButton;
     ProgressBar changePasswordProgressBar;
-   // ChangePasswordSetResponse changePasswordSetResponse;
+    ChangePasswordSetResponse changePasswordSetResponse;
 
     ///delete password dialog box view
     Button deleteCancelButton,deleteConfirmButton;
@@ -185,5 +187,70 @@ public class AboutMeFragment extends Fragment {
         alertDialog.show();
 
 
+    }
+
+
+    public  void changePassword(){
+        String newPassword=newPasswordEditText.getText().toString();
+        String confirmPassword=confirmPasswordEditText.getText().toString();
+        String oldPassword=oldPasswordEditText.getText().toString();
+
+        if (TextUtils.isEmpty(oldPassword)){
+            oldPasswordEditText.setError("Enter your old password");
+            oldPasswordEditText.requestFocus();
+            return;
+        }
+
+        if (TextUtils.isEmpty(newPassword)){
+            newPasswordEditText.setError("Enter new password");
+            newPasswordEditText.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(confirmPassword)){
+            confirmPasswordEditText.setError("Enter confirm password");
+            confirmPasswordEditText.requestFocus();
+            return;
+        }
+        if (!newPassword.equals(confirmPassword)){
+            confirmPasswordEditText.setError("can not matching confirm password");
+            confirmPasswordEditText.requestFocus();
+            return;
+        }
+        changePasswordProgressBar.setVisibility(View.VISIBLE);
+
+        changePasswordSetResponse=new ChangePasswordSetResponse(oldPassword,newPassword);
+        apiInterface.changePassword("Bearer "+token,changePasswordSetResponse).
+                enqueue(new Callback<ChangePasswordGetResponse>() {
+                    @Override
+                    public void onResponse(Call<ChangePasswordGetResponse> call, Response<ChangePasswordGetResponse> response) {
+
+                        if(response.code()==200){
+                            Toast.makeText(getActivity(), "Password changed successfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Password changed successfully", Toast.LENGTH_SHORT).show();
+                            Intent intent =new Intent(getActivity(), LoginActivity.class);
+                            startActivity(intent);
+                            getActivity().finish();
+
+                        }else if (response.code()==400){
+                            Toast.makeText(getActivity(), "Old password does not match", Toast.LENGTH_SHORT).show();
+                            oldPasswordEditText.setError("old password can not match");
+                            oldPasswordEditText.requestFocus();
+                        }
+                        else if (response.code()==401){
+                            Toast.makeText(getActivity(), "Invalid token", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getActivity(), "Failed !", Toast.LENGTH_SHORT).show();
+                        }
+
+                        changePasswordProgressBar.setVisibility(View.INVISIBLE);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ChangePasswordGetResponse> call, Throwable t) {
+                        Toast.makeText(getActivity(), "failed ! try again ", Toast.LENGTH_SHORT).show();
+                        changePasswordProgressBar.setVisibility(View.INVISIBLE);
+                    }
+                });
     }
 }
