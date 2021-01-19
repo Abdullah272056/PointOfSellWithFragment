@@ -13,6 +13,7 @@ import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
 import com.example.pointofsell.invoice.get_invoice.InVoiceResponse;
 import com.example.pointofsell.log_in.LogInData;
 import com.example.pointofsell.log_in.LogInResponse;
+import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
 import com.example.pointofsell.product.create_product.ProductDataResponse;
 import com.example.pointofsell.product.delete_product.DeleteProductDataResponse;
 import com.example.pointofsell.product.get_all_product_info.GetAllProductInfoDataResponse;
@@ -47,9 +48,9 @@ public interface ApiInterface {
 
 
 
-//    //Get Me
-//    @GET("api/auth/me")
-//    Call<OwnerDataWithResponse> getUserAllInformation(@Header("Authorization") String authorization);
+    //Get Me
+    @GET("api/auth/me")
+    Call<OwnerDataWithResponse> getUserAllInformation(@Header("Authorization") String authorization);
 //    // change password
 //    //http://mern-pos.herokuapp.com/api/auth/change-password
 //    @PUT("api/auth/change-password")
