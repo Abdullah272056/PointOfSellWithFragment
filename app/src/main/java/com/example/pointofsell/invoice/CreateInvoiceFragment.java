@@ -292,14 +292,17 @@ public class CreateInvoiceFragment extends Fragment implements
         apiInterface.getInvoiceResponse("Bearer "+token,setInVoiceResponse).enqueue(new Callback<OwnerDataWithResponse>() {
             @Override
             public void onResponse(Call<OwnerDataWithResponse> call, Response<OwnerDataWithResponse> response) {
+                if(getActivity() != null) {
+
                 if (response.code()==201){
+                    if(getActivity() != null) {
                     Bundle bundle=new Bundle();
                     bundle.putString("token",token);
                     Fragment fragment=new Invoice_Fragment();
                     fragment.setArguments(bundle);
                     getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
                     Toast.makeText(getActivity(), "create success", Toast.LENGTH_SHORT).show();
-                }
+                } }
                 else if (response.code()==500){
 
                     Toast.makeText(getActivity(), "internal server error", Toast.LENGTH_SHORT).show();
@@ -307,12 +310,13 @@ public class CreateInvoiceFragment extends Fragment implements
                 else{
                     Toast.makeText(getActivity(), "create failed", Toast.LENGTH_SHORT).show();
                 }
-            }
+            }}
             @Override
             public void onFailure(Call<OwnerDataWithResponse> call, Throwable t) {
+                if(getActivity() != null) {
                 Toast.makeText(getActivity(), String.valueOf(t.getMessage()), Toast.LENGTH_SHORT).show();
                 Log.e("getInvoice", String.valueOf(t.getMessage()));
-            }
+            }}
         });
 
     }
@@ -325,11 +329,8 @@ public class CreateInvoiceFragment extends Fragment implements
             @Override
             public void onResponse(Call<CustomerInformationDataResponse> call, Response<CustomerInformationDataResponse> response) {
 
-
-                if (response.code()==500){
-                    Toast.makeText(getActivity(), "Cannot read property 'id' of null", Toast.LENGTH_SHORT).show();
-                }
-                else if (response.code()==200){
+                if(getActivity() != null) {
+                if (response.code()==200){
                     customerInformationDataList=new ArrayList<>();
                     customerInformationDataList.addAll(response.body().getCustomerInformation());
                     if (customerInformationDataList.size ()>0){
@@ -337,16 +338,21 @@ public class CreateInvoiceFragment extends Fragment implements
                         Toast.makeText(getActivity(), String.valueOf(customerInformationDataList.size()), Toast.LENGTH_SHORT).show();
                     }
                 }
+                else if (response.code()==500){
+                    Toast.makeText(getActivity(), "Cannot read property 'id' of null", Toast.LENGTH_SHORT).show();
+                }
                 else if (response.code()==404){
                     Toast.makeText(getActivity(), "No customer found", Toast.LENGTH_SHORT).show();
                 }else {
 
-                }
+                }}
 
             }
             @Override
             public void onFailure(Call<CustomerInformationDataResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "fail Customer", Toast.LENGTH_SHORT).show();
+                if(getActivity() != null) {
+                    Toast.makeText(getActivity(), "fail Customer", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -369,13 +375,13 @@ public class CreateInvoiceFragment extends Fragment implements
         apiInterface.getAllProduct("Bearer "+token).enqueue(new Callback<GetProductDataResponse>() {
             @Override
             public void onResponse(Call<GetProductDataResponse> call, Response<GetProductDataResponse> response) {
-
+                if(getActivity() != null) {
                 if (response.code()==200){
                     getProductDataList=new ArrayList<>();
                     filterProductDataList=new ArrayList<>();
                     getProductDataList.addAll(response.body().getProducts());
                     if (getProductDataList.size ()>0){
-
+                        if(getActivity() != null) {
                         int sz=getProductDataList.size();
                         for (int i=0;sz-1>=i;i++){
                             int stck=getProductDataList.get(i).getStock();
@@ -385,7 +391,7 @@ public class CreateInvoiceFragment extends Fragment implements
                             }
                         }
                         addProductInformation(filterProductDataList);
-                    }
+                    }}
 
                     // Toast.makeText(CreateInVoice_Activity.this, "All product fetched", Toast.LENGTH_SHORT).show();
                 }else if (response.code()==404){
@@ -396,9 +402,12 @@ public class CreateInvoiceFragment extends Fragment implements
                 }else {
                 }
 
-            }
+            }}
             @Override
             public void onFailure(Call<GetProductDataResponse> call, Throwable t) {
+                if(getActivity() != null) {
+                    Toast.makeText(getActivity(), "try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -474,13 +483,14 @@ public class CreateInvoiceFragment extends Fragment implements
                     filterProductDataList.get(position).getName(),
                     filterProductDataList.get(position).getUnit()));
         }
-
+        if(getActivity() != null) {
 
         productCustomAdapter2 = new ProductCustomAdapter2(getActivity(),token,newList, onContactClickListener3);
         selectRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         selectRecyclerView.setAdapter(productCustomAdapter2);
         Log.e("size",String.valueOf(newList.size()));
         alertDialog.dismiss();
+    }
     }
 
 }
