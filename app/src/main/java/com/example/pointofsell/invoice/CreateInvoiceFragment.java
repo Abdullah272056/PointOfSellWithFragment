@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pointofsell.R;
+import com.example.pointofsell.customer.CustomerPayDueFragment;
 import com.example.pointofsell.customer.get_customer.CustomerInformationData;
 import com.example.pointofsell.customer.get_customer.CustomerInformationDataResponse;
 import com.example.pointofsell.invoice.create_invoice.CustomerCustomAdapter;
@@ -280,10 +281,11 @@ public class CreateInvoiceFragment extends Fragment implements
             @Override
             public void onResponse(Call<OwnerDataWithResponse> call, Response<OwnerDataWithResponse> response) {
                 if (response.code()==201){
-//                    Intent intent=new Intent(CreateInVoice_Activity.this, InVoiceActivity.class);
-//                    intent.putExtra("token",token);
-//                    startActivity(intent);
-//                    finish();
+                    Bundle bundle=new Bundle();
+                    bundle.putString("token",token);
+                    Fragment fragment=new Invoice_Fragment();
+                    fragment.setArguments(bundle);
+                    getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
                     Toast.makeText(getActivity(), "create success", Toast.LENGTH_SHORT).show();
                 }
                 else if (response.code()==500){
