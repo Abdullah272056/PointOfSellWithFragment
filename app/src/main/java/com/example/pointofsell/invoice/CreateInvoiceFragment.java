@@ -256,7 +256,42 @@ public class CreateInvoiceFragment extends Fragment implements
     //product
     @Override
     public void onContactClick(int position) {
-      
+        //getAllProduct();
+        // Toast.makeText(this, String.valueOf(filterProductDataList.get(position).getName()), Toast.LENGTH_SHORT).show();
+        //newList.add(getProductDataList.get(position));
+
+        int sSize= newList.size();
+        if (sSize>0){
+            for (int i=0;sSize-1>=i;i++){
+                String id=newList.get(i).getId();
+                if (id.equals(filterProductDataList.get(position).getId())){
+                    Toast.makeText(getActivity(), "already selected", Toast.LENGTH_SHORT).show();
+                    alertDialog.dismiss();
+                    return;
+                }
+                newList.add(new GetProductData(filterProductDataList.get(position).getPrice(),
+                        filterProductDataList.get(position).getSellingPrice(),
+                        filterProductDataList.get(position).getStock(),
+                        1,filterProductDataList.get(position).getId(),
+                        filterProductDataList.get(position).getName(),
+                        filterProductDataList.get(position).getUnit()));
+            }
+        }else {
+
+            newList.add(new GetProductData(filterProductDataList.get(position).getPrice(),
+                    filterProductDataList.get(position).getSellingPrice(),
+                    filterProductDataList.get(position).getStock(),
+                    1,filterProductDataList.get(position).getId(),
+                    filterProductDataList.get(position).getName(),
+                    filterProductDataList.get(position).getUnit()));
+        }
+
+
+        productCustomAdapter2 = new ProductCustomAdapter2(getActivity(),token,newList, onContactClickListener3);
+        selectRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        selectRecyclerView.setAdapter(productCustomAdapter2);
+        Log.e("size",String.valueOf(newList.size()));
+        alertDialog.dismiss();
     }
 
 }
