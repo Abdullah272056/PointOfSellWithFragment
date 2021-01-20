@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.retrofit.ApiInterface;
+import com.example.pointofsell.retrofit.RetrofitClient;
 
 public class SellInfoByDayFragment extends Fragment {
     String token;
@@ -50,6 +51,15 @@ public class SellInfoByDayFragment extends Fragment {
         inVoiceTextView=view.findViewById(R.id.inVoiceTextViewId);
         productCostTextView=view.findViewById(R.id.productCostTextViewId);
 
+
+        apiInterface = RetrofitClient.getRetrofit("http://mern-pos.herokuapp.com/").create(ApiInterface.class);
+
+        sellInfoByDayOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // getSellInfoByDate();
+            }
+        });
 
         return view;
     }
