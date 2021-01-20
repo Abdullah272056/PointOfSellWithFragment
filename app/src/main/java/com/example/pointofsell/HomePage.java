@@ -55,7 +55,7 @@ public class HomePage extends AppCompatActivity {
 //                    Toast.makeText(MainActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 }
                 if (item.getItemId()==R.id.othersItemId){
-                    fragment=new OthersFragment();
+                    fragment=new SellInfoByDayFragment();
 //                    Toast.makeText(MainActivity.this, "clicked", Toast.LENGTH_SHORT).show();
                 }
                 fragment.setArguments(bundle);
