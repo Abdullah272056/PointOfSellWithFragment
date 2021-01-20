@@ -1,6 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:background="#C0F3EE"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:text="Sell info by last days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:id="@+id/sellInfoByDayEditTextId"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp"
+                android:hint="Enter Days"
+                android:background="@drawable/back2"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/sellInfoByDayOkButtonId"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="Ok"
+                android:background="@drawable/back"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Sale Product :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/sellProductTextViewId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="00"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Sale Amount :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/saleAmountTextViewId"
+                        android:textAlignment="center"
+                        android:text="00"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Profit :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/profitTxtViewId"
+                        android:textAlignment="center"
+                        android:text="00"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Current Cash :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/currentCashTextViewId"
+                        android:textAlignment="center"
+                        android:text="00"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Due :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/dueTextViewId"
+                        android:textAlignment="center"
+                        android:text="00"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Invoice :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/inVoiceTextViewId"
+                        android:textAlignment="center"
+                        android:text="00"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:paddingLeft="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="Product Cost :"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/productCostTextViewId"
+                        android:textAlignment="center"
+                        android:text="00"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+
+                </LinearLayout>
+                <View
+                    android:layout_marginRight="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <ProgressBar
+        android:layout_marginBottom="120dp"
+        android:id="@+id/sellInfoByDayProgressBarId"
+        android:layout_width="59dp"
+        android:layout_height="67dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
