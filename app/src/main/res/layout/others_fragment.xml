@@ -366,7 +366,7 @@
 
 
     <com.google.android.material.navigation.NavigationView
-        app:itemIconTint="#0B0B0B"
+        app:itemIconTint="#090909"
         app:itemTextColor="#040303"
         android:id="@+id/myNavigationViewId"
         android:layout_width="wrap_content"

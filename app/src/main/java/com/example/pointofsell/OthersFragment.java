@@ -236,6 +236,7 @@ public class OthersFragment extends Fragment {
             }
         };
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.colorWhite));
         actionBarDrawerToggle.syncState();
     }
 
