@@ -15,6 +15,7 @@ import com.example.pointofsell.delete_user.DeleteUserSetDataResponse;
 import com.example.pointofsell.invoice.create_invoice.SetInVoiceResponse;
 import com.example.pointofsell.invoice.delete_invoice.DeleteInVoiceGetInVoiceDataResponse;
 import com.example.pointofsell.invoice.get_all_sell_info.GetAllSellInfoResponse;
+import com.example.pointofsell.invoice.get_all_sell_info.GetSellInfoByDayResponse;
 import com.example.pointofsell.invoice.get_invoice.InVoiceResponse;
 import com.example.pointofsell.invoice.single_invoice.SingleInvoiceGetResponse;
 import com.example.pointofsell.log_in.LogInData;
@@ -100,10 +101,10 @@ public interface ApiInterface {
     //get single invoice information
     @GET("api/invoice/{id}")
     Call<SingleInvoiceGetResponse> getSingleInvoiceInformation(@Header("Authorization") String authorization, @Path("id") String id);
-//    // Get sale info by date
-//    // http://mern-pos.herokuapp.com/api/invoice/sale/day?day=0
-//    @GET("/api/invoice/sale/day")
-//    Call<GetSellInfoByDayResponse> getSellInfoByDay(@Header("Authorization") String authorization, @Query("day") Integer dayInt);
+    // Get sale info by date
+    // http://mern-pos.herokuapp.com/api/invoice/sale/day?day=0
+    @GET("/api/invoice/sale/day")
+    Call<GetSellInfoByDayResponse> getSellInfoByDay(@Header("Authorization") String authorization, @Query("day") Integer dayInt);
     // create inVoice
     @POST("/api/invoice")
     Call<OwnerDataWithResponse> getInvoiceResponse(@Header("Authorization") String authorization, @Body SetInVoiceResponse setInVoiceResponse);
