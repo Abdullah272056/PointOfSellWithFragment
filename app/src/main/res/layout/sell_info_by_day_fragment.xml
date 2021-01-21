@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView
-            android:background="#C0F3EE"
-            android:textColor="#000000"
+            android:background="#0821AC"
+            android:textColor="#F1EFEF"
             android:textSize="20sp"
             android:padding="10dp"
-            android:textAlignment="center"
+        
             android:text="Sell info by last days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

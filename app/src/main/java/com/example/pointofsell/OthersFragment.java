@@ -218,7 +218,6 @@ public class OthersFragment extends Fragment {
     }
 
 
-
     // create for drawerLayout
     private void navigationDrawer() {
 
