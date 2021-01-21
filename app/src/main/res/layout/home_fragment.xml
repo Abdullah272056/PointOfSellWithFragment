@@ -37,10 +37,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:layout_weight="1"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -68,10 +68,10 @@
 
                             </LinearLayout>
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
+                               android:layout_margin="5dp"
                                 android:layout_weight="1"
-                                android:layout_margin="10dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -104,11 +104,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:gravity="center"
                                 android:layout_weight="1"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -134,11 +135,11 @@
                                     android:layout_height="0dp"/>
                             </LinearLayout>
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:gravity="center"
                                 android:layout_weight="1"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -171,11 +172,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -199,11 +200,11 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -237,11 +238,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -264,11 +265,11 @@
                                     android:layout_height="wrap_content"/>
                             </LinearLayout>
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -298,11 +299,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
@@ -328,11 +329,11 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:paddingTop="10dp"
-                                android:paddingBottom="10dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="15dp"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:layout_margin="10dp"
+                                android:layout_margin="5dp"
                                 android:background="@drawable/background"
                                 android:orientation="vertical"
                                 android:layout_width="0dp"
