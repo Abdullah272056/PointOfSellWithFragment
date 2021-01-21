@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.pointofsell.change_password.ChangePasswordGetResponse;
 import com.example.pointofsell.change_password.ChangePasswordSetResponse;
-import com.example.pointofsell.customer.CustomerFragment;
 import com.example.pointofsell.delete_user.DeleteUserGetDataResponse;
 import com.example.pointofsell.delete_user.DeleteUserSetDataResponse;
 import com.example.pointofsell.owner_all_information.OwnerDataWithResponse;
@@ -79,7 +78,7 @@ public class AboutMeFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle=new Bundle();
                 bundle.putString("token",token);
-               Fragment fragment=new OthersFragment();
+               Fragment fragment=new HomeFragment();
                 fragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 

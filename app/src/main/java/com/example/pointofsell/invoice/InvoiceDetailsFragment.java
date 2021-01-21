@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pointofsell.OthersFragment;
 import com.example.pointofsell.R;
 import com.example.pointofsell.invoice.single_invoice.SingleInvoiceCustomAdapter;
 import com.example.pointofsell.invoice.single_invoice.SingleInvoiceData;

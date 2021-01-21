@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.pointofsell.customer.CustomerFragment;
 import com.example.pointofsell.invoice.Invoice_Fragment;
 import com.example.pointofsell.product.ProductFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomePage extends AppCompatActivity {
+public class MainPageActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     Bundle bundle;
     Fragment fragment=null;
@@ -22,7 +21,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_main_page);
         bottomNavigationView=findViewById(R.id.bottomBarId);
         token=getIntent().getStringExtra("token");
 
@@ -30,7 +29,7 @@ public class HomePage extends AppCompatActivity {
          bundle.putString("token",token);
 
         if (savedInstanceState==null){
-             fragment=new OthersFragment();
+             fragment=new HomeFragment();
             fragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.frameViewId,fragment).commit();
 
@@ -42,7 +41,7 @@ public class HomePage extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 if (item.getItemId()==R.id.homeItemId){
-                    fragment=new OthersFragment();
+                    fragment=new HomeFragment();
 
                 }
                 if (item.getItemId()==R.id.customerItemId){
