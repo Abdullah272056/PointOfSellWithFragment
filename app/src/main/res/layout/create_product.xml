@@ -85,11 +85,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/imgSizeTextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:background="#DCD8D8"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="select image"
+            android:text="Select image"
             android:layout_width="150dp"
             android:layout_height="wrap_content"/>
         <LinearLayout

@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +45,9 @@ import com.example.pointofsell.retrofit.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +76,7 @@ public class ProductFragment extends Fragment {
             productStockEditText,productDescriptionEditText;
     TextView pieceTextView;
     ImageView productSelectImageView;
+    TextView imgSizeTextView;
     Button uploadProductButton;
 
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 99 ;
@@ -79,7 +84,6 @@ public class ProductFragment extends Fragment {
     private static final int SELECT_REQUEST_CODE = 1;
     // private OurRetrofitClient ourRetrofitClient;
     private ProgressDialog progressDialog;
-    Button imageUploadButton;
 
     File file;
     Uri imageUri=null;
@@ -88,6 +92,8 @@ public class ProductFragment extends Fragment {
     AlertDialog alertDialog;
 
     View view;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -125,7 +131,7 @@ public class ProductFragment extends Fragment {
                 if(getActivity() != null) {
                     if (response.code() == 200) {
                         if(getActivity() != null) {
-                              Toast.makeText(getActivity(), "All product fetched", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "All product fetched", Toast.LENGTH_SHORT).show();
                             getProductDataList = new ArrayList<>();
                             getProductDataList.addAll(response.body().getProducts());
                             if (getProductDataList.size()>0){
@@ -141,7 +147,7 @@ public class ProductFragment extends Fragment {
                     } else {
                     }
 
-                productProgressBar.setVisibility(View.GONE);
+                    productProgressBar.setVisibility(View.GONE);
                 }
             }
             @Override
@@ -167,6 +173,7 @@ public class ProductFragment extends Fragment {
         productDescriptionEditText=view.findViewById(R.id.productDescriptionEditTextId);
 
         productSelectImageView=view.findViewById(R.id.productSelectImageViewId);
+        imgSizeTextView=view.findViewById(R.id.imgSizeTextView);
         uploadProductButton=view.findViewById(R.id.uploadProductButtonId);
         unitTypeSpinner=view.findViewById(R.id.unitTypeSpinnerId);
 
@@ -176,7 +183,7 @@ public class ProductFragment extends Fragment {
             public void onClick(View view) {
 
                 if(CheckPermission()) {
-                    Intent select = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    Intent select = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                     startActivityForResult(select, SELECT_REQUEST_CODE);
                 }
             }
@@ -228,7 +235,7 @@ public class ProductFragment extends Fragment {
                 if (imageUri == null){
                     Toast.makeText(getActivity(), "image url not found", Toast.LENGTH_SHORT).show();
                 }
-                UploadProduct(imageUri,productName,productRegularPrice,productSellingPrice,unitType,productStock,productDescription);
+                UploadProduct(productName,productRegularPrice,productSellingPrice,unitType,productStock,productDescription);
 
 
             }
@@ -242,50 +249,71 @@ public class ProductFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
+        if (resultCode==RESULT_OK){
 
-            case CAPTURE_REQUEST_CODE:
+            imageUri=data.getData();
 
-//                if(resultCode == RESULT_OK){
-//
-//                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-//                    imageView.setImageBitmap(bitmap);
-//                    progressDialog.show();
-//                    //ImageUpload(bitmap);
-//
-//                }
+            try {
+                final InputStream imageStream=getContext().getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage= BitmapFactory.decodeStream(imageStream);
+                productSelectImageView.setImageBitmap(selectedImage);
+                file=new File(imageUri.getPath().replace("raw/",""));
+                imgSizeTextView.setText("Size"+ Formatter.formatShortFileSize(getContext(),file.length()));
 
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
 
-                break;
+        }else {
+            Toast.makeText(getContext(), "No image selected", Toast.LENGTH_SHORT).show();
 
-            case SELECT_REQUEST_CODE:
-                if(resultCode == RESULT_OK && data!=null
-                        && data.getData()!=null){
-                    try {
-                        imageUri = data.getData();
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
-                        productSelectImageView.setImageBitmap(bitmap);
-                        // progressDialog.show();
-                        //ImageUpload(imageUri);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                else {
-                    Toast.makeText(getActivity(), "url empty", Toast.LENGTH_SHORT).show();
-                }
-                break;
         }
+
+
+//        switch (requestCode){
+//
+//            case CAPTURE_REQUEST_CODE:
+//
+////                if(resultCode == RESULT_OK){
+////
+////                    Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+////                    imageView.setImageBitmap(bitmap);
+////                    progressDialog.show();
+////                    //ImageUpload(bitmap);
+////
+////                }
+//
+//
+//                break;
+//
+//            case SELECT_REQUEST_CODE:
+//                if(resultCode == RESULT_OK && data!=null
+//                        && data.getData()!=null){
+//                    try {
+//                        imageUri = data.getData();
+//                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), imageUri);
+//                        productSelectImageView.setImageBitmap(bitmap);
+//                        // progressDialog.show();
+//                        //ImageUpload(imageUri);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                else {
+//                    Toast.makeText(getActivity(), "url empty", Toast.LENGTH_SHORT).show();
+//                }
+//                break;
+//        }
 
     }
 
-    private void UploadProduct(Uri imgUri,String productName,String productRegularPrice,String productSellingPrice,
+    private void UploadProduct(String productName,String productRegularPrice,String productSellingPrice,
                                String productPiece,String productStock,String productDescription) {
-        if (imageUri!=null){
-            progressDialog.show();
-            String path= getImagePath(imgUri);
 
-            file = new File(path);
+
+        if (file!=null){
+
             MultipartBody.Part imageFile = null;
 
             final RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
@@ -376,27 +404,9 @@ public class ProductFragment extends Fragment {
 
         }
     }
-    public String getImagePath(Uri uri){
-        Cursor cursor = null;
-        if (uri != null){
-            cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
-        }else {
-            Toast.makeText(getActivity(), "uri not found", Toast.LENGTH_SHORT).show();
-        }
-        cursor.moveToFirst();
-        String document_id = cursor.getString(0);
-        document_id = document_id.substring(document_id.lastIndexOf(":")+1);
-        cursor.close();
 
-        cursor = getActivity().getContentResolver().query(
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                null, MediaStore.Images.Media._ID + " = ? ", new String[]{document_id}, null);
-        cursor.moveToFirst();
-        String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
 
-        return path;
-    }
+
 
 
 }
